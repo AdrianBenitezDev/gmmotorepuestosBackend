@@ -1,0 +1,61 @@
+.img404Big{
+ height: 100%;
+ width: auto;
+}
+
+.img404{
+ height: 20%;
+ border: 12px;
+ margin: 5px;
+}
+
+.img404:hover{
+
+ border: 1px solid rgb(223, 7, 7);
+}
+
+.descripcionVP{
+    border-radius: 12px;
+    background-color: rgb(31, 30, 30);
+    padding: 20px;
+
+}
+/* 
+div vista previa  */
+.divVP{
+    background-color: rgba(0, 0, 0, 0.596);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    width: 90%;
+}
+
+
+.divVP div{
+    width: 100%;
+}
+.precioVP{
+font-size: 30px;
+}
+
+.buy{
+    padding: 20px;
+}
+
+.info{
+align-items: stretch
+}
+
+.info > *{
+margin: 20px 0 20px 0;
+}
+
+.btnCrearProducto{
+width: 50%;
+margin: 20px;
+}
+
+.grid{
+        display: flex;
+    align-items: flex-start;
+}

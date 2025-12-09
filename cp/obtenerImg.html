@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GM MotoRepuestos</title>
+    <link rel="stylesheet" href="../css.css">
+    <link rel="stylesheet" href="./stilo cp.css">
+    <link rel="stylesheet" href="./vistaPrevia.css">
+    <link rel="stylesheet" href="../spin.css">
+    <meta charset="utf-8">
+  <!-- <title>Imágenes Mercado Libre</title> -->
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    img { width: 180px; margin: 10px; border-radius: 10px; }
+    input { width: 420px; padding: 6px; }
+    button { padding: 8px 14px; margin-left: 6px; cursor: pointer; }
+  </style>
+</head>
+<body>
+     <!-- ENCABEZADO -->
+    <header class="header">
+        <img src="../logogm.png" class="logo" alt="GM MotoRepuestos">
+        <h1>GM MotoRepuestos</h1>
+       <h2>Crear un Producto Nuevo</h2>
+    </header>
+
+<div class="column">
+
+         <p>Obtener Producto de Mercado Libre</p>
+        <!-- <h3>Imagenes Obtenidas</h3> -->
+         <div class="row">
+        
+     
+                <input id="url" placeholder="URL de Mercado Libre" value="https://articulo.mercadolibre.com.ar/MLA-1420354505-optica-farol-delantero-motomel-cg-150-s2-completo-clampara-_JM?searchVariation=182398269353#is_advertising=true&searchVariation=182398269353&backend_model=search-backend&position=2&search_layout=stack&type=pad&tracking_id=a4f6726e-41ea-4454-bd38-02efbdb953f2&ad_domain=VQCATCORE_LST&ad_position=2&ad_click_id=MTI1ODFmYjQtZGY1Yi00YmQ2LWE0ZTctNjdmODMwZjc5Nzhk">
+                <button onclick="extraer()">Obtener</button>
+                <button onclick="pegarUrl()">Pegar Url</button>
+                <button onclick="limpiarUrl()">Limpiar</button>
+
+         </div>
+
+        <div class="column grid" id="caracteristicasDiv">
+
+          <h2>Caracteristicas del Producto</h2>
+                  <br>
+                  <div class="row">
+                    <p>Titulo del Producto</p>
+                    <input id="tituloP" placeholder="Ingrese el nombre del Producto" value="---------">
+                  </div>
+
+                  <div class="row">
+                    <p>Precio del Producto</p>
+                    <input id="inputPrecio" value="50000" placeholder="Ingrese Precio">
+                  </div>
+
+                  <div class="row">
+                    <p>Descripción del Producto</p>
+                    <textarea  id="descripcionP" placeholder="Ingrese Descripción"></textarea>
+                  </div>
+
+                  <div class="row">
+                    <p>Seleccione Categoria</p>
+                    <select id="categorias">
+                      
+                    </select>
+                  </div>
+
+
+
+        </div>
+
+         <br>
+        <h2>Imagenes Obtenidas</h2>
+         <br>
+        
+        <div class="h-scroll" id="imagenesDiv"></div>
+      
+
+        <div class="divVP" id="vistaP">
+<!-- fila principal -->
+          <div class="row">
+
+            <!-- columna de 4 imagenes -->
+            <div class="column">
+              <img id="img404_1" class="img404" src="../Image404.png" alt="../Image404.png">
+              <img id="img404_2" class="img404"src="../Image404.png" alt="../Image404.png">
+              <img id="img404_3" class="img404" src="../Image404.png" alt="../Image404.png">
+              <img id="img404_4" class="img404" src="../Image404.png" alt="../Image404.png">
+            </div>
+
+            <!-- imagen seleccionada y titulo -->
+            <div class="column">
+
+              <img  id="img404_0" class="img404 img404Big" src="../Image404.png" alt="../Image404.png">
+              
+            </div>
+
+            <!-- boton comprar y precio -->
+            <div class="column info" >
+               <h2 class="tituloVP" id="tituloVP">Nombre del producto</h2>
+               <p class="precioVP" id="precioVP">Precio</p>
+
+               <div class="descripcionVP">
+              <p id="descripcionVP"></p>
+               </div>
+               
+               <button class="buy" id="buy">Comprar</button>
+
+            </div>
+
+
+          </div>
+<!-- descripcion del producto -->
+          
+
+        </div>
+
+        <div style="width: 100%; display: flex; align-items: stretch;">
+             
+    
+        </div>
+
+
+         <button  id="btnCP" class="btnCrearProducto btnDisabled" disabled>Crear Producto</button>
+          
+
+</div>
+<div class="overlay" id="overlay">
+<div id="spinner" class="spinner" aria-hidden="true"></div>
+</div>
+
+<footer>
+    <!-- COPY -->
+    <div class="footer-copy">
+        © 2025 GM MotoRepuestos — Todos los derechos reservados.
+        <a href="../index.html">Inicio</a>
+    </div>
+</footer>
+
+<script src="./obtnerimg.js"></script>
+<script src="./btnCrearProducto.js"></script>
+
+</body>
+</html>

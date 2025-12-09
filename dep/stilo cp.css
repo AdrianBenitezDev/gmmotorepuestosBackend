@@ -1,0 +1,71 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.row{
+   display: flex;
+    flex-direction: row;
+    margin: 5px;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.column{
+    display: flex;
+    flex-direction: column;
+    margin: 5px;
+    align-items: center;
+}
+
+.containter-grid{
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    justify-content: center;
+    
+}
+
+.btnEnabled {
+ padding: 10px 20px;
+    background: #d80000;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+
+/* ESTILO PARA BOTÓN DESHABILITADO */
+.btnDisabled {
+  background: #999;
+  color: #eee;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.h-scroll {
+    display: flex;
+  gap: 12px;
+
+  /* ESTA ES LA CLAVE */
+  overflow-x: auto;    /* permite scroll horizontal */
+  overflow-y: hidden;  /* oculta lo que sobresale verticalmente */
+
+  white-space: nowrap; /* evita salto de línea */
+  padding: 10px;
+  width: 100%;       /* limitar ancho para ver el efecto */
+  background: #eee;
+  border-radius: 12px;
+  margin: 10px;
+   background-color: rgba(0, 0, 0, 0.596);
+   align-items: center;
+    justify-content: center;
+
+}
+
