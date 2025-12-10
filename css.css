@@ -1,13 +1,7 @@
-.background {
-    background-image: url("./background.png");
-    background-repeat: repeat; /* se repite X e Y */
-    background-size: auto; /* tamaño original, repite para cubrir */
-    background-position: 0 0; 
-    width: 100%;
-    height: 100vh;
-    position: fixed;
-    z-index: -100;
+body {
+background: linear-gradient(270deg, #000000a1, #a0a0a0);
 }
+
 
 .logo{
     border-radius: 50%;
@@ -22,17 +16,6 @@
     box-sizing: border-box;
 }
 
-/* FONDO */
-body {
-    font-family: Arial, sans-serif;
-    background-image: url("background.png");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    color: white;
-    padding-bottom: 50px;
-    position: relative;
-}
 /* 
 .overlay {
     position: fixed;
