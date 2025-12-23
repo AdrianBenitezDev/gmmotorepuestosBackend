@@ -27,19 +27,32 @@
 
 <div class="column">
 
-         <p>Selecciona un Producto del Catalogo</p>
+        
 
   <!-- SELECCIONAMOS UNA CATEGORIA DEL INPUT -->
 
-  
-  
-  
-  
+        <div class="row">
+      
+          <select id="categorias">
+            
+          </select>
+        </div>
+
+        
+
+      <div  class="card" id="categoriaSeleccionada">Categoria Seleccionada</div>
+
+
   <!-- CARGAMOS LOS CONTENIDOS DE LAS CATEGORIAS -->
-  
-  
-  
-  
+        <br>
+        
+        <div class="gridIndex" id="CategoriaAndProductos">
+        
+          <p>Debe seleccinar una categoria</p>
+        
+        </div>
+        <br>
+        <div id="visorProducto"></div>  
   
   <!-- CADA PRODUCTO DE LA CATEGORIA TIENE UN BOTON PARA EDITAR PRODUCTO Y OTRO PARA ELIMINAR PRODUCTO -->
 
@@ -72,13 +85,7 @@
                     <textarea  id="descripcionP" placeholder="Ingrese Descripción"></textarea>
                   </div>
 
-                  <div class="row">
-                    <p>Seleccione Categoria</p>
-                    <select id="categorias">
-                      
-                    </select>
-                  </div>
-
+                  
 
 
         </div>
@@ -151,8 +158,7 @@
     </div>
 </footer>
 
-<script src="./obtnerimg.js"></script>
-<script src="./btnCrearProducto.js"></script>
+<script src="./generarCardProductos.js"></script>
 
 </body>
 </html>
