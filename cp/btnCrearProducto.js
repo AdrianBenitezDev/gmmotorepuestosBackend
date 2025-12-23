@@ -108,7 +108,7 @@ const imagenesBase64 = await Promise.all(
   producto:titulo,
   precio:precio,
   descripcion:descripcion,
-  img0:[]
+  img:nuevasRutas
     },
   images: imagenesBase64
 };
