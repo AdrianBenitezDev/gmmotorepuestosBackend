@@ -41,8 +41,20 @@ let docImagenes = Array.from(docVirtual.getElementsByClassName("img404"));
 // Mover imagen 4 → 0 en arrayImgSeleccionadas
 docImagenes.unshift(docImagenes.splice(4, 1)[0]);
 
-let numeroRandom = Math.floor(1000 + Math.random() * 9000);
-let nombreDelProducto = "prod_" + numeroRandom +".html";
+//--------------CREAR UNA VARIABLE PARA EL ID------------------------
+
+let d = new Date();
+let ms = d.getMilliseconds();
+let m = d.getMinutes();
+let mt = d.getMonth() + 1; // Sumamos 1 porque los meses en JS van de 0 a 11
+let hs = d.getHours();
+let fy = d.getFullYear();
+let dy = d.getDate(); // Usamos getDate() para el día del mes (1-31) en lugar de getDay() (0-6 día semana)
+
+// Opción 1: Formato de fecha y hora estándar
+let fechaCompleta = `${ms}_${m}_${hs}_${dy}${mt}${fy}`;
+
+let nombreDelProducto = "producto_"+fechaCompleta;
 let nuevasRutas = [];
 
 // Recorrer imágenes
@@ -55,11 +67,12 @@ docImagenes.forEach((img, index) => {
     }
 
     const extension = ".jpg";
-    const nuevoNombre = `imagen_${index}_${numeroRandom}${extension}`;
+    const nuevoNombre = `imagen_${index}_${fechaCompleta}${extension}`;
 
-    nuevasRutas.push(nuevoNombre);
+    let newSrc= `https://raw.githubusercontent.com/AdrianBenitezDev/gmmotorepuestosBackend/main/categorias/${categoria.value}/${nuevoNombre}`;
 
-    img.src = `https://raw.githubusercontent.com/AdrianBenitezDev/gmmotorepuestosBackend/main/categorias/${categoria.value}/${nuevoNombre}`;
+    nuevasRutas.push({name:nuevoNombre,src:newSrc});
+
 });
 
 
@@ -67,19 +80,6 @@ docImagenes.forEach((img, index) => {
 const htmlModificado = docVirtual.body.innerHTML;
 
 // 6) Armar tu documento final
-const htmlFinal = `
-<html>
-<head>
-  <meta charset="UTF-8" />
-  <title>${titulo}</title>
-    <link rel="stylesheet" href="./cp/stilo cp.css"> 
-    <link rel="stylesheet" href="./cp/vistaPrevia.css"> 
-</head>
-<body>
-  ${htmlModificado}
-</body>
-</html>
-`;
 
 
   // ---------------------------------------------------
@@ -87,7 +87,7 @@ const htmlFinal = `
   // ---------------------------------------------------
 const imagenesBase64 = await Promise.all(
   arrayImgSeleccionadas.map(
-    (url, index) => convertirImagenABase64(url, nuevasRutas[index])
+    (url, index) => convertirImagenABase64(url, nuevasRutas[index].name)
   )
 );
 
@@ -99,17 +99,22 @@ const imagenesBase64 = await Promise.all(
   // ---------------------------------------------------
   // 3) ARMAR PAYLOAD PARA APPS SCRIPT
   // ---------------------------------------------------
-  const payload = {
+
+
+  const json = {
+    jsonDatos:{
   categoria: categoria.value,
-  htmlFile: {
-    name: nombreDelProducto,
-    content: htmlFinal
-  },
+  id: nombreDelProducto,
+  producto:titulo,
+  precio:precio,
+  descripcion:descripcion,
+  img0:[]
+    },
   images: imagenesBase64
 };
 
 
-  console.log("Payload listo:", payload);
+  console.log("json listo:", json);
 
   // ---------------------------------------------------
   // 4) ENVIAR A APPS SCRIPT
@@ -128,7 +133,7 @@ const imagenesBase64 = await Promise.all(
   method: "POST", headers: {
     "Content-Type": "text/plain"  // 👈 TRUCO CLAVE: NO HAY OPTIONS
   },
-  body: JSON.stringify(payload)
+  body: JSON.stringify(json)
 })
  const texto = await resp.text(); // <-- aquí está la respuesta REAL
   console.log("Respuesta del backend:", texto);
