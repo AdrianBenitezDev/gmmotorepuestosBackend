@@ -136,7 +136,7 @@ const imagenesBase64 = await Promise.all(
   body: JSON.stringify(json)
 })
  const texto = await resp.text(); // <-- aquí está la respuesta REAL
-  console.log("Respuesta del backend:", texto);
+ // console.log("Respuesta del backend:", texto);
 
   spinFalse();
   alert("datos cargados correctmente")
