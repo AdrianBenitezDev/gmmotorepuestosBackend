@@ -56,12 +56,14 @@ let fechaCompleta = `${ms}_${m}_${hs}_${dy}${mt}${fy}`;
 
 let nombreDelProducto = "producto_"+fechaCompleta;
 let nuevasRutas = [];
+let arrayImg=[];
 
 // Recorrer imágenes
 docImagenes.forEach((img, index) => {
 
     // si no existe esa imagen seleccionada → imagen de error
     if (!arrayImgSeleccionadas[index]) {
+      arrayImg.push("404")
         img.src = "./Image404.png";
         return;
     }
@@ -69,9 +71,11 @@ docImagenes.forEach((img, index) => {
     const extension = ".jpg";
     const nuevoNombre = `imagen_${index}_${fechaCompleta}${extension}`;
 
-    let newSrc= `https://raw.githubusercontent.com/AdrianBenitezDev/gmmotorepuestosBackend/main/categorias/${categoria.value}/${nuevoNombre}`;
+    //url de la imagen (cuando renderizamos la usamos como base y agregamos el index)
+   // let newSrc= `https://raw.githubusercontent.com/AdrianBenitezDev/gmmotorepuestosBackend/main/categorias/${categoria.value}/${nuevoNombre}`;
 
-    nuevasRutas.push({name:nuevoNombre,src:newSrc});
+     arrayImg.push(index);
+    nuevasRutas.push(nuevoNombre);
 
 });
 
@@ -87,7 +91,7 @@ const htmlModificado = docVirtual.body.innerHTML;
   // ---------------------------------------------------
 const imagenesBase64 = await Promise.all(
   arrayImgSeleccionadas.map(
-    (url, index) => convertirImagenABase64(url, nuevasRutas[index].name)
+    (url, index) => convertirImagenABase64(url, nuevasRutas[index])
   )
 );
 
