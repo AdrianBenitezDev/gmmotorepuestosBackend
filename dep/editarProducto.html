@@ -5,7 +5,7 @@
     <meta-name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GM MotoRepuestos</title>
     <link rel="stylesheet" href="../css.css">
-    <link rel="stylesheet" href="./stilo cp.css">
+    <link rel="stylesheet" href="./stilo ed.css">
     <link rel="stylesheet" href="./vistaPrevia.css">
     <link rel="stylesheet" href="../spin.css">
     <meta charset="utf-8">
@@ -22,8 +22,38 @@
     <header class="header">
         <img src="../logogm.png" class="logo" alt="GM MotoRepuestos">
         <h1>GM MotoRepuestos</h1>
-       <h2>Editar producto</h2>
+       
     </header>
+
+       <div class="barraNav">
+      <a class="button" href="../index.html">Inicio</a>
+     <h2>Editar / Eliminar Productos</h2>
+    </div>
+    <br>
+
+<!---------------------------------------------
+---------------BARRA DE BUSQUEDA--------------- 
+----------------------------------------------->
+     
+<div class="card row" id="DivSeach">
+        
+
+       <div class="column">
+        <h3>Buscar producto</h3>
+         <div class="row">
+            <input type="text" placeholder="Ingrese una palabra clave para inciar la busqueda" value="bicicleta" id="inputBusqueda">
+        <button id="btnBuscar">Buscar</button>
+        <button id="btnBorrar">Borrar</button>
+        </div>
+       </div>
+     </div>
+
+
+
+
+
+
+
 
 <div class="column">
 
@@ -39,9 +69,9 @@
         </div>
 
         
-
+<!-- 
       <div  class="card" id="categoriaSeleccionada">Categoria Seleccionada</div>
-
+ -->
 
   <!-- CARGAMOS LOS CONTENIDOS DE LAS CATEGORIAS -->
         <br>
@@ -52,7 +82,18 @@
         
         </div>
         <br>
-        <div id="visorProducto"></div>  
+
+
+<div class="contenedorEdit">
+
+  
+
+
+        <div id="visorProducto" style="background-color: rgba(0, 0, 0, 0.432);">
+
+
+
+        </div>  
   
   <!-- CADA PRODUCTO DE LA CATEGORIA TIENE UN BOTON PARA EDITAR PRODUCTO Y OTRO PARA ELIMINAR PRODUCTO -->
 
@@ -66,9 +107,11 @@
 
          </div>
 
+            <h2>Caracteristicas del Producto</h2>
+
         <div class="column grid" id="caracteristicasDiv">
 
-          <h2>Caracteristicas del Producto</h2>
+       
                   <br>
                   <div class="row">
                     <p>Titulo del Producto</p>
@@ -84,9 +127,6 @@
                     <p>Descripción del Producto</p>
                     <textarea  id="descripcionP" placeholder="Ingrese Descripción"></textarea>
                   </div>
-
-                  
-
 
         </div>
 
@@ -136,16 +176,21 @@
 
         </div>
 
-        <div style="width: 100%; display: flex; align-items: stretch;">
-             
-    
+                  <div style="width: 100%; display: flex; align-items: stretch;">
+                  </div>
+
+             <button  id="btnCP" class="btnCrearProducto btnDisabled" disabled>Actualizar Producto</button>
+          
         </div>
 
 
-         <button  id="btnCP" class="btnCrearProducto btnDisabled" disabled>Crear Producto</button>
-          
-
 </div>
+
+
+
+
+
+
 <div class="overlay" id="overlay">
 <div id="spinner" class="spinner" aria-hidden="true"></div>
 </div>
@@ -159,6 +204,7 @@
 </footer>
 
 <script src="./generarCardProductos.js"></script>
+<script src="./busqueda.js"></script>
 
 </body>
 </html>
