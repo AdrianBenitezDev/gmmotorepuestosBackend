@@ -1,1 +1,16 @@
-{}
+{
+  "producto_688_29_18_412026": {
+    "categoria": "transmision",
+    "id": "producto_688_29_18_412026",
+    "producto": "Bicicleta Mtb Alpina 2.0 Acero R29 Shimano 21v Pro Disco",
+    "precio": "50000",
+    "descripcion": "eliminar para la versi?n de producci?n",
+    "img": [
+      "imagen_0_688_29_18_412026.jpg",
+      "imagen_1_688_29_18_412026.jpg",
+      "imagen_2_688_29_18_412026.jpg",
+      "imagen_3_688_29_18_412026.jpg",
+      "imagen_4_688_29_18_412026.jpg"
+    ]
+  }
+}
