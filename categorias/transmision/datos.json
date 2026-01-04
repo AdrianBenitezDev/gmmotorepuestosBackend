@@ -11,18 +11,5 @@
       "imagen_2_102_19_9_24122025.jpg",
       "imagen_3_102_19_9_24122025.jpg"
     ]
-  },
-  "producto_698_19_9_24122025":{
-    "categoria": "transmision",
-    "id": "producto_698_19_9_24122025",
-    "producto": "terra",
-    "precio": "50000",
-    "descripcion": "eliminar para la versi?n de producci?n",
-    "img": [
-      "imagen_0_102_19_9_24122025.jpg",
-      "imagen_1_102_19_9_24122025.jpg",
-      "imagen_2_102_19_9_24122025.jpg",
-      "imagen_3_102_19_9_24122025.jpg"
-    ]
   }
 }
