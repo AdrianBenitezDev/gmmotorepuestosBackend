@@ -10,12 +10,7 @@
     <link rel="stylesheet" href="../spin.css">
     <meta charset="utf-8">
   <!-- <title>Imágenes Mercado Libre</title> -->
-  <style>
-    body { font-family: Arial; padding: 20px; }
-    img { width: 180px; margin: 10px; border-radius: 10px; }
-    input { width: 420px; padding: 6px; }
-    button { padding: 8px 14px; margin-left: 6px; cursor: pointer; }
-  </style>
+  
 </head>
 <body>
      <!-- ENCABEZADO -->
@@ -44,6 +39,7 @@
             <input type="text" placeholder="Ingrese una palabra clave para inciar la busqueda" value="bicicleta" id="inputBusqueda">
         <button id="btnBuscar">Buscar</button>
         <button id="btnBorrar">Borrar</button>
+              <button  id="btnEP" class="btnCrearProducto" onclick="enviarPrueba()">Actualizar Producto</button>
         </div>
        </div>
      </div>
@@ -84,7 +80,14 @@
         <br>
 
 
-<div class="contenedorEdit">
+  <!---------------------------------------------->
+  <!--------------- DIV  EDITAR ------------------>
+  <!---------------------------------------------->
+
+<div class="contenedorEdit" id="contenedorEdit">
+
+  <h2>Editar Producto</h2>
+  <br>
 
   
 
@@ -104,6 +107,7 @@
                 <button onclick="extraer()">Obtener</button>
                 <button onclick="pegarUrl()">Pegar Url</button>
                 <button onclick="limpiarUrl()">Limpiar</button>
+                
 
          </div>
 
@@ -131,28 +135,94 @@
         </div>
 
          <br>
-        <h2>Imagenes Obtenidas</h2>
+        <h2 id="h2ImagenesDiv">Busque imagenes para cambiarlas</h2>
          <br>
         
-        <div class="h-scroll" id="imagenesDiv"></div>
-      
+        <div class="h-scroll-div" id="imagenesDiv">
 
+           
+              <h2>Imagenes a para editar</h2>
+              <div class="h-scroll" id="imagenesDivScroll">
+
+              </div>
+              <button onclick="salirEditImg()">❌ Cancelar</button>
+       
+
+        </div>
+      <br>
+      <h2>Vista Previa</h2>
+      <br>
         <div class="divVP" id="vistaP">
+    
 <!-- fila principal -->
           <div class="row">
 
             <!-- columna de 4 imagenes -->
-            <div class="column">
-              <img id="img404_1" class="img404" src="../Image404.png" alt="../Image404.png">
-              <img id="img404_2" class="img404"src="../Image404.png" alt="../Image404.png">
-              <img id="img404_3" class="img404" src="../Image404.png" alt="../Image404.png">
-              <img id="img404_4" class="img404" src="../Image404.png" alt="../Image404.png">
+            <div class="column columnImgMuestra">
+
+               <div class="img-wrapper" onclick="mostrarPanelImagenes(1)">
+                <img id="img404_1" class="img404" src="../Image404.png" alt="imagen">
+                
+                <span class="icon-edit">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                  </svg>
+                </span>
+              </div>
+
+              
+              <div class="img-wrapper" onclick="mostrarPanelImagenes(2)">
+                <img id="img404_2" class="img404" src="../Image404.png" alt="imagen">
+                
+                <span class="icon-edit">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="img-wrapper" onclick="mostrarPanelImagenes(3)">
+                <img id="img404_3" class="img404" src="../Image404.png" alt="imagen">
+                
+                <span class="icon-edit">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                  </svg>
+                </span>
+              </div>
+
+              <div class="img-wrapper" onclick="mostrarPanelImagenes(4)">
+                <img id="img404_4" class="img404" src="../Image404.png" alt="imagen">
+                
+                <span class="icon-edit">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                  </svg>
+                </span>
+              </div>
+
+              
             </div>
 
             <!-- imagen seleccionada y titulo -->
-            <div class="column">
+            <div class="column img-wrapper"  onclick="mostrarPanelImagenes(0)">
 
               <img  id="img404_0" class="img404 img404Big" src="../Image404.png" alt="../Image404.png">
+               <span class="icon-edit">
+                  <svg xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24">
+                    <path d="M12 20h9"/>
+                    <path d="M16.5 3.5a2.1 2.1 0 0 1 3 3L7 19l-4 1 1-4Z"/>
+                  </svg>
+                </span>
               
             </div>
 
@@ -179,7 +249,9 @@
                   <div style="width: 100%; display: flex; align-items: stretch;">
                   </div>
 
-             <button  id="btnCP" class="btnCrearProducto btnDisabled" disabled>Actualizar Producto</button>
+             <button  id="btnEP" class="btnCrearProducto" onclick="enviarProductoEditado()">Actualizar Producto</button> 
+             
+              
           
         </div>
 
@@ -205,6 +277,8 @@
 
 <script src="./generarCardProductos.js"></script>
 <script src="./busqueda.js"></script>
+<script src="./edit.js"></script>
+<script src="delete.js"></script>
 
 </body>
 </html>

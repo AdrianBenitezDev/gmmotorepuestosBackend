@@ -1,18 +1,16 @@
-
-
-
 async function deleteProducto(categoria,id,nombre){
   let eliminar=confirm("desea eliminar el producto seleccionado? "+nombre)
 
   if(eliminar){
     //preparamos el body
-    let json={deleteCategoria:categoria,deleteId:id}
+    let json={type:"delete",deleteCategoria:categoria,deleteId:id}
+    console.log(json);
 
     //realizamos un fetch post al backend donde transmitimos categoria y id del producto a eliminar
     
       //para producción
   let urlExcel="https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec";
-   console.log(urlExcel)
+
 
   try {
   resp = await fetch(urlExcel,{
@@ -30,11 +28,7 @@ async function deleteProducto(categoria,id,nombre){
 
 }
 
-
-
-
     alert("se elimino el producto "+nombre)
-
 
     cargarProductos(valorActualOption)
   }else{

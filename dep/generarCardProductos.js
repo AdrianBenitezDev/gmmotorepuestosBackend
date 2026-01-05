@@ -45,13 +45,14 @@ async function cargarProductos(categoriaSelected) {
     try{
 
       //con RAW para evitar los limites
-      const apiURL = `https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${categoriaSelected}/datos.json`;
-
+      let apiURL = `https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec?accion=datos&categoria=${categoriaSelected}`
+  
+      console.log(apiURL)
       //tiene 60 consultas por hora, si ni te autenticas con tokens
 //let apiURL = `https://api.github.com/repos/${owner}/${repo}/contents/categorias/${categoriaSelected}/datos.json`;
 console.log(apiURL)
 
-const res = await fetch(apiURL);
+let res = await fetch(apiURL);
 
  let contenedor = document.getElementById("CategoriaAndProductos");
     contenedor.innerHTML = ""; // limpiar antes 
@@ -66,10 +67,11 @@ if (!res.ok) {
   return;
 }
 
-const datosJson = await res.json();
+let datosJson = await res.json();
 
 console.log("cargarProductos:");
 console.log(datosJson);
+jsonActual=datosJson;
 
    
    
@@ -100,8 +102,10 @@ console.log(datosJson);
 
 
                 <h3>${prod.producto}</h3>
+
+                 <h3>$ ${prod.precio}</h3>
                 
-               <button onclick="editProducto('${categoriaSelected}','${prod.id}')" class="btn-edit">
+               <button onclick="cargarEditProducto('${categoriaSelected}','${prod.id}')" class="btn-edit">
                   <svg xmlns="http://www.w3.org/2000/svg"
                       width="18" height="18"
                       viewBox="0 0 24 24"
@@ -138,24 +142,4 @@ console.log(datosJson);
     
 }
 
-function editProducto(categoria,id){
-  alert("editar producto")
-  document.getElementById("visorProducto").scrollIntoView();
-}
-
-function mostrarProducto(url) {
-
-    spinTrue();
-    fetch(url)
-        .then(res => res.text())
-        .then(html => {
-            spinFalse()
-            document.getElementById("visorProducto").innerHTML = html;
-
-            document.getElementById("visorProducto")
-                .scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-}
-
-// cargarProductos();
 

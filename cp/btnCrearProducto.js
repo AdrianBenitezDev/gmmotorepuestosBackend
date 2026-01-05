@@ -114,6 +114,7 @@ const imagenesBase64 = await Promise.all(
   descripcion:descripcion,
   img:nuevasRutas
     },
+    type:"crear",
   images: imagenesBase64
 };
 

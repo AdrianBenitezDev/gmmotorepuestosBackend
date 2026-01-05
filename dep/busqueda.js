@@ -32,10 +32,10 @@ divBusqueda.addEventListener('click', async () => {
 
 
   // esperar todas las categorías
-  const resultadosPorCategoria = await Promise.all(promesas);
+  let resultadosPorCategoria = await Promise.all(promesas);
 
   // 🔥 UNIFICAR OBJETOS (NO flat)
-  const resultados = Object.assign({}, ...resultadosPorCategoria);
+  let resultados = Object.assign({}, ...resultadosPorCategoria);
 
   console.log("RESULTADOS:", resultados);
 
@@ -52,7 +52,7 @@ async function traerJSON(arrayTxt, id) {
   const apiURL = `https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${categoriasTextos[id]}/datos.json`;
 
   try {
-    const res = await fetch(apiURL);
+    const res = await fetch(apiURL,{ cache: "no-store" });
     if (!res.ok) return {};
 
     const archivos = await res.json(); 
@@ -107,7 +107,7 @@ function cagarCardProductos(jsonObj){
 
       <h3 style="color:red;">$${json.precio}</h3>
 
-      <button onclick="editProducto('${json.id}','${json.categoria}')">
+      <button onclick="cargarEditProducto('${json.categoria}','${json.id}','${json.producto}')">
       <svg xmlns="http://www.w3.org/2000/svg"
                       width="18" height="18"
                       viewBox="0 0 24 24"
@@ -122,7 +122,7 @@ function cagarCardProductos(jsonObj){
         Editar 
       </button>
 
-       <button onclick="deleteProducto('${json.id}','${json.categoria}')">
+       <button onclick="deleteProducto('${json.categoria}','${json.id}','${json.producto}')">
        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                     <path d="M3 6h18v2H3V6zm2 3h14l-1.5 13h-11L5 9zm5-6h4l1 2H9l1-2z"/>
                   </svg>
@@ -137,11 +137,12 @@ function cagarCardProductos(jsonObj){
 
 document.getElementById("btnBorrar").addEventListener("click",()=>{
     document.getElementById("inputBusqueda").value="";
+    document.getElementById("contenedorEdit").style.display="none";
 
     document.getElementById("CategoriaAndProductos").innerHTML=`<p>Debe seleccinar una categoria</p>`;
    
     document.getElementById("visorProducto").innerHTML="";
-    document.getElementById("vistaP").innerHTML="";
+   
     eleCategoria.selectedIndex = 0;
     
 })

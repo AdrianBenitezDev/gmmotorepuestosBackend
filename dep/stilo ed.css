@@ -49,10 +49,25 @@
   opacity: 0.6;
 }
 
+.h-scroll-div{
+      background-color: rgba(187, 187, 187, 0.829);
+   
+    border-radius: 12px;
+    align-items: center;
+    padding: 10px;
+    width: 100%;
+  z-index: 1000;
+    display: none;
+      position: fixed;
+       top: 0;
+       flex-direction: column;
+
+}
+
 .h-scroll {
+  
     display: flex;
   gap: 12px;
-
   /* ESTA ES LA CLAVE */
   overflow-x: auto;    /* permite scroll horizontal */
   overflow-y: hidden;  /* oculta lo que sobresale verticalmente */
@@ -63,7 +78,7 @@
   background: #eee;
   border-radius: 12px;
   margin: 10px;
-   background-color: rgba(0, 0, 0, 0.596);
+   background-color: rgba(0, 0, 0, 0.89);
    align-items: center;
     justify-content: center;
 

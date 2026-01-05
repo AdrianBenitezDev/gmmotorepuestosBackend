@@ -62,7 +62,8 @@ background: linear-gradient(270deg, #000000a1, #a0a0a0);
 
 /* GRID DE CARDS */
 .gridIndex {
-    display: grid;
+    display: flex;
+    flex-direction: column;
     grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 25px;
     max-width: 1000px;
