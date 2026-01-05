@@ -1,173 +1,216 @@
 {
-  "producto_590_33_22_412028": {
+  "producto_100_1_1_512026": {
     "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
+    "id": "producto_100_1_1_512026",
+    "producto": "Carburador Completo Para Yamaha YBR 125",
     "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "descripcion": "carburador compatible, no dudes en consultar",
     "img": [
       "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_101_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_101_1_1_512026",
+    "producto": "Carburador Para Honda CG 125 Titan",
+    "precio": "60000",
+    "descripcion": "repuesto alternativo de excelente calidad",
+    "img": [
       "imagen_1_590_33_22_412026.jpg",
       "imagen_2_590_33_22_412026.jpg",
-      "imagen_3_590_33_22_412026.jpg",
-      "imagen_4_590_33_22_412026.jpg"
+      "imagen_3_590_33_22_412026.jpg"
     ]
-  }, "producto_590_33_22_412027": {
+  },
+  "producto_102_1_1_512026": {
     "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
+    "id": "producto_102_1_1_512026",
+    "producto": "Kit Pistón 150cc Para Motomel Skua",
     "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "descripcion": "kit completo listo para instalar",
     "img": [
-      "imagen_0_590_33_22_412026.jpg",
-      "imagen_1_590_33_22_412026.jpg",
-      "imagen_2_590_33_22_412026.jpg",
-      "imagen_3_590_33_22_412026.jpg",
-      "imagen_4_590_33_22_412026.jpg"
-    ]
-  }, "producto_590_33_22_412026": {
-    "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
-    "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
-    "img": [
-      "imagen_0_590_33_22_412026.jpg",
-      "imagen_1_590_33_22_412026.jpg",
-      "imagen_2_590_33_22_412026.jpg",
-      "imagen_3_590_33_22_412026.jpg",
-      "imagen_4_590_33_22_412026.jpg"
-    ]
-  }, "producto_590_33_22_412026": {
-    "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
-    "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
-    "img": [
-      "imagen_0_590_33_22_412026.jpg",
-      "imagen_1_590_33_22_412026.jpg",
-      "imagen_2_590_33_22_412026.jpg",
-      "imagen_3_590_33_22_412026.jpg",
-      "imagen_4_590_33_22_412026.jpg"
-    ]
-  }, "producto_590_33_22_412026": {
-    "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
-    "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
-    "img": [
-      "imagen_0_590_33_22_412026.jpg",
-      "imagen_1_590_33_22_412026.jpg",
-      "imagen_2_590_33_22_412026.jpg",
-      "imagen_3_590_33_22_412026.jpg",
-      "imagen_4_590_33_22_412026.jpg"
-    ]
-  }, "producto_590_33_22_412026": {
-    "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
-    "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
-    "img": [
-      "imagen_0_590_33_22_412026.jpg",
-      "imagen_1_590_33_22_412026.jpg",
-      "imagen_2_590_33_22_412026.jpg",
-      "imagen_3_590_33_22_412026.jpg",
-      "imagen_4_590_33_22_412026.jpg"
-    ]
-  }, "producto_590_33_22_412026": {
-    "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
-    "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
-    "img": [
-      "imagen_0_590_33_22_412026.jpg",
-      "imagen_1_590_33_22_412026.jpg",
-      "imagen_2_590_33_22_412026.jpg",
-      "imagen_3_590_33_22_412026.jpg",
-      "imagen_4_590_33_22_412026.jpg"
-    ]
-  }, "producto_590_33_22_412026": {
-    "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
-    "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
-    "img": [
-      "imagen_0_590_33_22_412026.jpg",
-      "imagen_1_590_33_22_412026.jpg",
-      "imagen_2_590_33_22_412026.jpg",
-      "imagen_3_590_33_22_412026.jpg",
-      "imagen_4_590_33_22_412026.jpg"
-    ]
-  }, "producto_590_33_22_412026": {
-    "categoria": "motor",
-    "id": "producto_590_33_22_412026",
-    "producto": "Carburador De Repuesto Para Yamaha Blaster Yfs200 1988-2006",
-    "precio": "60000",
-    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
-    "img": [
-      "imagen_0_590_33_22_412026.jpg",
-      "imagen_1_590_33_22_412026.jpg",
       "imagen_2_590_33_22_412026.jpg",
       "imagen_3_590_33_22_412026.jpg",
       "imagen_4_590_33_22_412026.jpg"
     ]
   },
-  "producto_660_46_1_512026": {
+  "producto_103_1_1_512026": {
     "categoria": "motor",
-    "id": "producto_660_46_1_512026",
-    "producto": "Cables+4 Bujias Ngk Fiesta,ecosport,ka,courier,focus Rocam Negro",
-    "precio": "12500",
-    "descripcion": "no dudes en consultar!!",
+    "id": "producto_103_1_1_512026",
+    "producto": "Juego De Aros Para Honda XR 190",
+    "precio": "60000",
+    "descripcion": "aros reforzados alta durabilidad",
     "img": [
       "imagen_0_660_46_1_512026.jpg",
-      "imagen_1_660_46_1_512026.jpg",
+      "imagen_1_660_46_1_512026.jpg"
+    ]
+  },
+  "producto_104_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_104_1_1_512026",
+    "producto": "Bujía NGK Para Motos 125cc",
+    "precio": "60000",
+    "descripcion": "encendido eficiente y duradero",
+    "img": [
       "imagen_2_660_46_1_512026.jpg",
       "imagen_3_660_46_1_512026.jpg"
     ]
   },
-  "producto_122_51_1_512026": {
+  "producto_105_1_1_512026": {
     "categoria": "motor",
-    "id": "producto_122_51_1_512026",
-    "producto": "Pist?n 190cc Cg Xr Titan Zayima Kit 190cc 0.50",
-    "precio": "15000",
-    "descripcion": "eliminar para la versi?n de producci?n",
+    "id": "producto_105_1_1_512026",
+    "producto": "Bobina De Encendido Universal 12v",
+    "precio": "60000",
+    "descripcion": "compatible con múltiples modelos",
     "img": [
       "imagen_0_122_51_1_512026.jpg",
-      "imagen_1_122_51_1_512026.jpg",
+      "imagen_1_122_51_1_512026.jpg"
+    ]
+  },
+  "producto_106_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_106_1_1_512026",
+    "producto": "Filtro De Aire Espuma Yamaha XTZ",
+    "precio": "60000",
+    "descripcion": "mejora el rendimiento del motor",
+    "img": [
       "imagen_2_122_51_1_512026.jpg",
       "imagen_3_122_51_1_512026.jpg"
     ]
   },
-  "producto_573_53_1_512026": {
+  "producto_107_1_1_512026": {
     "categoria": "motor",
-    "id": "producto_573_53_1_512026",
-    "producto": "Kit De 30 Tapa Cubre Tornillos Anodizada Para Moto Universal",
-    "precio": "50000",
-    "descripcion": "eliminar para la versi?n de producci?n",
+    "id": "producto_107_1_1_512026",
+    "producto": "Cadena Reforzada 428 Para Moto",
+    "precio": "60000",
+    "descripcion": "cadena reforzada larga duración",
     "img": [
       "imagen_0_573_53_1_512026.jpg",
-      "imagen_1_573_53_1_512026.jpg",
+      "imagen_1_573_53_1_512026.jpg"
+    ]
+  },
+  "producto_108_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_108_1_1_512026",
+    "producto": "Piñón De Ataque Honda Wave",
+    "precio": "60000",
+    "descripcion": "acero templado alta resistencia",
+    "img": [
       "imagen_2_573_53_1_512026.jpg",
       "imagen_3_573_53_1_512026.jpg"
     ]
   },
-  "producto_32_59_1_512026": {
+  "producto_109_1_1_512026": {
     "categoria": "motor",
-    "id": "producto_32_59_1_512026",
-    "producto": "Cubierta Trasera Motomel S2 150 Cg 6 Telas 300 18",
-    "precio": "10000",
-    "descripcion": "eliminar para la versi?n de producci?n",
+    "id": "producto_109_1_1_512026",
+    "producto": "Corona Trasera Yamaha YBR",
+    "precio": "60000",
+    "descripcion": "excelente relación de transmisión",
     "img": [
       "imagen_0_32_59_1_512026.jpg",
-      "imagen_1_32_59_1_512026.jpg",
+      "imagen_1_32_59_1_512026.jpg"
+    ]
+  },
+  "producto_110_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_110_1_1_512026",
+    "producto": "Kit Embrague Completo CG 150",
+    "precio": "60000",
+    "descripcion": "kit completo de discos y resortes",
+    "img": [
       "imagen_2_32_59_1_512026.jpg",
-      "imagen_3_32_59_1_512026.jpg",
+      "imagen_3_32_59_1_512026.jpg"
+    ]
+  },
+  "producto_111_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_111_1_1_512026",
+    "producto": "Tapa Válvulas Cromada CG Titan",
+    "precio": "60000",
+    "descripcion": "acabado cromado premium",
+    "img": [
       "imagen_4_32_59_1_512026.jpg"
+    ]
+  },
+  "producto_112_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_112_1_1_512026",
+    "producto": "Tensor De Cadena Automático",
+    "precio": "60000",
+    "descripcion": "mantiene tensión óptima",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_113_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_113_1_1_512026",
+    "producto": "Retén De Válvulas Universal",
+    "precio": "60000",
+    "descripcion": "repuesto estándar de calidad",
+    "img": [
+      "imagen_1_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_114_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_114_1_1_512026",
+    "producto": "Kit Juntas Completo Motor 125",
+    "precio": "60000",
+    "descripcion": "kit completo para armado",
+    "img": [
+      "imagen_2_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_115_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_115_1_1_512026",
+    "producto": "Cigueñal Reforzado Para CG",
+    "precio": "60000",
+    "descripcion": "equilibrado y reforzado",
+    "img": [
+      "imagen_3_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_116_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_116_1_1_512026",
+    "producto": "Árbol De Levas Deportivo 150",
+    "precio": "60000",
+    "descripcion": "mejora el rendimiento",
+    "img": [
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_117_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_117_1_1_512026",
+    "producto": "Volante Magnético Completo",
+    "precio": "60000",
+    "descripcion": "compatible con múltiples modelos",
+    "img": [
+      "imagen_0_660_46_1_512026.jpg"
+    ]
+  },
+  "producto_118_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_118_1_1_512026",
+    "producto": "Motor Arranque Universal",
+    "precio": "60000",
+    "descripcion": "arranque confiable",
+    "img": [
+      "imagen_1_660_46_1_512026.jpg"
+    ]
+  },
+  "producto_119_1_1_512026": {
+    "categoria": "motor",
+    "id": "producto_119_1_1_512026",
+    "producto": "Bomba De Aceite Para CG 150",
+    "precio": "60000",
+    "descripcion": "lubricación eficiente",
+    "img": [
+      "imagen_2_660_46_1_512026.jpg"
     ]
   }
 }
