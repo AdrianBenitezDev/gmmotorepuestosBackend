@@ -65,5 +65,19 @@
       "imagen_3_32_59_1_512026.jpg",
       "imagen_4_32_59_1_512026.jpg"
     ]
+  },
+  "producto_529_1_2_512026": {
+    "categoria": "motor",
+    "id": "producto_529_1_2_512026",
+    "producto": "Cubierta Trasera Motomel S2 150 Cg 6 Telas 300 18",
+    "precio": "10000",
+    "descripcion": "eliminar para la versi?n de producci?n",
+    "img": [
+      "imagen_0_529_1_2_512026.jpg",
+      "imagen_1_529_1_2_512026.jpg",
+      "imagen_2_529_1_2_512026.jpg",
+      "imagen_3_529_1_2_512026.jpg",
+      "imagen_4_529_1_2_512026.jpg"
+    ]
   }
 }
