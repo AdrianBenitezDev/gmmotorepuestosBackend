@@ -11,5 +11,19 @@
       "imagen_2_34_48_1_512026.jpg",
       "imagen_3_34_48_1_512026.jpg"
     ]
+  },
+  "producto_214_57_1_512026": {
+    "categoria": "transmision",
+    "id": "producto_214_57_1_512026",
+    "producto": "Cubierta Trasera Motomel S2 150 Cg 6 Telas 300 18",
+    "precio": "10000",
+    "descripcion": "eliminar para la versi?n de producci?n",
+    "img": [
+      "imagen_0_214_57_1_512026.jpg",
+      "imagen_1_214_57_1_512026.jpg",
+      "imagen_2_214_57_1_512026.jpg",
+      "imagen_3_214_57_1_512026.jpg",
+      "imagen_4_214_57_1_512026.jpg"
+    ]
   }
 }
