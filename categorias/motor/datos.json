@@ -25,5 +25,18 @@
       "imagen_2_660_46_1_512026.jpg",
       "imagen_3_660_46_1_512026.jpg"
     ]
+  },
+  "producto_122_51_1_512026": {
+    "categoria": "motor",
+    "id": "producto_122_51_1_512026",
+    "producto": "Pist?n 190cc Cg Xr Titan Zayima Kit 190cc 0.50",
+    "precio": "15000",
+    "descripcion": "eliminar para la versi?n de producci?n",
+    "img": [
+      "imagen_0_122_51_1_512026.jpg",
+      "imagen_1_122_51_1_512026.jpg",
+      "imagen_2_122_51_1_512026.jpg",
+      "imagen_3_122_51_1_512026.jpg"
+    ]
   }
 }
