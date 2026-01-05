@@ -12,5 +12,18 @@
       "imagen_3_590_33_22_412026.jpg",
       "imagen_4_590_33_22_412026.jpg"
     ]
+  },
+  "producto_660_46_1_512026": {
+    "categoria": "motor",
+    "id": "producto_660_46_1_512026",
+    "producto": "Cables+4 Bujias Ngk Fiesta,ecosport,ka,courier,focus Rocam Negro",
+    "precio": "12500",
+    "descripcion": "no dudes en consultar!!",
+    "img": [
+      "imagen_0_660_46_1_512026.jpg",
+      "imagen_1_660_46_1_512026.jpg",
+      "imagen_2_660_46_1_512026.jpg",
+      "imagen_3_660_46_1_512026.jpg"
+    ]
   }
 }
