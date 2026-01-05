@@ -38,5 +38,18 @@
       "imagen_2_122_51_1_512026.jpg",
       "imagen_3_122_51_1_512026.jpg"
     ]
+  },
+  "producto_573_53_1_512026": {
+    "categoria": "motor",
+    "id": "producto_573_53_1_512026",
+    "producto": "Kit De 30 Tapa Cubre Tornillos Anodizada Para Moto Universal",
+    "precio": "50000",
+    "descripcion": "eliminar para la versi?n de producci?n",
+    "img": [
+      "imagen_0_573_53_1_512026.jpg",
+      "imagen_1_573_53_1_512026.jpg",
+      "imagen_2_573_53_1_512026.jpg",
+      "imagen_3_573_53_1_512026.jpg"
+    ]
   }
 }
