@@ -1,1 +1,277 @@
-{}
+{
+  "producto_test_01": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 01",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_02": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 02",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_03": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 03",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_04": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 04",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_05": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 05",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_06": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 06",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_07": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 07",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_08": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 08",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_09": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 09",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+  "producto_test_10": {
+    "categoria": "motor",
+    "id": "producto_590_33_22_412026",
+    "producto": "Carburador Yamaha Blaster Test 10",
+    "precio": "60000",
+    "descripcion": "carburador parayamaha Ybr200, no dudes en consultar",
+    "img": [
+      "imagen_0_590_33_22_412026.jpg",
+      "imagen_1_590_33_22_412026.jpg",
+      "imagen_2_590_33_22_412026.jpg",
+      "imagen_3_590_33_22_412026.jpg",
+      "imagen_4_590_33_22_412026.jpg"
+    ]
+  },
+
+  "producto_test_11": {
+    "categoria": "motor",
+    "id": "producto_660_46_1_512026",
+    "producto": "Cables Y Bujías Test 11",
+    "precio": "12500",
+    "descripcion": "no dudes en consultar!!",
+    "img": [
+      "imagen_0_660_46_1_512026.jpg",
+      "imagen_1_660_46_1_512026.jpg",
+      "imagen_2_660_46_1_512026.jpg",
+      "imagen_3_660_46_1_512026.jpg"
+    ]
+  },
+  "producto_test_12": {
+    "categoria": "motor",
+    "id": "producto_660_46_1_512026",
+    "producto": "Cables Y Bujías Test 12",
+    "precio": "12500",
+    "descripcion": "no dudes en consultar!!",
+    "img": [
+      "imagen_0_660_46_1_512026.jpg",
+      "imagen_1_660_46_1_512026.jpg",
+      "imagen_2_660_46_1_512026.jpg",
+      "imagen_3_660_46_1_512026.jpg"
+    ]
+  },
+  "producto_test_13": {
+    "categoria": "motor",
+    "id": "producto_122_51_1_512026",
+    "producto": "Pistón 190cc Test 13",
+    "precio": "15000",
+    "descripcion": "eliminar para la versión de producción",
+    "img": [
+      "imagen_0_122_51_1_512026.jpg",
+      "imagen_1_122_51_1_512026.jpg",
+      "imagen_2_122_51_1_512026.jpg",
+      "imagen_3_122_51_1_512026.jpg"
+    ]
+  },
+  "producto_test_14": {
+    "categoria": "motor",
+    "id": "producto_122_51_1_512026",
+    "producto": "Pistón 190cc Test 14",
+    "precio": "15000",
+    "descripcion": "eliminar para la versión de producción",
+    "img": [
+      "imagen_0_122_51_1_512026.jpg",
+      "imagen_1_122_51_1_512026.jpg",
+      "imagen_2_122_51_1_512026.jpg",
+      "imagen_3_122_51_1_512026.jpg"
+    ]
+  },
+  "producto_test_15": {
+    "categoria": "motor",
+    "id": "producto_573_53_1_512026",
+    "producto": "Kit Tornillos Anodizados Test 15",
+    "precio": "50000",
+    "descripcion": "eliminar para la versión de producción",
+    "img": [
+      "imagen_0_573_53_1_512026.jpg",
+      "imagen_1_573_53_1_512026.jpg",
+      "imagen_2_573_53_1_512026.jpg",
+      "imagen_3_573_53_1_512026.jpg"
+    ]
+  },
+  "producto_test_16": {
+    "categoria": "motor",
+    "id": "producto_573_53_1_512026",
+    "producto": "Kit Tornillos Anodizados Test 16",
+    "precio": "50000",
+    "descripcion": "eliminar para la versión de producción",
+    "img": [
+      "imagen_0_573_53_1_512026.jpg",
+      "imagen_1_573_53_1_512026.jpg",
+      "imagen_2_573_53_1_512026.jpg",
+      "imagen_3_573_53_1_512026.jpg"
+    ]
+  },
+  "producto_test_17": {
+    "categoria": "motor",
+    "id": "producto_32_59_1_512026",
+    "producto": "Cubierta Trasera Test 17",
+    "precio": "10000",
+    "descripcion": "eliminar para la versión de producción",
+    "img": [
+      "imagen_0_32_59_1_512026.jpg",
+      "imagen_1_32_59_1_512026.jpg",
+      "imagen_2_32_59_1_512026.jpg",
+      "imagen_3_32_59_1_512026.jpg",
+      "imagen_4_32_59_1_512026.jpg"
+    ]
+  },
+  "producto_test_18": {
+    "categoria": "motor",
+    "id": "producto_32_59_1_512026",
+    "producto": "Cubierta Trasera Test 18",
+    "precio": "10000",
+    "descripcion": "eliminar para la versión de producción",
+    "img": [
+      "imagen_0_32_59_1_512026.jpg",
+      "imagen_1_32_59_1_512026.jpg",
+      "imagen_2_32_59_1_512026.jpg",
+      "imagen_3_32_59_1_512026.jpg",
+      "imagen_4_32_59_1_512026.jpg"
+    ]
+  },
+  "producto_test_19": {
+    "categoria": "motor",
+    "id": "producto_32_59_1_512026",
+    "producto": "Cubierta Trasera Test 19",
+    "precio": "10000",
+    "descripcion": "eliminar para la versión de producción",
+    "img": [
+      "imagen_0_32_59_1_512026.jpg",
+      "imagen_1_32_59_1_512026.jpg",
+      "imagen_2_32_59_1_512026.jpg",
+      "imagen_3_32_59_1_512026.jpg",
+      "imagen_4_32_59_1_512026.jpg"
+    ]
+  },
+  "producto_test_20": {
+    "categoria": "motor",
+    "id": "producto_32_59_1_512026",
+    "producto": "Cubierta Trasera Test 20",
+    "precio": "10000",
+    "descripcion": "eliminar para la versión de producción",
+    "img": [
+      "imagen_0_32_59_1_512026.jpg",
+      "imagen_1_32_59_1_512026.jpg",
+      "imagen_2_32_59_1_512026.jpg",
+      "imagen_3_32_59_1_512026.jpg",
+      "imagen_4_32_59_1_512026.jpg"
+    ]
+  }
+}
