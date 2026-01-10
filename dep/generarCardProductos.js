@@ -32,9 +32,6 @@ categoriasTextos.forEach((e,index)=>{
 eleCategoria.addEventListener("change",(e)=>cargarProductos(e.target.value))
 
 
-const owner = "AdrianBenitezDev";
-const repo = "gmmotorepuestosBackend";
-
 async function cargarProductos(categoriaSelected) {
   valorActualOption=categoriaSelected;
 

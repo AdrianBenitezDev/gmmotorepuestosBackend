@@ -1,4 +1,9 @@
 
+
+const owner = "AdrianBenitezDev";
+const repo = "gmmotorepuestosBackend";
+
+
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -53,10 +58,8 @@ function renderVenta(data) {
     <td>${data.stock}</td>
     <td>${data.precio}</td>
     <td>${data.envio}</td>
-    <td>${data.estado}</td>
-    <td>${data.accion}</td>
-    <strong>${data.id}</strong> - ${data.categoria}
-    <span>${data.estado_pago}</span>
+    <td>${data.estado_pago}</td>
+    <td><button>Eliminar</button</td>
   `;
   contenedor.prepend(div);
 }
