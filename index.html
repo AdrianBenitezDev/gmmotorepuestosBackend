@@ -5,6 +5,7 @@
     <meta-name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GM MotoRepuestos</title>
     <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="./divVentas.css">
      <!-- <link rel="stylesheet" href="./vistaPrevia.css"> -->
 </head>
 <body>
@@ -14,10 +15,11 @@
 
     <!-- ENCABEZADO -->
     <header class="header">
+
         <img src="logogm.png" class="logo" alt="GM MotoRepuestos">
         <h1>GM MotoRepuestos</h1>
         <P>Crea, Edita y Elimina Productos </P>
-       
+
     </header>
 
     <section class="productos">
@@ -25,6 +27,10 @@
            <div class="row">
                 <a class="btn button" href="./cp/cp.html">Crear Producto</a>
                 <a class="btn button" href="./dep/editarProducto.html">Editar o Eliminar</a>
+                <button>Stock</button>
+                <button id="btnVentas">Ventas Online</button>  
+                <button id="btnVentas">Ventas en el Local</button>  
+
             </div>
         </div>
     </section>
@@ -39,8 +45,32 @@
 
         <div id="visorProducto"></div>
 
-
     </section>
+
+    <div class="containerVentasOnline" id="ContainerVO">
+        <h3>Ventas Online</h3>
+        <div class="divVentasOnlne">
+            <table>
+                <thead>
+                    <tr>
+                        <td>Imagen</td>
+                        <td>Producto</td>
+                        <td>Cantidad</td>
+                        <td>Stock</td>
+                        <td>Precio</td>
+                        <td>Tipo de Envio</td>
+                        <td>Estado</td>
+                        <td>Accion</td>
+                    </tr>
+                </thead>
+                <tbody id="tabVentasOnline">
+
+                </tbody>
+            </table>
+            
+        </div>
+    </div>
+
 
 </body>
 <footer class="footer">
@@ -52,6 +82,9 @@
         <a href="https://gmmotorepuestos.vercel.app/" >Ir a la Tienda</a>
     </div>
 </footer>
+
+<script type="module" src="./onsnapshot.js"></script>
+<script src="./divVentasOnline.js"></script>
 
 
 </html>
