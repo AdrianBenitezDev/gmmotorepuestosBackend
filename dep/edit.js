@@ -1,3 +1,5 @@
+
+
 let imagenes=[]
 let jsonAEditar;
 

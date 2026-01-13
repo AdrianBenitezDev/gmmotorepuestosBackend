@@ -24,11 +24,12 @@
 
     <section class="productos">
         <div class="card row">
-           <div class="row">
+           <div class="rowCard">
+
                 <a class="btn button" href="./cp/cp.html">Crear Producto</a>
                 <a class="btn button" href="./dep/editarProducto.html">Editar o Eliminar</a>
                 <button>Stock</button>
-                <button id="btnVentas">Ventas Online</button>  
+                <div class="rowNoti"><button id="btnVentas">Ventas Online</button><span class="edge" id="notiVO"></span></div> 
                 <button id="btnVentas">Ventas en el Local</button>  
 
             </div>
@@ -57,8 +58,9 @@
                         <td>Producto</td>
                         <td>Cantidad</td>
                         <td>Stock</td>
-                        <td>Precio</td>
-                        <td>Tipo de Envio</td>
+                        <td>Precio Unitario</td>
+                        <td>Total</td>
+                        <td>Envio</td>
                         <td>Estado</td>
                         <td>Accion</td>
                     </tr>
@@ -83,6 +85,7 @@
     </div>
 </footer>
 
+<script src="./config.js"></script>
 <script type="module" src="./onsnapshot.js"></script>
 <script src="./divVentasOnline.js"></script>
 

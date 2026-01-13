@@ -1,3 +1,5 @@
+const { owner, repo } = window.APP_CONFIG;
+
 let valorActualOption=0;
 
 // ====== SPINNER ======

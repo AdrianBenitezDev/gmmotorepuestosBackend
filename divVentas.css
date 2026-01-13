@@ -4,3 +4,33 @@
     justify-content: center;
     align-items: center;
 }
+
+.rowCard{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+thead{
+    background: white;
+}
+
+.edge{
+    display: flex;
+    align-items: center;
+    position: absolute;
+    transform: translate(120px, -10px);
+    background-color: rgb(236, 232, 232);
+    border-radius: 50%;
+    border: 1px solid black;
+    color: black;
+    padding: 5px;
+    width: 20px;
+    height: 20px;
+    font-size: 15px;
+}
+.rowNoti{
+    display: flex;
+    flex-direction: row;
+
+}
+

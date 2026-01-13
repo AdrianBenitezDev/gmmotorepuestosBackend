@@ -1,0 +1,36 @@
+javascript:(function(){
+  var s=document.createElement('script');
+  s.src='http://127.0.0.1:5501/bookmarklets/bookmarklet.js?'+Date.now();
+  document.body.appendChild(s);
+})();
+
+(function () {
+  try {
+    var imgs = Array.from(document.querySelectorAll("img"))
+      .map(function (img) { return img.src; })
+      .filter(function (src) {
+        return src &&
+          src.indexOf("mlstatic") !== -1 &&
+          src.indexOf("avatar") === -1 &&
+          src.indexOf("logo") === -1 &&
+          src.indexOf("frontend-assets") === -1;
+      });
+
+    var unicas = Array.from(new Set(imgs));
+
+    if (!unicas.length) {
+      alert("No se encontraron imagenes");
+      return;
+    }
+
+    window.postMessage({
+      origen: "ML_BOOKMARKLET",
+      imagenes: unicas
+    }, "*");
+
+    alert(unicas.length + " imagenes capturadas");
+  } catch (e) {
+    alert("Error ejecutando script remoto");
+    console.error(e);
+  }
+})();

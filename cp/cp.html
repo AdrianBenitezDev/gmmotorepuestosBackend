@@ -35,17 +35,22 @@
 
          <h2>Obtener Producto de Mercado Libre</h2>
          <br>
+         <button id="btnML">Ir a Mercado Libre</button>
+       
         <!-- <h3>Imagenes Obtenidas</h3> -->
-         <div class="row">
+         <div class="column">
         
-     
-                <input id="url" placeholder="URL de Mercado Libre" value="https://articulo.mercadolibre.com.ar/MLA-1487171425-bicicleta-mtb-alpina-20-acero-r29-shimano-21v-pro-disco-_JM?searchVariation=188950376659#polycard_client=offers&deal_print_id=3b3b4166-266a-4582-b0c6-4e329a067942&position=1&tracking_id=84a979fe-258e-47db-a450-cc3631e452bf">
-                <button onclick="extraer()">Obtener</button>
-                <button onclick="pegarUrl()">Pegar Url</button>
-                <button onclick="limpiarUrl()">Limpiar</button>
+              <br>
+              <h2>Cargar imagenes desde la pc</h2>
+
+              <div class="row">
+                <button>Cargar Imagen</button>
+              </div>
+
+                
 
          </div>
-
+        
          <br>
 
           <h2>Caracteristicas del Producto</h2>
@@ -146,10 +151,16 @@
         © 2025 GM MotoRepuestos — Todos los derechos reservados.
         <a href="../index.html">Inicio</a>
     </div>
+     <div class="row">
+          <a id="bm">Generar bookmarklet</a>
+         </div>
+
 </footer>
 
+<script src="../config.js"></script>
 <script src="./btnCrearProducto.js"></script>
 <script src="./obtnerimg.js"></script>
+<script src="./bookmarklets/bookmarklet.js"></script>
 
 </body>
 </html>
