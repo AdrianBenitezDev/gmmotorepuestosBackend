@@ -4,11 +4,12 @@ const { owner, repo } = window.APP_CONFIG;
 
 let arrayVentas;
 
-  const contenedor = document.getElementById("tabVentasOnline");
+  let contenedor = document.getElementById("tabVentasOnline");
   
   let textoNotificacion=document.getElementById("notiVO");
 
 
+  export {traerVentas} 
   import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
   import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
@@ -68,30 +69,39 @@ const ventasDelMes = query(
     });
   });
 
+
+
+
+
  async function traerVentas(){
-    
+
+contenedor.innerHTML='';
+
  arrayVentas = await getDocs(ventasDelMes);
 
+ 
+console.log("arrayVentas")
 
 console.log(arrayVentas)
 
 arrayVentas.forEach(venta=>{
+  let idVenta=venta.id; 
     let json=venta.data();
 
     console.log(json)
 
     if(json.carrito==true){
 
-    renderVentaCarrito(json)
+    renderVentaCarrito(json,idVenta)
     }else{
       
-    renderVentaIndividual(json)
+    renderVentaIndividual(json,idVenta)
     }
 })
 }
 
 
-function renderVentaIndividual(data) {
+function renderVentaIndividual(data,idVenta) {
   const tr = document.createElement("tr");
   tr.setAttribute("class","card")
   tr.innerHTML = `
@@ -103,12 +113,12 @@ function renderVentaIndividual(data) {
     <td>${data.total_pagar} $</td>
     <td>${data.envio}</td>
     <td>${data.estado_pago}</td>
-    <td><button>Eliminar</button</td>
+    <td><button onClick="deleteCompra('${idVenta}','${data.producto.producto}')">Eliminar</button</td>
   `;
   contenedor.prepend(tr);
 }
 
-function renderVentaCarrito(data){
+function renderVentaCarrito(data,idVenta){
 
   let array=data.arrayCarrito;
   
@@ -126,7 +136,7 @@ function renderVentaCarrito(data){
               <td>${compra.total_pagar} $</td>
               <td>${compra.envio}</td>
               <td>${compra.estado_pago}</td>
-              <td><button>Eliminar</button</td>
+              <td><button onClick="deleteCompra('${idVenta}','${compra.producto}')">Eliminar</button</td>
             `;
             div.prepend(tr);
 
@@ -143,9 +153,49 @@ function notificar(){
 
 }
 
-document.getElementById("btnVentas").addEventListener("click",()=>{
 
-    document.getElementById("ContainerVO").style.display="flex";
-    traerVentas();
-    textoNotificacion.style.display="none";
-})
+document.addEventListener("click", (e) => {
+  if (e.target.classList.contains("btnEliminar")) {
+    deleteCompra(e.target.dataset.id);
+  }
+});
+
+
+window.deleteCompra = async function (idVenta,nameProducto) {
+
+  let confirm=confirm("¿Desea eliminar la compra seleccionada? \n "+ nameProducto);
+
+  if(confirm){
+spiner(true);
+  
+  const data = {
+    action: "eliminarVenta",
+    data: { idVenta }
+  };
+
+  const resp = await fetch(
+    "https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/crearVentaPendiente",
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(data)
+    }
+  );
+
+  const res = await resp.json();
+  console.log(res);
+
+  if (res.ok === true) {
+    alert("Compra eliminada con éxito!");
+   // location.reload();
+   traerVentas();
+  } else {
+    alert(res.error || "Error al eliminar la compra");
+  }
+  
+  spiner(false);
+  }else{
+
+  }
+  
+};

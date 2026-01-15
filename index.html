@@ -6,12 +6,15 @@
     <title>GM MotoRepuestos</title>
     <link rel="stylesheet" href="css.css">
     <link rel="stylesheet" href="./divVentas.css">
+    <link rel="stylesheet" href="./spin.css">
      <!-- <link rel="stylesheet" href="./vistaPrevia.css"> -->
 </head>
 <body>
 
     <!-- Fondo oscuro -->
-    <div class="overlay"></div>
+    <div class="overlay" id="overlay">
+            <div id="spinner" class="spinner" aria-hidden="true"></div>
+    </div>
 
     <!-- ENCABEZADO -->
     <header class="header">
@@ -28,9 +31,9 @@
 
                 <a class="btn button" href="./cp/cp.html">Crear Producto</a>
                 <a class="btn button" href="./dep/editarProducto.html">Editar o Eliminar</a>
-                <button>Stock</button>
-                <div class="rowNoti"><button id="btnVentas">Ventas Online</button><span class="edge" id="notiVO"></span></div> 
-                <button id="btnVentas">Ventas en el Local</button>  
+                <!-- <button id="btnStock">Stock</button> -->
+                <div class="rowNoti"><button id="btnVentasOnline">Ventas Online</button><span class="edge" id="notiVO"></span></div> 
+                <button id="btnVentasLocal">Ventas en el Local</button>  
 
             </div>
         </div>
@@ -38,6 +41,10 @@
 
 
     <!-- SECCIÓN DE PRODUCTOS -->
+
+<!-- -------------------------------------------- -->
+<!------------------- PRODUCTOS -------------------->
+<!-- -------------------------------------------- -->
     <section class="productos" >
         
         <div class="gridIndex" id="CategoriaAndProductos">
@@ -48,8 +55,34 @@
 
     </section>
 
-    <div class="containerVentasOnline" id="ContainerVO">
-        <h3>Ventas Online</h3>
+    
+<!-- -------------------------------------------- -->
+<!------------------- BUSQUEDA --------------------->
+<!-- -------------------------------------------- -->
+
+       <div class="divBusquedaInicio" id="divBusquedaInicio">
+        <h3>Venta En El Local</h3>
+        <br>
+        <h3>Buscar producto</h3>
+         <div class="row">
+            <input type="text" placeholder="Ingrese una palabra clave para inciar la busqueda" value="bicicleta" id="inputBusquedaInicio">
+        <button id="btnBuscarInicio">Buscar</button>
+        <button id="btnBorrarInicio">Borrar</button>
+        </div>
+       </div>
+<!-- -------------------------------------------- -->
+<!------------------- CONTAINER --------------------->
+<!-- -------------------------------------------- -->
+
+       <div class="containerVentasOnline" id="container">
+     
+    </div>
+
+<!-- -------------------------------------------- -->
+<!------------------- ventasOnline------------------>
+<!-- -------------------------------------------- -->
+    <div class="ventasOnline" id="ventasOnline">
+         <h3>Ventas Online</h3>
         <div class="divVentasOnlne">
             <table>
                 <thead>
@@ -85,9 +118,16 @@
     </div>
 </footer>
 
+
 <script src="./config.js"></script>
 <script type="module" src="./onsnapshot.js"></script>
-<script src="./divVentasOnline.js"></script>
+<script src="./spin.js"></script>
+<script src="./ventasLocal.js"></script>
+<script src="./stock.js"></script>
+<script type="module" src="./ventasOnline.js"></script>
+<script src="busquedaInicio.js"></script>
+
+
 
 
 </html>

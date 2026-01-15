@@ -2,6 +2,24 @@ body {
 background: linear-gradient(270deg, #000000a1, #a0a0a0);
 }
 
+.column{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.ventasOnline{
+    display: none;
+    flex-direction: column;
+}
+
+.divBusquedaInicio{
+    display: none;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
 
 .logo{
     border-radius: 50%;

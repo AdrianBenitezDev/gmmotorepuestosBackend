@@ -6,13 +6,23 @@ let divBusqueda = document.getElementById("btnBuscar");
 
 divBusqueda.addEventListener('click', async () => {
 
+
+  
+  const input = document.getElementById("inputBusqueda");
+
+
+    if(input==''){
+    alert("Debe ingresar el nombre del producto")
+    return
+  }
+
+
   document.getElementById("CategoriaAndProductos").innerHTML = '';
   document.getElementById("visorProducto").innerHTML = '';
 
   spinTrue();
 
 
-  const input = document.getElementById("inputBusqueda");
 
   const arrayTexto = input.value
     .toLowerCase()
@@ -104,6 +114,7 @@ function cagarCardProductos(jsonObj){
 
 document.getElementById("btnBorrar").addEventListener("click",()=>{
     document.getElementById("inputBusqueda").value="";
+    document.getElementById("inputBusqueda").focus();
     document.getElementById("contenedorEdit").style.display="none";
 
     document.getElementById("CategoriaAndProductos").innerHTML=`<p>Debe seleccinar una categoria</p>`;

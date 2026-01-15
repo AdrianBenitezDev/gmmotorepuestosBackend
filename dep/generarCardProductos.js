@@ -1,4 +1,5 @@
-const { owner, repo } = window.APP_CONFIG;
+const { owner, repo, categoriasTextos } = window.APP_CONFIG;
+
 
 let valorActualOption=0;
 
@@ -9,20 +10,6 @@ function spinFalse() {
 function spinTrue() {
   document.getElementById('overlay').style.display = "flex";
 }
-
-const categoriasTextos = [
-  "Seleccione una categoria",
-  "motor",
-  "transmision",
-  "frenos",
-  "electricidad e iluminación",
-  "suspension",
-  "cubiertas y llantas",
-  "escapes",
-  "carroceria y plasticos",
-  "accesorios",
-  "mantenimiento"
-];
 
 let eleCategoria=document.getElementById("categorias");
 
