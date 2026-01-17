@@ -25,5 +25,20 @@
       "imagen_3_214_57_1_512026.jpg",
       "imagen_4_214_57_1_512026.jpg"
     ]
+  },
+  "producto_366_57_13_1712026": {
+    "categoria": "transmision",
+    "id": "producto_366_57_13_1712026",
+    "producto": "Linga Moto Bicicleta Candado Traba Cadena Piton 1,2m X 22mm Atpro",
+    "precio": "11.305,69",
+    "stock": "10",
+    "descripcion": "cadena de alta calidad",
+    "img": [
+      "imagen_0_366_57_13_1712026.jpg",
+      "imagen_1_366_57_13_1712026.jpg",
+      "imagen_2_366_57_13_1712026.jpg",
+      "imagen_3_366_57_13_1712026.jpg",
+      "imagen_4_366_57_13_1712026.jpg"
+    ]
   }
 }
