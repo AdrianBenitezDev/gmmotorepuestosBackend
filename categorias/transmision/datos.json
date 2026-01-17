@@ -40,5 +40,19 @@
       "imagen_3_366_57_13_1712026.jpg",
       "imagen_4_366_57_13_1712026.jpg"
     ]
+  },
+  "producto_221_37_14_1712026": {
+    "categoria": "transmision",
+    "id": "producto_221_37_14_1712026",
+    "producto": "Corona 42 Pi?on 14 + Cadena Did Japon Oring Benelli Trk 502",
+    "precio": "284.354,9",
+    "stock": "0",
+    "descripcion": "eliminar para la versi?n de producci?n ",
+    "img": [
+      "imagen_0_221_37_14_1712026.jpg",
+      "imagen_1_221_37_14_1712026.jpg",
+      "imagen_2_221_37_14_1712026.jpg",
+      "imagen_3_221_37_14_1712026.jpg"
+    ]
   }
 }
