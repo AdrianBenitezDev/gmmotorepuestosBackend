@@ -103,7 +103,7 @@ arrayVentas.forEach(venta=>{
 
 function renderVentaIndividual(data,idVenta) {
   const tr = document.createElement("tr");
-  tr.setAttribute("class","card")
+  // tr.setAttribute("class","card")
   tr.innerHTML = `
     <td><img style="width:100px; height:100px; overflow:visible;" src="https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${data.producto.categoria}/${data.producto.id}/imagen_0_${data.producto.id.replace('producto_','')}.jpg"></td>
     <td>${data.producto.producto}</td>

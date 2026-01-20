@@ -22,7 +22,8 @@ window.addEventListener("message", (event) => {
 
 });
 
-
+//aplicamos el listener
+colocarListenerVP()
 
 const btn = document.getElementById("btnCP");
 
@@ -141,14 +142,28 @@ function spinTrue() {
 
 // ====== LISTENERS INPUTS ======
 function colocarListenerVP(){
+
   const inputPrecio = document.getElementById("inputPrecio");
-  if(inputPrecio) inputPrecio.onkeyup = () => document.getElementById("precioVP").textContent = inputPrecio.value;
+  if(inputPrecio) inputPrecio.onkeyup = () => document.getElementById("precioVP").textContent = "$ "+inputPrecio.value;
 
   const tituloP = document.getElementById("tituloP");
   if(tituloP) tituloP.onkeyup = () => document.getElementById("tituloVP").textContent = tituloP.value;
 
+  const stockP = document.getElementById("stockP");
+  if(stockP) stockP.onkeyup = () => {
+    
+      let valorStock=stockP.value;
+    if(valorStock==0){
+      document.getElementById("labelStockId").style.display="flex";
+    }else{
+      document.getElementById("labelStockId").style.display="none";
+    }
+
+    document.getElementById("stockVP").textContent = "Stock "+stockP.value;}
+
   const descripcionP = document.getElementById("descripcionP");
   if(descripcionP) descripcionP.onkeyup = () => document.getElementById("descripcionVP").textContent = descripcionP.value;
+
 }
 
 

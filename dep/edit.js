@@ -13,6 +13,12 @@ const h2ImagenesDiv=document.getElementById("h2ImagenesDiv");
     document.getElementById("tituloVP").textContent=e.target.value;
  })
 
+ 
+document.getElementById("stockP").addEventListener('keyup',(e)=>{
+     document.getElementById("stockVP").textContent=" "+e.target.value;
+
+ })
+
 
 document.getElementById("inputPrecio").addEventListener('keyup',(e)=>{
      document.getElementById("precioVP").textContent="$ "+e.target.value;
@@ -45,6 +51,10 @@ function cargarEditProducto(categoria,id,nombre){
                 document.getElementById("tituloP").value=jsonAEditar.producto;
                 document.getElementById("inputPrecio").value=jsonAEditar.precio;
                 document.getElementById("descripcionP").value=jsonAEditar.descripcion;
+                
+                
+                document.getElementById("stockP").value=jsonAEditar.stock;
+                document.getElementById("stockVP").textContent=jsonAEditar.stock;
 
                 document.getElementById("tituloVP").textContent=jsonAEditar.producto;
                 document.getElementById("precioVP").textContent="$ "+jsonAEditar.precio;
@@ -80,10 +90,11 @@ async function enviarProductoEditado() {
     //categoria
   let titulo = document.getElementById("tituloP").value;
   let precio = document.getElementById("inputPrecio").value;
+  let stockProducto= document.getElementById("stockP").value;
   let descripcion = document.getElementById("descripcionP").value;
 
   // VALIDACIÓN
-  if (titulo == '' || precio == '' || descripcion == '' ) {
+  if (titulo == '' || precio == '' || descripcion == '' || stockProducto == '' ) {
     alert("Debe completar todos los datos");
     return;
   }else{
@@ -116,11 +127,13 @@ const imagenesBase64 = await Promise.all(
 
 
   const json = {
-    jsonDatos:{
+  
+  jsonDatos:{
   categoria: jsonAEditar.categoria,
   id: jsonAEditar.id,
   producto:titulo,
   precio:precio,
+  stock:stockProducto,
   descripcion:descripcion,
   img:jsonAEditar.img//los nombres de los img
     },
@@ -167,25 +180,6 @@ const imagenesBase64 = await Promise.all(
    }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   function convertirImagenABase64(url, nombreFinal) {
     if(url){
 return new Promise((resolve, reject) => {
@@ -209,9 +203,6 @@ return new Promise((resolve, reject) => {
     }
   
 }
-
-
-
 
 function limpiarUrl(){
     document.getElementById("url").value = "";

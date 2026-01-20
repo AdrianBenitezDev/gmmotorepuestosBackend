@@ -126,6 +126,11 @@
                     <input id="inputPrecio" value="50000" placeholder="Ingrese Precio">
                   </div>
 
+                    <div class="row">
+                    <p>Stock del Producto</p>
+                    <input id="stockP" value="0" placeholder="Ingrese El stock del Producto">
+                  </div>
+
                   <div class="row">
                     <p>Descripción del Producto</p>
                     <textarea  id="descripcionP" placeholder="Ingrese Descripción"></textarea>
@@ -229,12 +234,35 @@
             <div class="column info" >
                <h2 class="tituloVP" id="tituloVP">Nombre del producto</h2>
                <p class="precioVP" id="precioVP">Precio</p>
-
-               <div class="descripcionVP">
-              <p id="descripcionVP"></p>
+               <br>
+               <div class="row" style="justify-content: left;">
+                      <p class="stockVP">stock:</p>
+                      <p style="color: white;">_</p>
+                      <p class="stockVP" id="stockVP"></p>
                </div>
                
-               <button class="buy" id="buy">Comprar</button>
+
+               <div class="descripcionVP">
+                    <p id="descripcionVP"></p>
+               </div>
+
+
+               <div class="row">
+
+                  <button > - </button>
+                    <p >1</p>
+                  <button  > + </button>
+
+               </div>
+               
+               <button class="buy">Comprar</button>
+
+                <button>Agregar al Carrito</button>
+
+               <button class="buy">Consultar al Vendedor</button>
+
+               <button>Compartir</button>
+               
 
             </div>
 

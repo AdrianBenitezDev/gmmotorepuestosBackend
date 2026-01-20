@@ -1,19 +1,16 @@
-
-
-const contenedor=document.getElementById("container");
-
 document.getElementById("btnStock").addEventListener('click',()=>{
 
-        document.getElementById("ventasOnline").style.display="none";
+    booleanStock=true;
+
+    document.getElementById("titleStockAndVentaLocal").textContent="Stock";
     
+    document.getElementById("ventasOnline").style.display="none";
     document.getElementById("container").style.display="flex";
+    document.getElementById("container").innerHTML=``;
+    document.getElementById("divBusquedaInicio").style.display="flex";
+    document.getElementById("busquedaProductosInicio").innerHTML="";
 
-    divStock();
+    document.getElementById("categorias").selectedIndex=0;
 
+    
 })
-
-function divStock(){
-    let h3=document.createElement("h3");
-    h3.textContent="Stock";
-    contenedor.append(h3)
-}

@@ -6,6 +6,8 @@ document.getElementById("btnVentasOnline").addEventListener('click',()=>{
     
     document.getElementById("container").style.display="none";
 
+    document.getElementById("divBusquedaInicio").style.display="none"
+
     traerVentas();
 })
 

@@ -1,0 +1,6 @@
+❌ logica de pago con tarjeta
+
+✅ revisar! si al crear y editar esta ya agregado agregar stock a los productos
+
+✅ agregar label de "sin stock" a los productos
+

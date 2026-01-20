@@ -1,18 +1,33 @@
-document.getElementById("btnCP").addEventListener('click', crearProducto);
+document.getElementById("btnCP").addEventListener('click', ()=>{
+
+    let stock = document.getElementById("stockP").value;
+    if(stock==0){
+              let confirmacion=confirm("Atención esta creando un producto con STOCK 0 \n NO estara habilitado para la Venta \n ¿Desea continuar?")
+            if(confirmacion){
+              crearProducto();
+            }else{
+              return;
+            }
+    }else{
+      crearProducto();
+    }
+});
 
 async function crearProducto() {
 
   let titulo = document.getElementById("tituloP").value;
   let precio = document.getElementById("inputPrecio").value;
   let descripcion = document.getElementById("descripcionP").value;
+  let stock = document.getElementById("stockP").value;
   let categoria = document.getElementById("categorias");
 
   // VALIDACIÓN
   if (titulo == '' || precio == '' || descripcion == '' || categoria.value == categoria.options[0].value) {
     alert("Debe completar todos los datos");
     return;
-  }else if(arrayImgSeleccionadas.length==0){
+    }else if(arrayImgSeleccionadas.length==0){
     alert("debe seleccionar alguna imagen para el producto")
+    return;
   }else{
 
     for (let index = 0; index < 5; index++) {
@@ -81,7 +96,7 @@ docImagenes.forEach((img, index) => {
 
 
 // 5) Convertir el DOM virtual ya modificado en string HTML nuevamente
-const htmlModificado = docVirtual.body.innerHTML;
+//const htmlModificado = docVirtual.body.innerHTML;
 
 // 6) Armar tu documento final
 
@@ -111,6 +126,7 @@ const imagenesBase64 = await Promise.all(
   id: nombreDelProducto,
   producto:titulo,
   precio:precio,
+  stock:stock,
   descripcion:descripcion,
   img:nuevasRutas
     },

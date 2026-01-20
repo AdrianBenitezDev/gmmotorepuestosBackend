@@ -33,23 +33,19 @@
 
 <div class="column">
 
-         <h2>Obtener Producto de Mercado Libre</h2>
-         <br>
-         <button id="btnML">Ir a Mercado Libre</button>
-       
-        <!-- <h3>Imagenes Obtenidas</h3> -->
-         <div class="column">
-        
-              <br>
-              <h2>Cargar imagenes desde la pc</h2>
-
-              <div class="row">
-                <button>Cargar Imagen</button>
-              </div>
-
-                
-
-         </div>
+        <div class="row">
+                          
+                  <div class="cardColumn">
+                      <h2>Obtener Imagenes de M.L</h2>
+                      <br>
+                      <button id="btnML">Ir a Mercado Libre</button>   
+                  </div>
+                  <div class="cardColumn">
+                        <h2>Subir imagenes desde la pc</h2>
+                     <br>
+                          <button>Cargar Imagen</button>
+                  </div>
+        </div>
         
          <br>
 
@@ -67,6 +63,11 @@
                   <div class="row">
                     <p>Precio del Producto</p>
                     <input id="inputPrecio" value="50000" placeholder="Ingrese Precio">
+                  </div>
+
+                  <div class="row">
+                    <p>Stock del Producto</p>
+                    <input id="stockP" value="0" placeholder="Ingrese El stock del Producto">
                   </div>
 
                   <div class="row">
@@ -93,6 +94,10 @@
       
 
         <div class="divVP" id="vistaP">
+
+          <span class="labelStock" id="labelStockId">Producto Sin Stock</span>
+
+
 <!-- fila principal -->
           <div class="row">
 
@@ -115,12 +120,30 @@
             <div class="column info" >
                <h2 class="tituloVP" id="tituloVP">Nombre del producto</h2>
                <p class="precioVP" id="precioVP">Precio</p>
+               <br>
 
                <div class="descripcionVP">
-              <p id="descripcionVP"></p>
+                 <p id="descripcionVP"></p>
+               </div>
+
+               <p class="stockVP" id="stockVP">stock</p>
+
+               <div class="row">
+
+                  <button > - </button>
+                    <p >1</p>
+                  <button  > + </button>
+
                </div>
                
-               <button class="buy" id="buy">Comprar</button>
+               <button class="buy">Comprar</button>
+
+                <button>Agregar al Carrito</button>
+
+               <button class="buy">Consultar al Vendedor</button>
+
+               <button>Compartir</button>
+
 
             </div>
 

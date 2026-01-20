@@ -5,6 +5,62 @@
     align-items: center;
 }
 
+.cardPBDisabled{
+    background-color: rgb(222 222 222 / 75%);;
+}
+.cardPBEnabled{
+   background: white;
+}
+
+.cardProductoBusqueda{
+ position: relative;
+    overflow: hidden;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 5px;
+    flex-direction: row;
+    color: #222;
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    text-align: center;
+    transition: 0.3s;
+    width: 100%;
+}
+
+/* ESTILO PARA BOTÓN DESHABILITADO */
+.btnDisabled {
+  background: #999;
+  color: #eee;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+
+.labelStockBusqueda{
+    
+    height: 25px;
+    width: 50%;
+    position: absolute;
+    top: 25%;
+    left: -20%;
+    background: #c03a2bbe;
+    color: #fff;
+    font-size: 15px;
+    font-weight: bold;
+    text-transform: uppercase;
+    padding: 6px 50px;
+    text-align: center;
+    transform: rotate(-45deg);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.3);
+    z-index: 10;
+    pointer-events: none;
+}
+
 .rowCard{
     display: flex;
     flex-direction: row;

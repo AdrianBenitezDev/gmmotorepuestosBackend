@@ -9,16 +9,67 @@ background: linear-gradient(270deg, #000000a1, #a0a0a0);
     align-items: center;
 }
 
+.row{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
 .ventasOnline{
     display: none;
     flex-direction: column;
+    align-items: center;
+}
+
+thead tr{
+    background-color: rgb(156, 156, 156);
+    border-radius: 12px;
+    
+}
+
+tbody tr{
+        background: white;
+    color: #222;
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    text-align: center;
+    transition: 0.3s;
+    margin: 5px;
+    justify-content: space-between;
+    width: 50%;
+    
+}
+
+td{
+    padding: 5px;
+    align-items: center;
+    text-align: center;
 }
 
 .divBusquedaInicio{
     display: none;
     align-items: center;
+    justify-content: center;
     flex-direction: column;
     width: 100%;
+}
+
+.cardBusquedaInicio{
+        background: white;
+    color: #222;
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    text-align: center;
+    transition: 0.3s;
+    margin: 5px;
+     display: flex;
+    justify-content: space-between;
+    width: 50%;
+    padding-left: 10%;
+    padding-right: 10%;
 }
 
 .logo{
@@ -69,8 +120,25 @@ background: linear-gradient(270deg, #000000a1, #a0a0a0);
 
 /* TITULO SECCIÓN */
 .productos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 20px;
     text-align: center;
+    width: 100%;
+
+}
+
+.productos .card{
+    display: flex;
+    width: 80%;
+    align-items: center;
+    justify-content: center;
+}
+
+.rowCard{
+    justify-content: space-between;
+    width: 90%;
 }
 
 .productos h2 {
@@ -97,10 +165,28 @@ background: linear-gradient(270deg, #000000a1, #a0a0a0);
     box-shadow: 0 6px 14px rgba(0,0,0,0.25);
     text-align: center;
     transition: 0.3s;
+    margin: 5px;
+     display: flex;
+    justify-content: space-between;
+    
+}
+
+.cardProducto{
+    display: flex;
+    justify-content: space-between;
+      background: white;
+    color: #222;
+    padding: 15px;
+    border-radius: 14px;
+    box-shadow: 0 6px 14px rgba(0,0,0,0.25);
+    text-align: center;
+    transition: 0.3s;
+    margin: 5px;
+    width: 100%;
+    
 }
 
 .card:hover {
-    transform: translateY(-5px);
     box-shadow: 0 12px 22px rgba(0,0,0,0.35);
 }
 
@@ -193,4 +279,36 @@ button:hover, .button:hover  {
     margin-top: 25px;
     font-size: 0.85rem;
     opacity: 0.7;
+}
+
+/* 
+mensaje */
+
+
+.containerMensaje{
+    top: 0px;
+    left: 0px;
+    padding: 10px;
+    position: fixed;
+}
+
+.mensaje{
+   display: flex;
+  padding: 15px 25px;
+  background: #111;
+  color: #fff;
+  border-radius: 8px;
+
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s ease;
+}
+
+.mensaje.show {
+  opacity: 1;
+  transform: translateY(0);
 }
