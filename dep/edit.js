@@ -49,7 +49,7 @@ function cargarEditProducto(categoria,id,nombre){
 
                 //titulo del producto (CARACTERISTICAS)
                 document.getElementById("tituloP").value=jsonAEditar.producto;
-                document.getElementById("inputPrecio").value=jsonAEditar.precio;
+                document.getElementById("inputPrecio").value=parseNumeroAR(jsonAEditar.precio);
                 document.getElementById("descripcionP").value=jsonAEditar.descripcion;
                 
                 
@@ -57,7 +57,7 @@ function cargarEditProducto(categoria,id,nombre){
                 document.getElementById("stockVP").textContent=jsonAEditar.stock;
 
                 document.getElementById("tituloVP").textContent=jsonAEditar.producto;
-                document.getElementById("precioVP").textContent="$ "+jsonAEditar.precio;
+                document.getElementById("precioVP").textContent="$ "+parseNumeroAR(jsonAEditar.precio);
                 document.getElementById("descripcionVP").textContent=jsonAEditar.descripcion;
      
 
@@ -89,7 +89,7 @@ async function enviarProductoEditado() {
 
     //categoria
   let titulo = document.getElementById("tituloP").value;
-  let precio = document.getElementById("inputPrecio").value;
+  let precio = parseNumeroAR(document.getElementById("inputPrecio").value);
   let stockProducto= document.getElementById("stockP").value;
   let descripcion = document.getElementById("descripcionP").value;
 
@@ -365,4 +365,16 @@ function cambiarImagenVP(id,src){
     console.log(arrayImgSeleccionadas)
     salirEditImg();
 
+}
+
+
+
+function parseNumeroAR(valor) {
+  if (typeof valor === "number") return valor;
+
+  return Number(
+    valor
+      .replace(/\./g, "") // quita separador de miles
+      .replace(",", ".")  // convierte decimal a formato JS
+  );
 }
