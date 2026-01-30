@@ -1,4 +1,16 @@
 
+  import  {db} from "./firebaseConfig.js";
+
+  import {
+    collection,
+    query,
+    where,
+    orderBy,
+    onSnapshot,
+    limit,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
 
 const { owner, repo } = window.APP_CONFIG;
 
@@ -10,28 +22,6 @@ let arrayVentas;
 
 
   export {traerVentas} 
-  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-  import { getFirestore } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
-
-  const firebaseConfig = {
-    apiKey: "AIzaSyAOk_ze32aJXfleQcjYoOgN7yQox46pygk",
-    authDomain: "gmmotorepuestos-ventas.firebaseapp.com",
-    projectId: "gmmotorepuestos-ventas"
-  };
-
-  const app = initializeApp(firebaseConfig);
-  const db = getFirestore(app);
-
-  
-  import {
-    collection,
-    query,
-    where,
-    orderBy,
-    onSnapshot,
-    limit,
-    getDocs
-  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
   //TRAEMOS TOMAS LAS VENTAS DE ESTE MES
   

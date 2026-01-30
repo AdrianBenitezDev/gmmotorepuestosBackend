@@ -1,18 +1,36 @@
+import { jsonActual,setValorJsonActual } from "./config.js";
+import { dbProducto } from "./firebaseConfig.js";
+
+import {
+  collection,
+  getDocs,
+  query,
+  where,
+  doc,
+  updateDoc
+} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+
 const { categoriasTextos, owner, repo } = window.APP_CONFIG;
+
+
+
+
 
 
 let selectCategoria=document.getElementById("categorias");
 
+//cargamos en el elemento select las categorias
 categoriasTextos.forEach((e,index)=>{
   selectCategoria.innerHTML+=`<option ${index==0?"selected":''} value="${e}">${e}</option>`
 })
 
-
+//cuando cambiamos el valor del select ejecutamos cargarProductos
 selectCategoria.addEventListener("change",(e)=>cargarProductos(e.target.value))
 
 
 async function cargarProductos(categoriaSelected) {
-  valorActualOption=categoriaSelected;
+  //valorActualOption=categoriaSelected;
 
   if(categoriaSelected==categoriasTextos[0]){
     return;
@@ -20,22 +38,35 @@ async function cargarProductos(categoriaSelected) {
     spiner(true);
     try{
 
-      //con RAW para evitar los limites
-      let apiURL = `https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec?accion=datos&categoria=${categoriaSelected}`
-  
-      console.log(apiURL)
-      //tiene 60 consultas por hora, si ni te autenticas con tokens
-//let apiURL = `https://api.github.com/repos/${owner}/${repo}/contents/categorias/${categoriaSelected}/datos.json`;
-console.log(apiURL)
+      
+const q = query(
+  collection(dbProducto, "productos"),
+  where("categoria", "==", categoriaSelected)
+);
 
-let res = await fetch(apiURL);
+const snapshot = await getDocs(q);
+
+
+//lo convertimos en arra de bjetos ideal para rednderizar
+const datosJson = snapshot.docs.map(doc => ({
+  id: doc.id,
+  ...doc.data()
+}));
+
+
+// [
+//   { id: "abc123", nombre: "...", precio: 12000 },
+//   { id: "xyz789", nombre: "...", precio: 9500 }
+// ]
+
+
 
  let contenedor = document.getElementById("CategoriaAndProductos");
     contenedor.innerHTML = ""; // limpiar antes 
 
 
 
-if (!res.ok) {
+if (datosJson.length==0) {
   console.error("No existe datos.json");
   
     spiner(false);
@@ -44,14 +75,7 @@ if (!res.ok) {
 
   return;
 }
-
-let datosJson = await res.json();
-
-jsonActual=datosJson;
-
-   
-   
-            
+setValorJsonActual(datosJson);
     // --------------------------------------------
     // ------------ FIN de categoria --------------
     // --------------------------------------------
@@ -121,6 +145,8 @@ divBusquedaInicio.addEventListener('click', async () => {
   spiner(false)
 });
 
+
+
 async function traerJSON(arrayTxt, id) { 
     
   const apiURL = `https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${categoriasTextos[id]}/datos.json`;
@@ -158,7 +184,7 @@ function cagarCardProductos(jsonObj){
   contenedorBusqueda.innerHTML = "";
 
   // guardamos estado actual
-  jsonActual = jsonObj;
+  setValorJsonActual(jsonObj);
 
   // si no hay resultados
   if (Object.keys(jsonObj).length === 0) {
@@ -243,7 +269,9 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 
                 <input value=${json.stock} type="number" id="stock_${json.id}">
 
-                 <button  onclick="actualizarStock('${json.categoria}','${json.id}','${json.stock}')">
+                 <button  class="btn-stock"
+                          data-id="${json.id}">
+
                     <svg xmlns="http://www.w3.org/2000/svg"
                         width="20"
                         height="20"
@@ -256,6 +284,7 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
                    Guardar  
                 
                  </button>`;
+
 
 
             }else{
@@ -273,15 +302,23 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 
                 <h3 style="color:red;">$ ${json.precio}</h3>
 
+              <button 
+                class="btn-vender ${json.stock == 0 ? 'btnDisabled' : ''}"
+                ${json.stock == 0 ? 'disabled' : ''}
+                
+                data-categoria="${json.categoria}"
+                data-id="${json.id}"
+                data-producto="${json.producto}"
+                data-precio="${json.precio}">
+                
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M3 6h18v2H3V6zm2 3h14l-1.5 13h-11L5 9zm5-6h4l1 2H9l1-2z"/>
+                </svg>
 
-                 <button  ${json.stock==0?'class="btnDisabled" disabled':''}  onclick="addProduct(['${json.categoria}','${json.id}','${json.producto}','${json.precio}',1])">
-                   <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
-                     <path d="M3 6h18v2H3V6zm2 3h14l-1.5 13h-11L5 9zm5-6h4l1 2H9l1-2z"/>
-                   </svg>
-                
-                   Vender  
-                
-                 </button>`;
+                Vender
+              </button>
+
+                `;
             }
 
 
@@ -297,6 +334,8 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
   <div class="row navegador" id="navHeader"> 
     <button onclick="navMenos(${numeroNavActual})">&lt</button> Mostrando ${inicioNav} al ${terminarDeIterar} de ${cantidadProductos} Productos Totales <button onclick="navMas(${numeroNavActual})">&gt</button>
   </div>`;
+
+
 }
 
 
@@ -326,9 +365,9 @@ function navMenos(actual){
 }
 
 
-async function actualizarStock(categoria,id,valorActual){
+async function actualizarStock(idDoc,valorActual){
   //tomamos el valor actul
-  let newStock=document.getElementById("stock_"+id).value;
+  let newStock=document.getElementById("stock_"+idDoc).value;
 
   if(valorActual==newStock){
     alert("❌ Error: El numero de Stock debe ser diferente al actual!")
@@ -349,66 +388,52 @@ async function actualizarStock(categoria,id,valorActual){
 
  spiner(true);
  
-  const json = {
-  
-  jsonDatos:{
-    categoria:categoria,
-    stock:newStock,
-    id:id
-    },
-  type:"actualizarStock"
-};
-
-
-  console.log("json listo:", json);
-
-  // ---------------------------------------------------
-  // 4) ENVIAR A APPS SCRIPT
-  // ---------------------------------------------------
-
-  //para pruebas
-  //let urlExcel="https://script.google.com/macros/s/AKfycbzjWcAHodsQeqmYdZfkifFIccsS5gYSjPwF1pCSmP0p/dev";
- 
-
-  //para producción
-  let urlExcel="https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec";
-  //let urlExcel="https://sdre"
-  console.log(urlExcel)
 
   try {
-  resp = await fetch(urlExcel,{
-  method: "POST", headers: {
-    "Content-Type": "text/plain"  // 👈 TRUCO CLAVE: NO HAY OPTIONS
-  },
-  body: JSON.stringify(json)
-})
+    const ref = doc(db, "productos", idDoc);
 
+    await updateDoc(ref, {
+      stock: stock
+    });
 
-
- const texto = await resp.text(); // <-- aquí está la respuesta REAL
- console.log("Respuesta del backend:");
-
-  let respuestaBackend=JSON.parse(texto);
- console.log(respuestaBackend);
-
+    console.log("✅ Stock actualizado");
+    
    spiner(false);
- if(respuestaBackend.respuesta[0].code==200){
+  } catch (error) {
+    console.error("❌ Error actualizando stock:", error);
+    
+   spiner(false);
+  }
 
-  alert("✅ Datos Actualizados correctmente")
- }else{
-
-  alert("❌ Error al Actualizar el STOCK")
- }
-
-} catch (e) {
-  spiner(false);
-  console.log("this error")
-  console.error(e);
-
-    alert("❌ Error al Actualizar el STOCK")
- 
-  return;
-}
 
 
 }
+
+//colocamos los listener globales
+const contenedorNav = document.getElementById("busquedaProductosInicio");
+
+contenedorNav.addEventListener("click", e => {
+  const btn = e.target.closest(".btn-stock");
+  if (!btn) return;
+
+  const id = btn.dataset.id;
+  const input = document.getElementById(`stock_${id}`);
+  const stock = Number(input.value);
+
+  actualizarStock(id, stock);
+});
+
+contenedorNav.addEventListener("click", e => {
+  const btn = e.target.closest(".btn-vender");
+  if (!btn || btn.disabled) return;
+
+  const producto = [
+    btn.dataset.categoria,
+    btn.dataset.id,
+    btn.dataset.producto,
+    btn.dataset.precio,
+    1
+  ];
+
+  addProduct(producto);
+});

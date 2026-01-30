@@ -1,3 +1,15 @@
+export let jsonActual={}
+
+export function setValorJsonActual(valor){
+
+  jsonActual=valor;
+  console.log("se acutualizo el valor de json actual")
+  console.log(jsonActual)
+
+}
+
+
+
 // js/config.js
 window.APP_CONFIG = {
   owner: "AdrianBenitezDev",
