@@ -1,4 +1,4 @@
-
+import {arrayImgSeleccionadas} from "./obtnerimg.js"
 // ====== LISTENERS INPUTS ======
 function colocarListenerVP(){
 

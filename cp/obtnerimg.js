@@ -1,7 +1,7 @@
 import {categoriasTextos} from "../config.js"
 
 
-let arrayImgSeleccionadas = [];
+export let arrayImgSeleccionadas = [];
 const btn = document.getElementById("btnCP");
 
 window.name = "ML_IMGS";
