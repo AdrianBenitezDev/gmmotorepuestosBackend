@@ -1,6 +1,8 @@
+import { actualizarBooleanStock } from "./config.js";
+
 document.getElementById("btnVentasLocal").addEventListener('click',()=>{
     
-    booleanStock=false;
+    actualizarBooleanStock(false);
 
     document.getElementById("titleStockAndVentaLocal").textContent="Venta en el Local";
     

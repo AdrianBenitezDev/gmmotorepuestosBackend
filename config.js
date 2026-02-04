@@ -8,6 +8,12 @@ export function setValorJsonActual(valor){
 
 }
 
+export let booleanStock = false;
+
+export function actualizarBooleanStock(valor){
+  booleanStock=valor
+}
+
 // js/config.js
 
   export let owner= "AdrianBenitezDev";

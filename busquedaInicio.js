@@ -1,7 +1,8 @@
-import { jsonActual,setValorJsonActual } from "./config.js";
+import { jsonActual,setValorJsonActual, booleanStock } from "./config.js";
 import { dbProducto } from "./firebaseConfig.js";
 import {spiner} from "./spin.js";
 import { busquedaPalabra } from "./busquedaPalabra.js"
+import { actualizarStock } from "./stock.js";
 
 import {
   collection,
@@ -207,16 +208,24 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 //si STOCK esta ACTIVADO
  card.innerHTML = `
 
-            
-            ${json.stock==0?'<span class="labelStockBusqueda" >Sin Stock</span>':''}
-                
-            <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}">
-
-                <h3>${name}...</h3>
-
-                <input value=${json.stock} type="number" id="stock_${json.id}">
-
-                 <button  class="btn-stock"
+ <table>
+    <thead>
+              <tr>
+                <td>Imagen</td>
+                <td>Producto</td>
+                <td>Stock</td>
+                <td>Precio</td>
+                <td>Acciones</td>
+              </tr>
+    </thead>
+    
+    <tbody>
+              <tr>
+                <td> <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}"></td>
+                <td> <h3>${name}...</h3></td>
+                <td> <input value=${json.stock} type="number" id="stock_${json.id}"></td>
+                <td> <input value=${json.precio} type="number" id="precio_${json.id}"> $</td>
+                <td><button  class="btn-stock"
                           data-id="${json.id}">
 
                     <svg xmlns="http://www.w3.org/2000/svg"
@@ -230,7 +239,12 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
                 
                    Guardar  
                 
-                 </button>`;
+                 </button></td>
+              </tr>
+    <tbody>
+ </table>
+
+            `;
 
 
 
@@ -313,50 +327,6 @@ function navMenos(actual){
 }
 
 
-async function actualizarStock(idDoc,valorActual){
-  //tomamos el valor actul
-  let newStock=document.getElementById("stock_"+idDoc).value;
-
-  if(valorActual==newStock){
-    alert("❌ Error: El numero de Stock debe ser diferente al actual!")
-    return
-  }
-
-  const stock = Number(newStock);
-
-  if (Number.isNaN(stock)) {
-    return;
-  }
-
-//realizamos el fetch
-  if (!Number.isInteger(stock)) {
-  return;
- }
- //realizamos la actualización del stock
-
- spiner(true);
- 
-
-  try {
-    const ref = doc(db, "productos", idDoc);
-
-    await updateDoc(ref, {
-      stock: stock
-    });
-
-    console.log("✅ Stock actualizado");
-    
-   spiner(false);
-  } catch (error) {
-    console.error("❌ Error actualizando stock:", error);
-    
-   spiner(false);
-  }
-
-
-
-}
-
 //colocamos los listener para los btn del NAVEGADOR NAV
 contenedorNav.addEventListener('click',(e)=>{
   const btnNav= e.target.closest(".btn-navegador");
@@ -380,10 +350,14 @@ contenedorNav.addEventListener("click", e => {
   if (!btn) return;
 
   const id = btn.dataset.id;
-  const input = document.getElementById(`stock_${id}`);
-  const stock = Number(input.value);
+  //stock
+  const inputStock = document.getElementById(`stock_${id}`);
+  const stock = Number(inputStock.value);
+  //precio
+  const inputPrecio = document.getElementById(`precio_${id}`);
+  const precio = Number(inputPrecio.value);
 
-  actualizarStock(id, stock);
+  actualizarStock(id, stock,precio);
 });
 
 contenedorNav.addEventListener("click", e => {
@@ -401,3 +375,36 @@ contenedorNav.addEventListener("click", e => {
 
   addProduct(producto);
 });
+
+
+
+
+
+//deprecado
+
+
+            // ${json.stock==0?'<span class="labelStockBusqueda" >Sin Stock</span>':''}
+                
+            // <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}">
+
+            //     <h3>${name}...</h3>
+
+            //     <input value=${json.stock} type="number" id="stock_${json.id}">
+
+            //      <input value=${json.precio} type="number" id="precio_${json.id}">
+
+            //      <button  class="btn-stock"
+            //               data-id="${json.id}">
+
+            //         <svg xmlns="http://www.w3.org/2000/svg"
+            //             width="20"
+            //             height="20"
+            //             fill="currentColor"
+            //             viewBox="0 0 24 24"
+            //             aria-label="Guardar">
+            //           <path d="M6 2h9l5 5v15a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2zm8 2H8v6h6V4zm-2 16a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/>
+            //         </svg>
+                
+            //        Guardar  
+                
+            //      </button>`
