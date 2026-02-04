@@ -1,3 +1,14 @@
+// import { auth } from "../auth.js";
+import {arrayImgSeleccionadas} from './obtnerimg.js'
+import {spiner} from '../spin.js'
+import {generarKeywords} from "../busquedaPalabra.js"
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const auth = getAuth();
+
+
+
+
 document.getElementById("btnCP").addEventListener('click', ()=>{
 
     let stock = document.getElementById("stockP").value;
@@ -37,7 +48,7 @@ async function crearProducto() {
       
     }
    
-spinTrue();
+spiner(true);
   //  alert("Enviando datos…");
 
   // ---------------------------------------------------
@@ -57,17 +68,17 @@ let docImagenes = Array.from(docVirtual.getElementsByClassName("img404"));
 docImagenes.unshift(docImagenes.splice(4, 1)[0]);
 
 //--------------CREAR UNA VARIABLE PARA EL ID------------------------
+const d = new Date();
 
-let d = new Date();
-let ms = d.getMilliseconds();
-let m = d.getMinutes();
-let mt = d.getMonth() + 1; // Sumamos 1 porque los meses en JS van de 0 a 11
-let hs = d.getHours();
-let fy = d.getFullYear();
-let dy = d.getDate(); // Usamos getDate() para el día del mes (1-31) en lugar de getDay() (0-6 día semana)
+const milis = String(d.getMilliseconds()).padStart(3, "0"); // 000–999
+const min   = String(d.getMinutes()).padStart(2, "0");
+const hora  = String(d.getHours()).padStart(2, "0");
+const dy    = String(d.getDate()).padStart(2, "0");
+const mes   = String(d.getMonth() + 1).padStart(2, "0");
+const fy    = d.getFullYear();
 
-// Opción 1: Formato de fecha y hora estándar
-let fechaCompleta = `${ms}_${m}_${hs}_${dy}${mt}${fy}`;
+const fechaCompleta = `${milis}_${min}_${hora}_${dy}_${mes}_${fy}`;
+
 
 let nombreDelProducto = "producto_"+fechaCompleta;
 let nuevasRutas = [];
@@ -83,8 +94,7 @@ docImagenes.forEach((img, index) => {
         return;
     }
 
-    const extension = ".jpg";
-    const nuevoNombre = `imagen_${index}_${fechaCompleta}${extension}`;
+    const nuevoNombre = `imagen_${index}_${fechaCompleta}`;
 
     //url de la imagen (cuando renderizamos la usamos como base y agregamos el index)
    // let newSrc= `https://raw.githubusercontent.com/AdrianBenitezDev/gmmotorepuestosBackend/main/categorias/${categoria.value}/${nuevoNombre}`;
@@ -120,57 +130,58 @@ const imagenesBase64 = await Promise.all(
   // ---------------------------------------------------
 
 
-  const json = {
-    jsonDatos:{
+  const newProducto = {
   categoria: categoria.value,
   id: nombreDelProducto,
   producto:titulo,
-  precio:precio,
-  stock:stock,
+  producto_lower:titulo.toLowerCase(),
+  precio:Number(precio),
+  stock:Number(stock),
   descripcion:descripcion,
-  img:nuevasRutas
-    },
-    type:"crear",
+  producto_keywords:generarKeywords(titulo),
+  img:nuevasRutas,
   images: imagenesBase64
 };
 
 
-  console.log("json listo:", json);
+  console.log("json listo:", newProducto);
+
+  //---------------------------------------------------
+  //---------- revisamos si esta logeado---------------
+  //---------------------------------------------------
+
+   const user = auth.currentUser;
+
+  if (!user) {
+    alert("No estás logueado");
+    return;
+  }
 
   // ---------------------------------------------------
-  // 4) ENVIAR A APPS SCRIPT
+  // 4) ENVIAR A FUNCTION DE FIREBASE 
   // ---------------------------------------------------
+try{
+  const token = await auth.currentUser.getIdToken();
 
-  //para pruebas
-  //let urlExcel="https://script.google.com/macros/s/AKfycbzjWcAHodsQeqmYdZfkifFIccsS5gYSjPwF1pCSmP0p/dev";
- 
-
-  //para producción
-  let urlExcel="https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec";
-   console.log(urlExcel)
-
-  try {
-  resp = await fetch(urlExcel,{
-  method: "POST", headers: {
-    "Content-Type": "text/plain"  // 👈 TRUCO CLAVE: NO HAY OPTIONS
+fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/crearProducto", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`
   },
-  body: JSON.stringify(json)
-})
- const texto = await resp.text(); // <-- aquí está la respuesta REAL
- // console.log("Respuesta del backend:", texto);
+  body: JSON.stringify(newProducto)
+});
 
-  spinFalse();
+
+  spiner(false);
   alert("datos cargados correctmente")
 } catch (e) {
-  spinFalse();
+   spiner(false);
   console.log("this error")
   console.error(e);
  
   return;
 }
-
-
-
 
    }
     }
@@ -196,3 +207,44 @@ const imagenesBase64 = await Promise.all(
       .catch(reject);
   });
 }
+
+
+
+
+
+
+
+
+
+
+//prueba deprecado enviarPrueba
+
+
+// document.getElementById("btnPrueba").addEventListener('click',enviarPrueba)
+
+// let prueba={}
+
+// async function enviarPrueba() {
+
+//   if (!auth.currentUser) {
+//     alert("No logueado");
+//     return;
+//   }
+
+//   const token = await auth.currentUser.getIdToken();
+
+//   const res = await fetch(
+//     "https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/crearProducto",
+//     {
+//       method: "POST",
+//       headers: {
+//         "Content-Type": "application/json",
+//         "Authorization": `Bearer ${token}`   // 🔥 CLAVE
+//       },
+//       body: JSON.stringify(prueba)
+//     }
+//   );
+
+//   const data = await res.json();
+//   console.log(data);
+// }

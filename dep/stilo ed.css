@@ -51,14 +51,13 @@
 
 .h-scroll-div{
       background-color: rgba(187, 187, 187, 0.829);
-   
     border-radius: 12px;
     align-items: center;
     padding: 10px;
     width: 100%;
   z-index: 1000;
     display: none;
-      position: fixed;
+     
        top: 0;
        flex-direction: column;
 
@@ -83,6 +82,38 @@
     justify-content: center;
 
 }
+
+.muestraImgEditar{
+    width: auto;
+    height: 100px;
+}
+
+.h-scroll-ML {
+  
+    display: flex;
+    flex-direction: row;
+  gap: 12px;
+  /* ESTA ES LA CLAVE */
+  overflow-x: auto;    /* permite scroll horizontal */
+  overflow-y: hidden;  /* oculta lo que sobresale verticalmente */
+
+  white-space: nowrap; /* evita salto de línea */
+  padding: 10px;
+  width: 100%;       /* limitar ancho para ver el efecto */
+  background: #eee;
+  border-radius: 12px;
+  margin: 10px;
+   background-color: rgba(0, 0, 0, 0.89);
+   align-items: center;
+    justify-content: center;
+
+}
+
+.imgItemML{
+    width:auto;
+    height:100px;
+}
+
 
 
 .barraNav{

@@ -1,7 +1,29 @@
-const { owner, repo, categoriasTextos } = window.APP_CONFIG;
+import { categoriasTextos,repo,owner } from "../config.js";
+import { jsonActual,setValorJsonActual } from "../config.js";
+import { dbProducto } from "../firebaseConfig.js";
+import {spiner} from "../spin.js"
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    orderBy,
+    limit,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+  import {deleteProducto} from './delete.js'
+  import { cargarEditProducto } from "./edit.js";
+
+export let valorActualOption="";
+
+export function setValorActualOption(valor){
+  valorActualOption=valor;
+  console.log("valor actual de valorActualOption "+valorActualOption)
+}
 
 
-let valorActualOption=0;
+   let contenedorNav = document.getElementById("CategoriaAndProductos");
 
 // ====== SPINNER ======
 function spinFalse() {
@@ -11,18 +33,25 @@ function spinTrue() {
   document.getElementById('overlay').style.display = "flex";
 }
 
+
+
+//colocamos el change para el select (option de categorias)
 let eleCategoria=document.getElementById("categorias");
-
-categoriasTextos.forEach((e,index)=>{
-  eleCategoria.innerHTML+=`<option ${index==0?"selected":''} value="${e}">${e}</option>`
-})
-
 
 eleCategoria.addEventListener("change",(e)=>cargarProductos(e.target.value))
 
+//----------------- COLOCAMOS LAS OPTION PARA EL SELECT DE EDITAR en el div EDITAR---------------------
 
-async function cargarProductos(categoriaSelected) {
-  valorActualOption=categoriaSelected;
+
+
+
+
+
+
+
+export async function cargarProductos(categoriaSelected) {
+
+  setValorActualOption(categoriaSelected);
 
   if(categoriaSelected==categoriasTextos[0]){
     return;
@@ -30,34 +59,38 @@ async function cargarProductos(categoriaSelected) {
     spinTrue();
     try{
 
-      //con RAW para evitar los limites
-      let apiURL = `https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec?accion=datos&categoria=${categoriaSelected}`
-  
-      console.log(apiURL)
-      //tiene 60 consultas por hora, si ni te autenticas con tokens
-//let apiURL = `https://api.github.com/repos/${owner}/${repo}/contents/categorias/${categoriaSelected}/datos.json`;
-console.log(apiURL)
 
-let res = await fetch(apiURL);
+      //realizamos la consulta la base de datos
+  const q = query(
+    collection(dbProducto, "productos"),
+    orderBy("categoria"),
+    where("categoria", "==", categoriaSelected)
+  );
+
+
+  const snap = await getDocs(q);
+   spiner(false);
+  
+let datosJson = snap.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+
 
  let contenedor = document.getElementById("CategoriaAndProductos");
     contenedor.innerHTML = ""; // limpiar antes 
 
+// if (!res.ok) {
+//   console.error("No existe datos.json");
+//   spinFalse();
+//   contenedor.innerHTML = "<h3>No hay productos para la sección elegida</h3>"; 
 
-
-if (!res.ok) {
-  console.error("No existe datos.json");
-  spinFalse();
-  contenedor.innerHTML = "<h3>No hay productos para la sección elegida</h3>"; 
-
-  return;
-}
-
-let datosJson = await res.json();
+//   return;
+// }
 
 console.log("cargarProductos:");
 console.log(datosJson);
-jsonActual=datosJson;
+setValorJsonActual(datosJson)
 
    
    
@@ -104,9 +137,8 @@ function navMenos(actual){
 
 }
 
-function panelProductoNav(numeroNavActual){
+export function panelProductoNav(numeroNavActual){
 
-   let contenedorNav = document.getElementById("CategoriaAndProductos");
     contenedorNav.innerHTML = ""; // limpiar antes
 
   let cantidadProductos=Object.values(jsonActual).length;
@@ -151,14 +183,14 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
             card.innerHTML = `
 
                 
-            <img style="width:100px; height:100px; overflow:visible;" src="https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${json.categoria}/${json.id}/${json.img[0]}">
+            <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}">
 
 
                 <h3>${json.producto}</h3>
 
                 <h3 style="color:red;">$ ${json.precio}</h3>
 
-                 <button onclick="cargarEditProducto('${json.categoria}','${json.id}')" class="btn-edit">
+                 <button class="btn-edit" data-id="${json.id}" >
                   <svg xmlns="http://www.w3.org/2000/svg"
                        width="18" height="18"
                        viewBox="0 0 24 24"
@@ -174,7 +206,7 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
                  </button>
 
 
-                 <button onclick="deleteProducto('${json.categoria}','${json.id}','${json.producto}')">
+                 <button class="btn-delete" data-id="${json.id}" data-prod="${json.producto}">
                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                      <path d="M3 6h18v2H3V6zm2 3h14l-1.5 13h-11L5 9zm5-6h4l1 2H9l1-2z"/>
                    </svg>
@@ -198,9 +230,25 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 }
 
 
+contenedorNav.addEventListener("click", e => {
+  const btn = e.target.closest(".btn-delete");
+  if (!btn) return;
 
+  const id = btn.dataset.id;
+  const nombreProducto= btn.dataset.prod;
 
+  deleteProducto(id, nombreProducto);
+});
 
+contenedorNav.addEventListener("click",(e)=>{
+
+  let btn=e.target.closest(".btn-edit");
+  if(!btn)return;
+
+  let id=btn.dataset.id;
+  cargarEditProducto(id);
+
+})
 
 
 

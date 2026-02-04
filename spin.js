@@ -1,4 +1,4 @@
-function spiner(boolean) {
+export function spiner(boolean) {
     if(boolean){
 
   document.getElementById('overlay').style.display = "flex";

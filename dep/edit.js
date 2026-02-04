@@ -1,12 +1,30 @@
+import { setValorJsonActual, jsonActual } from "../config.js";
+import { categoriasTextos } from "../config.js";
+import {generarKeywords} from "../busquedaPalabra.js"
+import {procesarImagenesDesdeML,imagenesML,setImgOptenidasML} from "../cp/obtnerimg.js"
+import { spiner } from "../spin.js";
 
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+const auth = getAuth();
 
-let imagenes=[]
 let jsonAEditar;
 
 
 const h2ImagenesDiv=document.getElementById("h2ImagenesDiv");
-  const imagenesDiv = document.getElementById("imagenesDiv");
+  const imagenesDivML = document.getElementById("imagenesDivML");
   const imagenesDivScroll= document.getElementById("imagenesDivScroll");
+   const divContenedorEditar=document.getElementById("divContenedorEditar")
+
+   //DECLARAMOS EL ARRAY PARA ENVIAR AL BACKEND
+   //CONTENDRA LAS URL DE LAS IMAGENES PARA CONVERTIR EN BASE 64
+   let newArrayEditImg=[null,null,null,null,null]
+
+//LISTENER DEL BTN SALIR EDITAR IMAGEN
+document.getElementById("salirEditImg").addEventListener('click',()=>{
+     divContenedorEditar.style.display="none";
+     imagenesDivML.innerHTML='';
+
+})
 
 //colocamos los change para los input
  document.getElementById("tituloP").addEventListener('keyup',(e)=>{
@@ -33,7 +51,7 @@ document.getElementById("descripcionP").addEventListener('keyup',(e)=>{
 
 
 
-function cargarEditProducto(categoria,id,nombre){
+export function cargarEditProducto(idProducto){
      
     document.getElementById("contenedorEdit").style.display="flex";
 
@@ -41,7 +59,9 @@ function cargarEditProducto(categoria,id,nombre){
 
      //cargar los datos en una variable que se itera
      //YA SE ENCUENTRA CARGADA EN JSONACTUAL
-     jsonAEditar=jsonActual[id];
+     console.log(idProducto)
+     jsonAEditar=jsonActual.find(ele=>ele.id==idProducto);
+     console.log(jsonAEditar)
 
 
      //cargamos cada una de las variables
@@ -59,24 +79,41 @@ function cargarEditProducto(categoria,id,nombre){
                 document.getElementById("tituloVP").textContent=jsonAEditar.producto;
                 document.getElementById("precioVP").textContent="$ "+parseNumeroAR(jsonAEditar.precio);
                 document.getElementById("descripcionVP").textContent=jsonAEditar.descripcion;
+
+                 let categoriasEditada=document.getElementById("categoriasEditada");
+                
+                 let categoriaActual=jsonAEditar.categoria.toUpperCase();
+                 //cargar 
+                categoriasTextos.forEach((e)=>{
+
+                          if(categoriaActual==e.toUpperCase()){
+                          
+                        categoriasEditada.innerHTML+=`<option selected value="${e}">${e.toUpperCase()}</option>`
+
+                          }else{
+                        categoriasEditada.innerHTML+=`<option value="${e}">${e.toUpperCase()}</option>`
+                          }
+
+                })
      
 
     //cargamos la url a las img
      
     for (let index = 0; index < jsonAEditar.img.length; index++) {
         
-    document.getElementById("img404_"+index).src=`https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${jsonAEditar.categoria}/${jsonAEditar.id}/${jsonAEditar.img[index]}`;
+    document.getElementById("img404_"+index).src=`${jsonAEditar.img[index]}`;
 
         
     }
      
  
-   
+   //colocamos el listener del boton para enviar el producto editado
+   document.getElementById("btnEP").addEventListener('click',enviarProductoEditado)
 }
 
 //arrayImgSeleccionadas
 //creamos la variable arrayImgSeleccionadas
-let arrayImgSeleccionadas=[null,null,null,null,null]
+//let arrayImgSeleccionadas=[null,null,null,null,null]
 let arrayImg=[];
 let nuevasRutas=[];
 
@@ -85,21 +122,21 @@ let nuevasRutas=[];
 
 
 async function enviarProductoEditado() {
-    console.log("enviando producto editado")
 
     //categoria
   let titulo = document.getElementById("tituloP").value;
   let precio = parseNumeroAR(document.getElementById("inputPrecio").value);
   let stockProducto= document.getElementById("stockP").value;
   let descripcion = document.getElementById("descripcionP").value;
+  let valorCategoriaEditada = document.getElementById("categoriasEditada").value
 
   // VALIDACIÓN
-  if (titulo == '' || precio == '' || descripcion == '' || stockProducto == '' ) {
+  if (titulo == '' || precio == '' || descripcion == '' || stockProducto == ''|| valorCategoriaEditada == "SELECCIONE UNA CATEGORIA" ) {
     alert("Debe completar todos los datos");
     return;
   }else{
 
-spinTrue();
+spiner(true);
 
 // 6) Armar tu documento final
 
@@ -109,9 +146,11 @@ spinTrue();
 
   //nuevasRutas
 
-const imagenesBase64 = await Promise.all(
-  arrayImgSeleccionadas.map(
+const imagenesBase64Editadas = await Promise.all(
+  newArrayEditImg.map(
     (url, index) => {
+    if(url==null) return null;
+
         let imagen='imagen_'+index;
         let name=jsonAEditar.id.replace("producto",imagen);
         return convertirImagenABase64(url, name)
@@ -128,50 +167,57 @@ const imagenesBase64 = await Promise.all(
 
   const json = {
   
-  jsonDatos:{
-  categoria: jsonAEditar.categoria,
+  categoria: valorCategoriaEditada.toUpperCase(),
   id: jsonAEditar.id,
   producto:titulo,
-  precio:precio,
-  stock:stockProducto,
+  producto_lower:titulo.toLowerCase(),
+  producto_keywords:generarKeywords(titulo),
+  precio: Math.round(Number(precio)),
+  stock:Number(stockProducto),
   descripcion:descripcion,
-  img:jsonAEditar.img//los nombres de los img
-    },
-  images: imagenesBase64,
-  type:"editar"
+   images: imagenesBase64Editadas
+  //img:jsonAEditar.img//las rutas de los img VIEJAS
+ 
 };
 
 
-  console.log("json listo:", json);
+  console.log("producto editado listo:", json);
+
+  
+
+  //ENVIAMOS LOS DATOS AL BACKEND, EDITARPRODUCTO
+
+  //---------------------------------------------------
+  //---------- revisamos si esta logeado---------------
+  //---------------------------------------------------
+
+   const user = auth.currentUser;
+
+  if (!user) {
+    spiner(false)
+    alert("No estás logueado");
+    return;
+  }
 
   // ---------------------------------------------------
-  // 4) ENVIAR A APPS SCRIPT
+  // 4) ENVIAR A FUNCTION DE FIREBASE 
   // ---------------------------------------------------
+try{
+  const token = await auth.currentUser.getIdToken();
 
-  //para pruebas
-  //let urlExcel="https://script.google.com/macros/s/AKfycbzjWcAHodsQeqmYdZfkifFIccsS5gYSjPwF1pCSmP0p/dev";
- 
-
-  //para producción
-  let urlExcel="https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec";
-  //let urlExcel="https://sdre"
-  console.log(urlExcel)
-
-  try {
-  resp = await fetch(urlExcel,{
-  method: "POST", headers: {
-    "Content-Type": "text/plain"  // 👈 TRUCO CLAVE: NO HAY OPTIONS
+fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/editarProducto", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    "Authorization": `Bearer ${token}`
   },
   body: JSON.stringify(json)
-})
- const texto = await resp.text(); // <-- aquí está la respuesta REAL
- console.log("Respuesta del backend:");
- console.log(JSON.parse(texto));
+});
 
-  spinFalse();
-  alert("datos Actualizados correctmente")
+  spiner(false)
+  alert("Datos Actualizados correctmente")
 } catch (e) {
-  spinFalse();
+  spiner(false)
   console.log("this error")
   console.error(e);
  
@@ -204,169 +250,63 @@ return new Promise((resolve, reject) => {
   
 }
 
-function limpiarUrl(){
-    document.getElementById("url").value = "";
-   
-    document.getElementById("imagenesDivScroll").innerHTML = "";
-}
-async function pegarUrl() {
-  try {
-    const texto = await navigator.clipboard.readText();
-    console.log("Pegado:", texto);
-    document.getElementById("url").value = texto;
-  } catch (error) {
-    console.error("Error al pegar:", error);
-  }
-}
-
-async function extraer() {
-  spinTrue();
-  const entrada = document.getElementById("url").value.trim();
-  if (!entrada) {
-    spinFalse();
-    return alert("Pegá la URL del producto");
-  }
-  
-  // FETCH
-
-//el proxi que usamos es el de producción
-const proxy =
-  "https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec?url=" +
-  encodeURIComponent(entrada);
-
-let html;
-try {
-  html = await fetch(proxy).then(r => r.text());
-} catch (e) {
-  spinFalse();
-  console.error(e);
-  alert("No se pudo obtener la página. Revisa la consola.");
-
-  return;
-}
 
 
-  imagenesDivScroll.innerHTML = "";
+window.name = "ML_IMGS";
+document.getElementById("btnML").addEventListener('click',()=>{
+  window.open("https://www.mercadolibre.com.ar/", "ML_PAGE");
 
-  // ====== OBTENER TITULO ======
-  let titulo = "";
-  try {
-    const regTitulo = /<h1[^>]*>(.*?)<\/h1>/s;
-    const m = html.match(regTitulo);
-    if (m) titulo = m[1].replace(/<[^>]*>/g, "").trim();
-  } catch (e) {
-
-    spinFalse()
-  }
-
-  // ====== EXTRAER IMÁGENES ======
-  const regex = /https:\/\/http2\.mlstatic\.com\/[^"]+/g;
-  const matches = html.match(regex) || [];
-
-   imagenes = [...new Set(matches.filter(url =>
-      url.includes("D_NQ_NP") &&
-      !url.includes("2x") &&
-      !url.includes("2X") &&
-      !url.includes("80:") &&
-      !url.endsWith(".webp")
-  ))];
+})
 
 
+function mostrarPanelImagenes(idStrig){
+
+  let id=Number(idStrig)
+
+    if(imagenesML.length==0){
 
 
-
-
-  if (imagenes.length === 0) {
-    h2ImagenesDiv.textContent = "❌  No se encontraron imágenes.";
-    spinFalse();
-    return;
-  }
-
-  h2ImagenesDiv.textContent=" ✅  Imagenes cargadas Correctamente, seleccione una imagen para editar"
-
-  spinFalse();
-
-//   colocarListenerVP();
-}
-
-
-
-
-
-
-
-
-
-function mostrarPanelImagenes(id){
-
-
-    if(imagenes.length==0){
-
-
-        alert("No hay imagenes cargadas");
+        alert("No hay imagenesML cargadas");
         
         return
 
     }
 
-    imagenesDiv.style.display='flex';  
-    imagenesDivScroll.innerHTML='';
+   divContenedorEditar.style.display="flex"
+    imagenesDivML.innerHTML='';
 
   // ====== RENDERIZAR IMÁGENES ====== ❌
-  imagenes.forEach((src, index) => {
-    const div = document.createElement("div");
-    div.setAttribute("id","imgId_"+index);
-    div.className = "imgItem";
+    let imgEditar = document.getElementById("muestraImgEditar");
+    imgEditar.src = jsonAEditar.img[id];
 
-    const img = document.createElement("img");
-    img.src = src;
-    div.setAttribute('src',src)
-    
-    div.appendChild(img);
-    imagenesDivScroll.appendChild(div);
+    //========= RENDERIZAMOS LAS IMAGENES DE ML ============
+    imagenesML.forEach(srcImgML=>{
+       const div = document.createElement("div");
+          
+          div.setAttribute('data-idEditar',id);
+          div.className = "imgItem";
+      
+          const img = document.createElement("img");
+          img.className = "imgItemML";
+          img.src = srcImgML;
+      
+          div.appendChild(img);
+          imagenesDivML.appendChild(div);
+      
+          div.addEventListener("click", () => {
 
-
-
-
-    //LISTENER DE LAS IMAGENES?
-
-    div.addEventListener("click", (e) => {
-
-       cambiarImagenVP(id,e.target.src);
-
-
-    });
-  });
-
-  //cuando terminamos de iterar
-   const div = document.createElement("div");
-    div.setAttribute("id","imgId_"+id);
-    div.className = "imgItem";
-
- 
-
-
-   
-    imagenesDivScroll.appendChild(div);
-
-
+            
+          divContenedorEditar.style.display="none";  
+            //colocamos la img en VP
+            document.getElementById("img404_"+id).src=srcImgML
+            //colocamos la img en el array para enviar al backend
+            newArrayEditImg[id]=srcImgML;
+            console.log("✅ imagenes lista para enviar al backend")
+            console.log(newArrayEditImg)
+          });
+    })
 
 }
-
-function salirEditImg(){
-     imagenesDivScroll.innerHTML='';
-       imagenesDiv.style.display="none"
-}
-
-function cambiarImagenVP(id,src){
-    document.getElementById("img404_"+id).src=src;
-    arrayImgSeleccionadas[id]=src
-    console.log("arrayImgSeleccionadas")
-    console.log(arrayImgSeleccionadas)
-    salirEditImg();
-
-}
-
 
 
 function parseNumeroAR(valor) {
@@ -378,3 +318,20 @@ function parseNumeroAR(valor) {
       .replace(",", ".")  // convierte decimal a formato JS
   );
 }
+
+//colocamos e listener en las img
+document.getElementById("rowDivImgVP").addEventListener('click',(e)=>{
+
+  console.log("click👌👌")
+
+  let img= e.target.closest('.img-wrapper');
+
+  if(!img)return
+
+  let id=img.dataset.numero;
+
+  console.log(id)
+
+  mostrarPanelImagenes(id)
+
+})

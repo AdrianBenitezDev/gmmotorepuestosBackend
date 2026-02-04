@@ -74,7 +74,7 @@ mostrarMensaje("✅ Producto Agregado!");
 
   } else {
     // Si no existe, agrego uno nuevo
-    arrayPedido.push([pro[0], pro[1], pro[2], pro[3], 1]);
+    arrayPedido.push(pro);
   }
 
   document.getElementById("contadorCarrito").textContent = arrayPedido.length;
@@ -109,7 +109,7 @@ if(arrayPedido.length>0){
           <tr>
             <td><button onclick="menos(${index})" >-</button> ${pedido[4]} <button onclick="mas(${index})">+</button></td>
            
-            <td class=""><img class="imgPanelPedidos" src="https://raw.githubusercontent.com/AdrianBenitezDev/gmmotorepuestosBackend/main/categorias/${pedido[0]}/${pedido[1]}/imagen_0_${pedido[1].replace("producto_","")}.jpg"></td> 
+            <td class=""><img class="imgPanelPedidos" src="${pedido[5]}"></td> 
              <td class="product-name">${pedido[2]}</td>
             <td class="product-price">$${pedido[3]}</td>
             <td class=""><button onclick="dele(${index})">Borrar</button></td>

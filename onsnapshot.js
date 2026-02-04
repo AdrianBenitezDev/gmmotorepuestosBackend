@@ -1,4 +1,5 @@
 
+
   import  {db} from "./firebaseConfig.js";
 
   import {
@@ -12,7 +13,7 @@
   } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
-const { owner, repo } = window.APP_CONFIG;
+import { owner, repo } from "./config.js";
 
 let arrayVentas;
 

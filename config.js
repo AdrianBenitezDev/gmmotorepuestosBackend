@@ -8,13 +8,11 @@ export function setValorJsonActual(valor){
 
 }
 
-
-
 // js/config.js
-window.APP_CONFIG = {
-  owner: "AdrianBenitezDev",
-  repo: "gmmotorepuestosBackend",
-  categoriasTextos : [
+
+  export let owner= "AdrianBenitezDev";
+  export let repo= "gmmotorepuestosBackend";
+  export let categoriasTextos = [
   "Seleccione una categoria",
   "motor",
   "transmision",
@@ -27,7 +25,6 @@ window.APP_CONFIG = {
   "accesorios",
   "mantenimiento"
 ]
-};
 
 
 

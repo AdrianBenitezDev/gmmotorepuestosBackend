@@ -1,3 +1,8 @@
+import {categoriasTextos} from "../config.js"
+
+
+let arrayImgSeleccionadas = [];
+const btn = document.getElementById("btnCP");
 
 window.name = "ML_IMGS";
 document.getElementById("btnML").addEventListener('click',()=>{
@@ -16,19 +21,33 @@ window.addEventListener("message", (event) => {
 
   procesarImagenesDesdeML(imagenes);
 
+  let resp=confirm("Desea utilizar el nombre del producto optenido?\n "+event.data.nombre)
+  if(resp){
   //colocamos el nombre del producto
   document.getElementById("tituloP").value = event.data.nombre
   document.getElementById("tituloVP").textContent =event.data.nombre
 
+  }
 });
 
-//aplicamos el listener
-colocarListenerVP()
 
-const btn = document.getElementById("btnCP");
+
+
+export function colocarOptions(){
+  let eleCategoria=document.getElementById("categorias");
+
+categoriasTextos.forEach((e,index)=>{
+  eleCategoria.innerHTML+=`<option ${index==0?"selected":''} value="${e}">${e.toUpperCase()}</option>`
+})
+ 
+
+}
+
+
+colocarOptions()
 
 //luego elimnar
-document.getElementById("descripcionP").value = "eliminar para la versión de producción";
+document.getElementById("descripcionP").value = "Agregue una descripción del producto";
 
 
 const iconoCheck = `
@@ -37,31 +56,11 @@ const iconoCheck = `
 </svg>
 `;
 
-const categoriasTextos = [
-  "Seleccione una categoria",
-  "motor",
-  "transmision",
-  "frenos",
-  "electricidad e iluminación",
-  "suspension",
-  "cubiertas y llantas",
-  "escapes",
-  "carroceria y plasticos",
-  "accesorios",
-  "mantenimiento"
-];
-
-let eleCategoria=document.getElementById("categorias");
-
-categoriasTextos.forEach((e,index)=>{
-  eleCategoria.innerHTML+=`<option ${index==2?"selected":''} value="${e}">${e.toUpperCase()}</option>`
-})
- 
-
-let arrayImgSeleccionadas = [];
 
 
-function procesarImagenesDesdeML(imagenes) {
+
+
+export function procesarImagenesDesdeML(imagenes) {
   spinTrue();
 
   const filtradas = imagenes.filter(src =>
@@ -75,15 +74,35 @@ function procesarImagenesDesdeML(imagenes) {
     return alert("No hay imágenes válidas");
   }
 
-  renderizarImagenes(filtradas);
+  console.log("imagenes filtradas")
+  console.log(filtradas)
+  setImgOptenidasML(filtradas)
+  try{
+  let h3Aviso= document.getElementById("h3AvisoImgDisponibles").textContent;
+  if(imagenesML.length>0){
+    h3Aviso="✅ Hay Imagenes Disponibles"
+  }else{
+
+    h3Aviso="❌ No Hay Imagenes Disponibles"
+  }
+  }catch(err){
+
+  }
+  
+  try{ 
+  renderizarImagenes(filtradas); 
+  }catch(error){
+
+  }
 
   spinFalse();
 }
+export let imagenesML=[];
+export function setImgOptenidasML (img){
+imagenesML=img;
+}
 
-
-
-
-function renderizarImagenes(imagenes) {
+export function renderizarImagenes(imagenes) {
   const imagenesDiv = document.getElementById("imagenesDiv");
   imagenesDiv.innerHTML = "";
   arrayImgSeleccionadas.length = 0;
@@ -117,13 +136,8 @@ function renderizarImagenes(imagenes) {
   });
 }
 
-
-
-
-
-
 // ====== MOSTRAR IMÁGENES EN PREVIEW ======
-function colocarImgVP(){
+export function colocarImgVP(){
   for(let i=0; i<=4; i++){
     const imgVP = document.getElementById("img404_"+i);
     if(imgVP){
@@ -139,35 +153,6 @@ function spinFalse() {
 function spinTrue() {
   document.getElementById('overlay').style.display = "flex";
 }
-
-// ====== LISTENERS INPUTS ======
-function colocarListenerVP(){
-
-  const inputPrecio = document.getElementById("inputPrecio");
-  if(inputPrecio) inputPrecio.onkeyup = () => document.getElementById("precioVP").textContent = "$ "+inputPrecio.value;
-
-  const tituloP = document.getElementById("tituloP");
-  if(tituloP) tituloP.onkeyup = () => document.getElementById("tituloVP").textContent = tituloP.value;
-
-  const stockP = document.getElementById("stockP");
-  if(stockP) stockP.onkeyup = () => {
-    
-      let valorStock=stockP.value;
-    if(valorStock==0){
-      document.getElementById("labelStockId").style.display="flex";
-    }else{
-      document.getElementById("labelStockId").style.display="none";
-    }
-
-    document.getElementById("stockVP").textContent = "Stock "+stockP.value;}
-
-  const descripcionP = document.getElementById("descripcionP");
-  if(descripcionP) descripcionP.onkeyup = () => document.getElementById("descripcionVP").textContent = descripcionP.value;
-
-}
-
-
-
 
 // Agregar listener a las image404
 

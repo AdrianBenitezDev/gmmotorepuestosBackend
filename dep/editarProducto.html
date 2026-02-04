@@ -21,7 +21,7 @@
     </header>
 
        <div class="barraNav">
-      <a class="button" href="../index.html">Inicio</a>
+      <a class="button" href="../admin.html">Inicio</a>
      <h2>Editar / Eliminar Productos</h2>
     </div>
     <br>
@@ -36,7 +36,7 @@
        <div class="column">
         <h3>Buscar producto</h3>
          <div class="row">
-            <input type="text" placeholder="Ingrese una palabra clave para inciar la busqueda" value="bicicleta" id="inputBusqueda">
+            <input type="text" placeholder="Ingrese una palabra clave para inciar la busqueda" value="protector" id="inputBusqueda">
         <button id="btnBuscar">Buscar</button>
         <button id="btnBorrar">Borrar</button>
         </div>
@@ -99,16 +99,20 @@
   
   <!-- CADA PRODUCTO DE LA CATEGORIA TIENE UN BOTON PARA EDITAR PRODUCTO Y OTRO PARA ELIMINAR PRODUCTO -->
 
-         <div class="row">
-        
-     
-                <input id="url" placeholder="URL de Mercado Libre" value="https://articulo.mercadolibre.com.ar/MLA-1420354505-optica-farol-delantero-motomel-cg-150-s2-completo-clampara-_JM?searchVariation=182398269353#is_advertising=true&searchVariation=182398269353&backend_model=search-backend&position=2&search_layout=stack&type=pad&tracking_id=a4f6726e-41ea-4454-bd38-02efbdb953f2&ad_domain=VQCATCORE_LST&ad_position=2&ad_click_id=MTI1ODFmYjQtZGY1Yi00YmQ2LWE0ZTctNjdmODMwZjc5Nzhk">
-                <button onclick="extraer()">Obtener</button>
-                <button onclick="pegarUrl()">Pegar Url</button>
-                <button onclick="limpiarUrl()">Limpiar</button>
-                
+                <div class="row">
+                   <div class="cardColumn">
+                      <h2>Obtener Imagenes de M.L</h2>
+                      <br>
+                      <button id="btnML">Ir a Mercado Libre</button>   
+                  </div>
 
-         </div>
+                  
+                  <div class="cardColumn">
+                        <h2>Subir imagenes desde la pc</h2>
+                     <br>
+                          <button>Cargar Imagen</button>
+                  </div>
+                </div>
 
             <h2>Caracteristicas del Producto</h2>
 
@@ -135,22 +139,32 @@
                     <p>Descripción del Producto</p>
                     <textarea  id="descripcionP" placeholder="Ingrese Descripción"></textarea>
                   </div>
+                  
+                  <div class="row">
+                    <p>Categoria del Producto</p>
+                    <select id="categoriasEditada">
+                      
+                    </select>
+                  </div>
+                  
 
         </div>
 
          <br>
-        <h2 id="h2ImagenesDiv">Busque imagenes para cambiarlas</h2>
-         <br>
-        
-        <div class="h-scroll-div" id="imagenesDiv">
 
-           
-              <h2>Imagenes a para editar</h2>
-              <div class="h-scroll" id="imagenesDivScroll">
+         <h3 id="h3AvisoImgDisponibles"></h3>
 
-              </div>
-              <button onclick="salirEditImg()">❌ Cancelar</button>
-       
+         <div class="h-scroll-div" id="divContenedorEditar">
+
+                      <div class="row">
+                          <img  src="" alt="" class="muestraImgEditar" id="muestraImgEditar"> 
+                          <h2 id="h2ImagenesDiv">Seleccione una imagenes para actualizar</h2>
+                      </div>
+                      <div class="h-scroll-ML" id="imagenesDivML">
+
+                      </div>
+                        <button id="salirEditImg">❌ Cancelar</button>
+         </div>
 
         </div>
       <br>
@@ -159,12 +173,12 @@
         <div class="divVP" id="vistaP">
     
 <!-- fila principal -->
-          <div class="row">
+          <div class="row" id="rowDivImgVP">
 
             <!-- columna de 4 imagenes -->
-            <div class="column columnImgMuestra">
+            <div class="column columnImgMuestra" >
 
-               <div class="img-wrapper" onclick="mostrarPanelImagenes(1)">
+               <div class="img-wrapper" data-numero="1" >
                 <img id="img404_1" class="img404" src="../Image404.png" alt="imagen">
                 
                 <span class="icon-edit">
@@ -177,7 +191,7 @@
               </div>
 
               
-              <div class="img-wrapper" onclick="mostrarPanelImagenes(2)">
+              <div class="img-wrapper" data-numero="2" >
                 <img id="img404_2" class="img404" src="../Image404.png" alt="imagen">
                 
                 <span class="icon-edit">
@@ -189,7 +203,7 @@
                 </span>
               </div>
 
-              <div class="img-wrapper" onclick="mostrarPanelImagenes(3)">
+              <div class="img-wrapper" data-numero="3" >
                 <img id="img404_3" class="img404" src="../Image404.png" alt="imagen">
                 
                 <span class="icon-edit">
@@ -201,7 +215,7 @@
                 </span>
               </div>
 
-              <div class="img-wrapper" onclick="mostrarPanelImagenes(4)">
+              <div class="img-wrapper" data-numero="4" >
                 <img id="img404_4" class="img404" src="../Image404.png" alt="imagen">
                 
                 <span class="icon-edit">
@@ -217,7 +231,7 @@
             </div>
 
             <!-- imagen seleccionada y titulo -->
-            <div class="column img-wrapper"  onclick="mostrarPanelImagenes(0)">
+            <div class="column img-wrapper"  data-numero="0" >
 
               <img  id="img404_0" class="img404 img404Big" src="../Image404.png" alt="../Image404.png">
                <span class="icon-edit">
@@ -276,7 +290,7 @@
                   <div style="width: 100%; display: flex; align-items: stretch;">
                   </div>
 
-             <button  id="btnEP" class="btnCrearProducto" onclick="enviarProductoEditado()">Actualizar Producto</button> 
+             <button  id="btnEP" class="btnCrearProducto">Actualizar Producto</button> 
              
               
           
@@ -298,15 +312,18 @@
     <!-- COPY -->
     <div class="footer-copy">
         © 2025 GM MotoRepuestos — Todos los derechos reservados.
-        <a href="../index.html">Inicio</a>
+         <a href="https://gmmotorepuestos.com.ar/" >Ir a la Tienda</a>
+       
     </div>
 </footer>
 
-<script src="../config.js"></script>
-<script src="./generarCardProductos.js"></script>
-<script src="./busqueda.js"></script>
-<script src="./edit.js"></script>
-<script src="delete.js"></script>
+
+<script type="module" src="../checkLogin.js"></script>
+<script type="module" src="../config.js"></script>
+<script type="module" src="./generarCardProductos.js"></script>
+<script type="module" src="./busqueda.js"></script>
+<script type="module" src="./edit.js"></script>
+<script type="module" src="delete.js"></script>
 
 </body>
 </html>

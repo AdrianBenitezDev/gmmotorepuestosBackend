@@ -1,3 +1,73 @@
+import { jsonActual,setValorJsonActual } from "../config.js";
+import { dbProducto } from "../firebaseConfig.js";
+import {panelProductoNav}from "./generarCardProductos.js"
+import {spiner} from "../spin.js"
+
+import {
+    getFirestore,
+    collection,
+    query,
+    where,
+    orderBy,
+    limit,
+    getDocs
+  } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
+
+
+let timer = null;
+
+
+async function buscarProductos(texto) {
+  texto = texto.toLowerCase().trim();
+
+  if (texto.length < 2) return []; // anti spam
+
+  const q = query(
+    collection(dbProducto, "productos"),
+    orderBy("producto_lower"),
+    where("producto_lower", ">=", texto),
+    where("producto_lower", "<=", texto + "\uf8ff"),
+    limit(10)
+  );
+
+  const snap = await getDocs(q);
+   spiner(false);
+  return snap.docs.map(doc => ({
+    id: doc.id,
+    ...doc.data()
+  }));
+
+}
+
+
+const input = document.getElementById("inputBusqueda");
+
+input.addEventListener("input", (e) => {
+  clearTimeout(timer);
+
+  timer = setTimeout(async () => {
+    const texto = e.target.value;
+    if(!texto.length>3){
+      return
+    }
+     spiner(true);
+    const resultados = await buscarProductos(texto);
+    cagarCardProductos(resultados);
+  }, 300);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 let divBusqueda = document.getElementById("btnBuscar");
@@ -8,7 +78,7 @@ divBusqueda.addEventListener('click', async () => {
 
 
   
-  const input = document.getElementById("inputBusqueda");
+  const input = document.getElementById("inputBusqueda").value;
 
 
     if(input==''){
@@ -20,76 +90,16 @@ divBusqueda.addEventListener('click', async () => {
   document.getElementById("CategoriaAndProductos").innerHTML = '';
   document.getElementById("visorProducto").innerHTML = '';
 
-  spinTrue();
+  spiner(true);
 
-
-
-  const arrayTexto = input.value
-    .toLowerCase()
-    .trim()
-    .split(/\s+/);
-
-  const promesas = [];
-
-  categoriasTextos.forEach((elemento, index) => {
-    
-   
-  
-    if (index !== 0) {
-      promesas.push(traerJSON(arrayTexto, index));
-    }
-
-  });
-
-
-
+ 
   // esperar todas las categorías
-  let resultadosPorCategoria = await Promise.all(promesas);
+  let resultadosPorCategoria =  await buscarProductos(input)
 
-  // 🔥 UNIFICAR OBJETOS (NO flat)
-  let resultados = Object.assign({}, ...resultadosPorCategoria);
+  cagarCardProductos(resultadosPorCategoria);
 
-  console.log("RESULTADOS:", resultados);
-
-  cagarCardProductos(resultados);
-
-  spinFalse();
+  spiner(false);
 });
-
-
-
-
-async function traerJSON(arrayTxt, id) { 
-    
-  const apiURL = `https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${categoriasTextos[id]}/datos.json`;
-
-  try {
-    const res = await fetch(apiURL,{ cache: "no-store" });
-    if (!res.ok) return {};
-
-    const archivos = await res.json(); 
-
-    const coincidencias = {};
-
-    for (const key in archivos) {
-      const prod = archivos[key];
-
-      const coincide = arrayTxt.every(palabra =>
-        prod.producto.toLowerCase().includes(palabra)
-      );
-
-      if (coincide) {
-        coincidencias[key] = prod;
-      }
-    }
-
-    return coincidencias;
-
-  } catch (e) {
-    return {};
-  }
-}
-
 
 
 function cagarCardProductos(jsonObj){
@@ -98,7 +108,7 @@ function cagarCardProductos(jsonObj){
   contenedorBusqueda.innerHTML = "";
 
   // guardamos estado actual
-  jsonActual = jsonObj;
+  setValorJsonActual(jsonObj);
 
   // si no hay resultados
   if (Object.keys(jsonObj).length === 0) {
@@ -121,6 +131,6 @@ document.getElementById("btnBorrar").addEventListener("click",()=>{
    
     document.getElementById("visorProducto").innerHTML="";
    
-    eleCategoria.selectedIndex = 0;
+    //eleCategoria.selectedIndex = 0;
     
 })

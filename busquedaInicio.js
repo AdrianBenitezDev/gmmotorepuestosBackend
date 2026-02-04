@@ -1,17 +1,23 @@
 import { jsonActual,setValorJsonActual } from "./config.js";
 import { dbProducto } from "./firebaseConfig.js";
+import {spiner} from "./spin.js";
+import { busquedaPalabra } from "./busquedaPalabra.js"
 
 import {
   collection,
   getDocs,
   query,
   where,
-  doc,
-  updateDoc
+  orderBy,
+    limit,
+    doc
 } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore.js";
 
 
-const { categoriasTextos, owner, repo } = window.APP_CONFIG;
+import { categoriasTextos, owner, repo } from "./config.js";
+
+
+   let contenedorNav = document.getElementById("busquedaProductosInicio");
 
 
 
@@ -94,12 +100,13 @@ setValorJsonActual(datosJson);
 
 
 
-let divBusquedaInicio = document.getElementById("btnBuscarInicio");
+let btnBusquedaInicio = document.getElementById("btnBuscarInicio");
 
-divBusquedaInicio.addEventListener('click', async () => {
 
-  
-  const input = document.getElementById("inputBusquedaInicio");
+
+btnBusquedaInicio.addEventListener('click', async () => {
+
+  const input = document.getElementById("inputBusquedaInicio").value;
 
   if(input==''){
     alert("Debe ingresar el nombre del producto")
@@ -111,72 +118,13 @@ divBusquedaInicio.addEventListener('click', async () => {
 
   spiner(true);
 
-
-
-  const arrayTexto = input.value
-    .toLowerCase()
-    .trim()
-    .split(/\s+/);
-
-  const promesas = [];
-
-  categoriasTextos.forEach((elemento, index) => {
-    
-   
-  
-    if (index !== 0) {
-      promesas.push(traerJSON(arrayTexto, index));
-    }
-
-  });
-
-
-
-  // esperar todas las categorías
-  let resultadosPorCategoria = await Promise.all(promesas);
-
-  // 🔥 UNIFICAR OBJETOS (NO flat)
-  let resultados = Object.assign({}, ...resultadosPorCategoria);
-
-  console.log("RESULTADOS:", resultados);
+  let resultados= await busquedaPalabra(input)
 
   cagarCardProductos(resultados);
 
   spiner(false)
 });
 
-
-
-async function traerJSON(arrayTxt, id) { 
-    
-  const apiURL = `https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${categoriasTextos[id]}/datos.json`;
-
-  try {
-    const res = await fetch(apiURL,{ cache: "no-store" });
-    if (!res.ok) return {};
-
-    const archivos = await res.json(); 
-
-    const coincidencias = {};
-
-    for (const key in archivos) {
-      const prod = archivos[key];
-
-      const coincide = arrayTxt.every(palabra =>
-        prod.producto.toLowerCase().includes(palabra)
-      );
-
-      if (coincide) {
-        coincidencias[key] = prod;
-      }
-    }
-
-    return coincidencias;
-
-  } catch (e) {
-    return {};
-  }
-}
 
 function cagarCardProductos(jsonObj){
     
@@ -207,7 +155,6 @@ document.getElementById("btnBorrarInicio").addEventListener("click",()=>{
 // FUNCION PANEL PRODUCTOS NAV (copia modificada de... generarCardProductos en carpeta dep)
 function panelProductoNav(numeroNavActual){
 
-   let contenedorNav = document.getElementById("busquedaProductosInicio");
     contenedorNav.innerHTML = ""; // limpiar antes
 
   let cantidadProductos=Object.values(jsonActual).length;
@@ -263,7 +210,7 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
             
             ${json.stock==0?'<span class="labelStockBusqueda" >Sin Stock</span>':''}
                 
-            <img style="width:100px; height:100px; overflow:visible;" src="https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${json.categoria}/${json.id}/${json.img[0]}">
+            <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}">
 
                 <h3>${name}...</h3>
 
@@ -295,7 +242,7 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
             
             ${json.stock==0?'<span class="labelStockBusqueda" >Sin Stock</span>':''}
                 
-            <img style="width:100px; height:100px; overflow:visible;" src="https://raw.githubusercontent.com/${owner}/${repo}/main/categorias/${json.categoria}/${json.id}/${json.img[0]}">
+            <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}">
 
 
                 <h3>${json.producto}</h3>
@@ -305,11 +252,12 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
               <button 
                 class="btn-vender ${json.stock == 0 ? 'btnDisabled' : ''}"
                 ${json.stock == 0 ? 'disabled' : ''}
-                
+
                 data-categoria="${json.categoria}"
                 data-id="${json.id}"
                 data-producto="${json.producto}"
-                data-precio="${json.precio}">
+                data-precio="${json.precio}"
+                data-img="${json.img[0]}">
                 
                 <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M3 6h18v2H3V6zm2 3h14l-1.5 13h-11L5 9zm5-6h4l1 2H9l1-2z"/>
@@ -332,7 +280,7 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
   
   <br>
   <div class="row navegador" id="navHeader"> 
-    <button onclick="navMenos(${numeroNavActual})">&lt</button> Mostrando ${inicioNav} al ${terminarDeIterar} de ${cantidadProductos} Productos Totales <button onclick="navMas(${numeroNavActual})">&gt</button>
+    <button class="btn-navegador" data-direccion="menos" data-actual=${numeroNavActual} >&lt</button> Mostrando ${inicioNav} al ${terminarDeIterar} de ${cantidadProductos} Productos Totales <button class="btn-navegador" data-direccion="mas" data-actual=${numeroNavActual} >&gt</button>
   </div>`;
 
 
@@ -409,8 +357,23 @@ async function actualizarStock(idDoc,valorActual){
 
 }
 
+//colocamos los listener para los btn del NAVEGADOR NAV
+contenedorNav.addEventListener('click',(e)=>{
+  const btnNav= e.target.closest(".btn-navegador");
+  if (!btnNav) return;
+
+  const direccion=btnNav.direccion;
+  let numActual=btnNav.actual;
+
+  if(direccion=="mas"){
+    navMas(numActual)
+  }else{
+    navMenos(numActual)
+  }
+})
+
+
 //colocamos los listener globales
-const contenedorNav = document.getElementById("busquedaProductosInicio");
 
 contenedorNav.addEventListener("click", e => {
   const btn = e.target.closest(".btn-stock");
@@ -432,7 +395,8 @@ contenedorNav.addEventListener("click", e => {
     btn.dataset.id,
     btn.dataset.producto,
     btn.dataset.precio,
-    1
+    1,
+    btn.dataset.img
   ];
 
   addProduct(producto);

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta-name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GM MotoRepuestos</title>
+    <link rel="stylesheet" href="css.css">
+    <link rel="stylesheet" href="./divVentas.css">
+    <link rel="stylesheet" href="./spin.css">
+    <link rel="stylesheet" href="./stylePedido.css">
+     <!-- <link rel="stylesheet" href="./vistaPrevia.css"> -->
+</head>
+<body>
+
+    <!-- Fondo oscuro -->
+    <div class="overlay" id="overlay">
+            <div id="spinner" class="spinner" aria-hidden="true"></div>
+    </div>
+
+    <!-- ENCABEZADO -->
+    <header class="header">
+
+        <img src="logogm.png" class="logo" alt="GM MotoRepuestos">
+        
+        <h1>GM MotoRepuestos</h1>
+        <h2>Perfil Administrador</h2>
+        <P>Crea, Edita y Elimina Productos </P>
+
+    </header>
+
+    <section class="productos">
+        <div class="card row">
+           <div class="rowCard">
+
+                <a class="btn button" href="./cp/cp.html">Crear Producto</a>
+                <a class="btn button" href="./dep/editarProducto.html">Editar o Eliminar</a>
+                <button id="btnStock">Stock</button>
+                <div class="rowNoti"><button id="btnVentasOnline">Ventas Online</button><span class="edge" id="notiVO"></span></div> 
+                <button id="btnVentasLocal">Ventas en el Local</button>  
+
+            </div>
+        </div>
+    </section>
+
+
+    <!-- SECCIÓN DE PRODUCTOS -->
+
+<!-- -------------------------------------------- -->
+<!------------------- PRODUCTOS -------------------->
+<!-- -------------------------------------------- -->
+    <section class="productos" >
+        
+        <div class="gridIndex" id="CategoriaAndProductos">
+        
+        </div>
+
+        <div id="visorProducto"></div>
+
+    </section>
+
+    
+<!-- -------------------------------------------- -->
+<!-- VENTA EN EL LOCAL y STOCK BUSQUEDA ------------>
+<!-- -------------------------------------------- -->
+
+       <div class="divBusquedaInicio" id="divBusquedaInicio">
+        <h3 id="titleStockAndVentaLocal">Venta En El Local</h3>
+        <br>
+        <h3>Buscar producto</h3>
+        <br>
+         <div class="cardBusquedaInicio">
+        <input type="text" placeholder="Ingrese una palabra clave para inciar la busqueda" value="bicicleta" id="inputBusquedaInicio">
+        <button id="btnBuscarInicio">Buscar</button>
+        <button id="btnBorrarInicio">Borrar</button>
+        </div>
+        <br>
+        <h3>CATEGORIA</h3>
+          <div class="row">
+      
+          <select id="categorias">
+            
+          </select>
+        </div>
+        <br>
+        <div class="column" id="busquedaProductosInicio"></div>
+       </div>
+<!-- -------------------------------------------- -->
+<!------------------- CONTAINER --------------------->
+<!-- -------------------------------------------- -->
+
+<div class="containerVentasOnline" id="container">
+
+</div>
+
+<!-- -------------------------------------------- -->
+<!------------------- ventasOnline------------------>
+<!-- -------------------------------------------- -->
+<div class="ventasOnline" id="ventasOnline">
+        <h3>Ventas Online</h3>
+        <br>
+    <div class="divVentasOnlne">
+        
+        <table>
+            <thead>
+                <tr>
+                    <td>Imagen</td>
+                    <td>Producto</td>
+                    <td>Cantidad</td>
+                    <td>Stock</td>
+                    <td>Precio Unitario</td>
+                    <td>Total</td>
+                    <td>Envio</td>
+                    <td>Estado</td>
+                    <td>Accion</td>
+                </tr>
+            </thead>
+
+            <tbody id="tabVentasOnline">
+
+            </tbody>
+        </table>
+        
+    </div>
+</div>
+
+<!------------------------------------------------
+----------------------VENTA LOCAL-----------------
+---------------------------------------------- -->
+<div class="container-Pedido">
+
+        <div class="btn2 btn-primary icon-container row" onclick="verPedidos()">
+            <div class="column">
+                <img class="iconPedido" src="./imagenes/delivery.png" style="width: 30px; height: 30px;">
+                <span class="tuPedido">Venta Actual</span>  
+            </div>
+            <span id="contadorCarrito" class="badge">0</span>
+        </div>
+</div>
+
+<div class="containerMensaje" id="mensaje">
+   
+</div>
+    <div class="panelBlack" id="panelBlack">
+                
+            <div class="panelPedido" id="panelPedidos"  style="margin-top: 120px;">
+                <div class="title"><h2>Revisar mi Pedido</h2></div>
+                <div class="cuerpoPedido" >
+                    <table class="view" id="cuerpoPedido">
+                        <thead><tr><td>Cantidad</td><td>Imagen</td><td>Producto</td><td>Precio</td><td>Acción</td></tr></thead>
+                        <tbody id="rowTabla"></tbody>
+                        <tr><td></td><td></td><td></td><td></td></tr>
+                        <tr class="total"><td>Total</td><td></td><td></td><td><h3 id="Total"></h3></td></tr>
+                    </table>
+                </div>
+                <div class="row"><button onclick="terminarVenta()">Finalizar mi Pedido</button> <button onclick="cerrarPanelPedidos()">Continuar Comprando</button></div>
+            </div>
+</div>
+
+</body>
+<footer class="footer">
+    <!-- COPY -->
+    <div class="footer-copy">
+        © 2025 GM MotoRepuestos — Todos los derechos reservados.
+        <a href="https://gmmotorepuestos.com.ar/" >Ir a la Tienda</a>
+    </div>
+</footer>
+
+
+<script type="module" src="./firebaseConfig.js"></script>
+<script type="module" src="./checkLogin.js"></script>
+<script type="module" src="./auth.js"></script>
+<script type="module" src="./config.js"></script>
+<!-- <script type="module" src="./onsnapshot.js"></script> -->
+<script type="module" src="./spin.js"></script>
+
+<script src="./ventasLocal.js"></script>
+<script src="./stock.js"></script>
+
+<script type="module" src="./ventasOnline.js"></script>
+<script type="module" src="busquedaInicio.js"></script>
+<script src="./carrito.js"></script>
+
+
+
+
+</html>

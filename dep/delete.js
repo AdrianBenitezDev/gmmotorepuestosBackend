@@ -1,32 +1,57 @@
-async function deleteProducto(categoria,id,nombre){
+import { spiner } from "../spin.js";
+import {cargarProductos, valorActualOption, setValorActualOption} from "./generarCardProductos.js"
+import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+
+const auth = getAuth();
+
+export async function deleteProducto(deleteId,nombre){
   let eliminar=confirm("desea eliminar el producto seleccionado? "+nombre)
 
   if(eliminar){
+    spiner(true)
     //preparamos el body
-    let json={type:"delete",deleteCategoria:categoria,deleteId:id}
-    console.log(json);
+    let jsonDelete={id:deleteId}
+    console.log(jsonDelete);
 
-    //realizamos un fetch post al backend donde transmitimos categoria y id del producto a eliminar
     
-      //para producción
-  let urlExcel="https://script.google.com/macros/s/AKfycbx-YwE7fkQKIyiQV13JPs0iIxRWw-nohtciTnR0Gb2G_ef6qtWSHSDEro_ipWeiBnTtKg/exec";
+      //---------------------------------------------------
+      //---------- revisamos si esta logeado---------------
+      //---------------------------------------------------
+    
+       const user = auth.currentUser;
+    
+      if (!user) {
+        alert("No estás logueado");
+        return;
+      }
+    
+      // ---------------------------------------------------
+      // 4) ENVIAR A FUNCTION DE FIREBASE 
+      // ---------------------------------------------------
+    try{
+      const token = await auth.currentUser.getIdToken();
+    
+   let resp= await fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/deleteProducto", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${token}`
+      },
+      body: JSON.stringify(jsonDelete)
+    });
+    
+    console.log("respuesta al eliminar producto:")
+    console.log(resp.json())
+      spiner(false);
+    } catch (e) {
+       spiner(false);
+      console.log("this error")
+      console.error(e);
+     
+      return;
+    }
 
-
-  try {
-  resp = await fetch(urlExcel,{
-  method: "POST", headers: {
-    "Content-Type": "text/plain"  // 👈 TRUCO CLAVE: NO HAY OPTIONS
-  },
-  body: JSON.stringify(json)
-})
- const texto = await resp.text(); // <-- aquí está la respuesta REAL
- // console.log("Respuesta del backend:", texto);
-
-  spinFalse();
-
-}catch{
-
-}
+    //fin del FETCH
 
     alert("se elimino el producto "+nombre)
 
