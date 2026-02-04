@@ -224,6 +224,7 @@ button, .button {
     border-radius: 8px;
     font-size: 0.9rem;
     cursor: pointer;
+    margin:5px;
     transition: 0.2s;
 }
 

@@ -28,7 +28,7 @@ let selectCategoria=document.getElementById("categorias");
 
 //cargamos en el elemento select las categorias
 categoriasTextos.forEach((e,index)=>{
-  selectCategoria.innerHTML+=`<option ${index==0?"selected":''} value="${e}">${e}</option>`
+  selectCategoria.innerHTML+=`<option ${index==0?"selected":''} value="${e.toLowerCase()}">${e.toUpperCase()}</option>`
 })
 
 //cuando cambiamos el valor del select ejecutamos cargarProductos
@@ -38,7 +38,7 @@ selectCategoria.addEventListener("change",(e)=>cargarProductos(e.target.value))
 async function cargarProductos(categoriaSelected) {
   //valorActualOption=categoriaSelected;
 
-  if(categoriaSelected==categoriasTextos[0]){
+  if(categoriaSelected.toLowerCase()==categoriasTextos[0].toLowerCase()){
     return;
   }
     spiner(true);
@@ -47,7 +47,7 @@ async function cargarProductos(categoriaSelected) {
       
 const q = query(
   collection(dbProducto, "productos"),
-  where("categoria", "==", categoriaSelected)
+  where("categoria", "==", categoriaSelected.toLowerCase())
 );
 
 const snapshot = await getDocs(q);
@@ -72,7 +72,7 @@ const datosJson = snapshot.docs.map(doc => ({
 
 
 
-if (datosJson.length==0) {
+if (!datosJson) {
   console.error("No existe datos.json");
   
     spiner(false);

@@ -53,7 +53,7 @@ export async function cargarProductos(categoriaSelected) {
 
   setValorActualOption(categoriaSelected);
 
-  if(categoriaSelected==categoriasTextos[0]){
+  if(categoriaSelected.toLowerCase()==categoriasTextos[0].toLowerCase()){
     return;
   }
     spinTrue();
@@ -64,7 +64,7 @@ export async function cargarProductos(categoriaSelected) {
   const q = query(
     collection(dbProducto, "productos"),
     orderBy("categoria"),
-    where("categoria", "==", categoriaSelected)
+    where("categoria", "==", categoriaSelected.toLowerCase())
   );
 
 

@@ -33,7 +33,7 @@ async function crearProducto() {
   let categoria = document.getElementById("categorias");
 
   // VALIDACIÓN
-  if (titulo == '' || precio == '' || descripcion == '' || categoria.value == categoria.options[0].value) {
+  if (titulo == '' || precio == '' || descripcion == '' || categoria.value.toLowerCase() == categoria.options[0].value.toLowerCase()) {
     alert("Debe completar todos los datos");
     return;
     }else if(arrayImgSeleccionadas.length==0){
@@ -131,7 +131,7 @@ const imagenesBase64 = await Promise.all(
 
 
   const newProducto = {
-  categoria: categoria.value,
+  categoria: categoria.value.toLowerCase(),
   id: nombreDelProducto,
   producto:titulo,
   producto_lower:titulo.toLowerCase(),
@@ -174,7 +174,10 @@ fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/crearProduc
 
 
   spiner(false);
-  alert("datos cargados correctmente")
+  alert("Producto creado Correctmente")
+  //recargamos la pagina
+  location.reload();
+
 } catch (e) {
    spiner(false);
   console.log("this error")

@@ -82,16 +82,16 @@ export function cargarEditProducto(idProducto){
 
                  let categoriasEditada=document.getElementById("categoriasEditada");
                 
-                 let categoriaActual=jsonAEditar.categoria.toUpperCase();
+                 let categoriaActual=jsonAEditar.categoria.toLowerCase();
                  //cargar 
                 categoriasTextos.forEach((e)=>{
 
-                          if(categoriaActual==e.toUpperCase()){
+                          if(categoriaActual==e.toLowerCase()){
                           
-                        categoriasEditada.innerHTML+=`<option selected value="${e}">${e.toUpperCase()}</option>`
+                        categoriasEditada.innerHTML+=`<option selected value="${e.toLowerCase}">${e.toUpperCase()}</option>`
 
                           }else{
-                        categoriasEditada.innerHTML+=`<option value="${e}">${e.toUpperCase()}</option>`
+                        categoriasEditada.innerHTML+=`<option value="${e}">${e.toLowerCase()}</option>`
                           }
 
                 })
@@ -131,7 +131,7 @@ async function enviarProductoEditado() {
   let valorCategoriaEditada = document.getElementById("categoriasEditada").value
 
   // VALIDACIÓN
-  if (titulo == '' || precio == '' || descripcion == '' || stockProducto == ''|| valorCategoriaEditada == "SELECCIONE UNA CATEGORIA" ) {
+  if (titulo == '' || precio == '' || descripcion == '' || stockProducto == ''|| valorCategoriaEditada.toUpperCase() == "SELECCIONE UNA CATEGORIA" ) {
     alert("Debe completar todos los datos");
     return;
   }else{
@@ -167,7 +167,7 @@ const imagenesBase64Editadas = await Promise.all(
 
   const json = {
   
-  categoria: valorCategoriaEditada.toUpperCase(),
+  categoria: valorCategoriaEditada.toLowerCase(),
   id: jsonAEditar.id,
   producto:titulo,
   producto_lower:titulo.toLowerCase(),

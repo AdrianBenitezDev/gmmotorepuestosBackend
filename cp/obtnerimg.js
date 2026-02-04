@@ -2,7 +2,6 @@ import {categoriasTextos} from "../config.js"
 
 
 export let arrayImgSeleccionadas = [];
-const btn = document.getElementById("btnCP");
 
 window.name = "ML_IMGS";
 document.getElementById("btnML").addEventListener('click',()=>{
@@ -37,7 +36,7 @@ export function colocarOptions(){
   let eleCategoria=document.getElementById("categorias");
 
 categoriasTextos.forEach((e,index)=>{
-  eleCategoria.innerHTML+=`<option ${index==0?"selected":''} value="${e}">${e.toUpperCase()}</option>`
+  eleCategoria.innerHTML+=`<option ${index==0?"selected":''} value="${e.toLowerCase()}">${e.toUpperCase()}</option>`
 })
  
 
