@@ -57,6 +57,7 @@ td{
 }
 
 .cardBusquedaInicio{
+    width: 80%;
         background: white;
     color: #222;
     padding: 15px;
@@ -67,9 +68,8 @@ td{
     margin: 5px;
      display: flex;
     justify-content: space-between;
-    width: 50%;
-    padding-left: 10%;
-    padding-right: 10%;
+    
+    align-items: center;
 }
 
 .logo{
@@ -216,7 +216,13 @@ td{
     margin-bottom: 12px;
 }
 
-button, .button {
+.btnRed.active{
+    background: #000000;
+    color: #d80000;
+   
+}
+
+button, .button, .btnRed {
     padding: 10px 20px;
     background: #d80000;
     color: white;
@@ -313,4 +319,17 @@ mensaje */
 .mensaje.show {
   opacity: 1;
   transform: translateY(0);
+}
+
+.flyerDiv{
+    display: none;
+    flex-direction: column;
+    align-items: center;
+}
+
+.btn-stock, .btn-flyer, .btn-venta{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: revert;
 }

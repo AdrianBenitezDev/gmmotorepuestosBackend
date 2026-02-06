@@ -3,6 +3,7 @@ import { dbProducto } from "./firebaseConfig.js";
 import {spiner} from "./spin.js";
 import { busquedaPalabra } from "./busquedaPalabra.js"
 import { actualizarStock } from "./stock.js";
+import {compartirProducto} from "./ventasLocal.js"
 
 import {
   collection,
@@ -16,9 +17,14 @@ import {
 
 
 import { categoriasTextos, owner, repo } from "./config.js";
+import { crearFlyer } from "./cp/crearFlyer.js";
 
 
-   let contenedorNav = document.getElementById("busquedaProductosInicio");
+    document.getElementById("busquedaProductosInicio").style.display="flex";
+
+   let contenedorNav = document.getElementById("busquedaProductosInicioTBody");
+   let navHeader = document.getElementById("navHeader");
+   let navBottom = document.getElementById("navBottom")
 
 
 
@@ -68,9 +74,6 @@ const datosJson = snapshot.docs.map(doc => ({
 
 
 
- let contenedor = document.getElementById("CategoriaAndProductos");
-    contenedor.innerHTML = ""; // limpiar antes 
-
 
 
 if (!datosJson) {
@@ -78,7 +81,7 @@ if (!datosJson) {
   
     spiner(false);
 
-  contenedor.innerHTML = "<h3>No hay productos para la sección elegida</h3>"; 
+  contenedorNav.innerHTML = "<h3>No hay productos para la sección elegida</h3>"; 
 
   return;
 }
@@ -114,8 +117,8 @@ btnBusquedaInicio.addEventListener('click', async () => {
     return
   }
 
-  document.getElementById("busquedaProductosInicio").innerHTML = '';
-  document.getElementById("visorProducto").innerHTML = '';
+  contenedorNav.innerHTML = '';
+  // document.getElementById("visorProducto").innerHTML = '';
 
   spiner(true);
 
@@ -129,15 +132,14 @@ btnBusquedaInicio.addEventListener('click', async () => {
 
 function cagarCardProductos(jsonObj){
     
-  let contenedorBusqueda = document.getElementById("busquedaProductosInicio");
-  contenedorBusqueda.innerHTML = "";
+  contenedorNav.innerHTML = "";
 
   // guardamos estado actual
   setValorJsonActual(jsonObj);
 
   // si no hay resultados
   if (Object.keys(jsonObj).length === 0) {
-    contenedorBusqueda.innerHTML = "<h3>No se encontraron resultados</h3>";
+    contenedorNav.innerHTML = "<h3>No se encontraron resultados</h3>";
     return;
   }
 
@@ -165,9 +167,9 @@ function panelProductoNav(numeroNavActual){
   
   let finNav=inicioNav+10;
 
-  console.log(cantidadProductos)//1
-  console.log(inicioNav)//0
-  console.log(finNav)//10
+ // console.log(cantidadProductos)//1
+ // console.log(inicioNav)//0
+ // console.log(finNav)//10
 
   //obtenemos el fin de la iteración
 let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
@@ -176,12 +178,14 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 
 //agregamos el navegador de productos
 
-  contenedorNav.innerHTML+=`<div class="row navegador" id="navHeader"> 
+  navHeader.innerHTML=`
   
       <button onclick="navMenos(${numeroNavActual})">&lt</button> Mostrando ${inicioNav} al ${terminarDeIterar} de ${cantidadProductos} Productos Totales <button onclick="navMas(${numeroNavActual})">&gt</button>
 
-  </div>
-  <br>`
+  
+  `;
+
+  let nav
 
   //realizamos la iteración
   for (let index = inicioNav; index < terminarDeIterar; index++) {
@@ -190,13 +194,13 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 
 
 
-    console.log("dentro de nav")
-    console.log(json)
+    //console.log("dentro de nav")
+  //  console.log(json)
 
             // crear card
-            const card = document.createElement("div");
-            card.className = "cardProductoBusqueda"
-            card.className += json.stock==0?" cardPBDisabled":" cardPBEnabled";
+            const tr = document.createElement("tr");
+            tr.className = "tableCardProductoBusqueda"
+            tr.className += json.stock==0?" cardPBDisabled":" cardPBEnabled";
 
 
             // si stock == true renderizamos un HTML sino renderizamos otro
@@ -206,27 +210,17 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
               let name=json.producto.slice(0,20);
 
 //si STOCK esta ACTIVADO
- card.innerHTML = `
+ tr.innerHTML = `
 
- <table>
-    <thead>
-              <tr>
-                <td>Imagen</td>
-                <td>Producto</td>
-                <td>Stock</td>
-                <td>Precio</td>
-                <td>Acciones</td>
-              </tr>
-    </thead>
-    
-    <tbody>
-              <tr>
+
                 <td> <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}"></td>
                 <td> <h3>${name}...</h3></td>
                 <td> <input value=${json.stock} type="number" id="stock_${json.id}"></td>
                 <td> <input value=${json.precio} type="number" id="precio_${json.id}"> $</td>
                 <td><button  class="btn-stock"
-                          data-id="${json.id}">
+                          data-id="${json.id}"
+                          data-stock=${json.stock}
+                          data-precio=${json.precio}>
 
                     <svg xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -239,10 +233,28 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
                 
                    Guardar  
                 
-                 </button></td>
-              </tr>
-    <tbody>
- </table>
+                 </button>
+                 <button  class="btn-flyer"
+                          data-id="${json.id}"
+                          data-index="${index}">
+
+                          <svg xmlns="http://www.w3.org/2000/svg"
+                              width="20"
+                              height="20"
+                              fill="currentColor"
+                              viewBox="0 0 24 24"
+                              aria-label="Crear flyer">
+                            <path d="M21 19V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2zM8.5 13.5l2.5 3 3.5-4.5L19 18H5l3.5-4.5z"/>
+                            <path d="M17.5 6.5l.6 1.2 1.3.2-.9.9.2 1.3-1.2-.6-1.2.6.2-1.3-.9-.9 1.3-.2z"/>
+                          </svg>
+
+
+                   Crear Flyer  
+                
+                 </button>
+                 
+                 </td>
+              
 
             `;
 
@@ -251,18 +263,21 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
             }else{
 //si stock esta desactivado
 
-            card.innerHTML = `
+            tr.innerHTML = `
 
             
             ${json.stock==0?'<span class="labelStockBusqueda" >Sin Stock</span>':''}
                 
-            <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}">
+            <td><img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}"></td>
 
 
-                <h3>${json.producto}</h3>
+            <td><h3>${json.producto}</h3></td>
 
-                <h3 style="color:red;">$ ${json.precio}</h3>
+            <td><h3 style="color:red;">${json.stock}</h3></td>
 
+            <td><h3 style="color:red;">$ ${json.precio}</h3></td>
+
+             <td>
               <button 
                 class="btn-vender ${json.stock == 0 ? 'btnDisabled' : ''}"
                 ${json.stock == 0 ? 'disabled' : ''}
@@ -279,25 +294,40 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 
                 Vender
               </button>
+              <button class="btn-compartir" data-id="${json.id}">
+                
+                      <svg xmlns="http://www.w3.org/2000/svg"
+                      width="20"
+                      height="20"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-label="Compartir">
+                    <circle cx="18" cy="5" r="3"/>
+                    <circle cx="6" cy="12" r="3"/>
+                    <circle cx="18" cy="19" r="3"/>
+                    <path d="M8.6 13.5l6.8 3.9M15.4 6.6l-6.8 3.9"/>
+                  </svg>
+
+              
+                    Compartir
+              </button>
+
+              </td>
 
                 `;
             }
 
 
-            contenedorNav.appendChild(card);
+            contenedorNav.appendChild(tr);
 
   }
 
   //agregamos el navegador de productos en el bottom
 
-  contenedorNav.innerHTML+=`
+  navBottom.innerHTML=`
   
-  <br>
-  <div class="row navegador" id="navHeader"> 
     <button class="btn-navegador" data-direccion="menos" data-actual=${numeroNavActual} >&lt</button> Mostrando ${inicioNav} al ${terminarDeIterar} de ${cantidadProductos} Productos Totales <button class="btn-navegador" data-direccion="mas" data-actual=${numeroNavActual} >&gt</button>
-  </div>`;
-
-
+`
 }
 
 
@@ -305,9 +335,9 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 
 function navMas(actual){
   let maximo=Number(Object.values(jsonActual).length)
-  console.log(maximo)
+  //console.log(maximo)
   let numNav = Math.floor(maximo / 10);
-    console.log(numNav)
+   // console.log(numNav)
   if(actual<numNav){
 
     let newActual=actual+1;
@@ -351,14 +381,26 @@ contenedorNav.addEventListener("click", e => {
 
   const id = btn.dataset.id;
   //stock
-  const inputStock = document.getElementById(`stock_${id}`);
-  const stock = Number(inputStock.value);
+  const stockJson=btn.dataset.stock;
   //precio
-  const inputPrecio = document.getElementById(`precio_${id}`);
-  const precio = Number(inputPrecio.value);
+  const precioJson=btn.dataset.precio;
 
-  actualizarStock(id, stock,precio);
+
+
+  actualizarStock(id, stockJson,precioJson);
 });
+
+contenedorNav.addEventListener("click",e=>{
+
+
+  const btn=e.target.closest(".btn-compartir");
+  if(!btn) return
+
+  let id=btn.dataset.id
+
+  compartirProducto(id);
+
+})
 
 contenedorNav.addEventListener("click", e => {
   const btn = e.target.closest(".btn-vender");
@@ -375,9 +417,53 @@ contenedorNav.addEventListener("click", e => {
 
   addProduct(producto);
 });
+contenedorNav.addEventListener('click',e =>{
 
 
+  const btnGenerarFlyer= e.target.closest('.btn-flyer');
+  if(!btnGenerarFlyer)return;
 
+  
+  spiner(true)
+
+  document.getElementById("flyerDiv").style.display="flex";
+
+  let index=btnGenerarFlyer.dataset.index;
+   let productoFlyer=Object.values(jsonActual)[index];
+
+   crearFlyer(productoFlyer)
+
+   
+  spiner(false)
+
+
+})
+
+changeActiveBtn()
+
+document.getElementById("btnCP").addEventListener('click',()=>{
+
+  window.location="./cp/cp.html"
+
+})
+
+document.getElementById("btnDEP").addEventListener('click',()=>{
+
+  window.location="./dep/editarProducto.html"
+  
+})
+
+function changeActiveBtn(){
+  const btnRed = document.querySelectorAll(".btnRed");
+
+btnRed.forEach(btn => {
+  btn.addEventListener("click", () => {
+    btnRed.forEach(b => b.classList.remove("active"));
+          btn.classList.add("active");
+  });
+});
+
+}
 
 
 //deprecado

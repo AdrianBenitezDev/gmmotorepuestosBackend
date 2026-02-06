@@ -6,7 +6,12 @@ document.getElementById("btnVentasOnline").addEventListener('click',()=>{
     
     document.getElementById("container").style.display="none";
 
-    document.getElementById("divBusquedaInicio").style.display="none"
+    document.getElementById("divBusquedaInicio").style.display="none";
+    
+    document.getElementById("busquedaProductosInicio").style.display="none";
+
+    
+  document.getElementById("flyerDiv").style.display="none";
 
     traerVentas();
 })

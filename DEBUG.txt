@@ -1,0 +1,5 @@
+⚠️problemas:
+1.carrito de compras
+2.ventana ver compras
+3-definir stock no coincide con lo que se carga al carrito
+4-falta definir función para compartir (se debe copiar en portapapeles y enviar una alerta)

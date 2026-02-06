@@ -89,6 +89,14 @@
                     </select>
                   </div>
 
+                  
+                  <div class="row">
+                    <p>Crear un Flyer de Promoción para Whatapp</p>
+                    <input type="checkbox" id="checkFlyer">
+                      
+                    </select>
+                  </div>
+
 
 
         </div>
@@ -175,6 +183,11 @@
 <div id="spinner" class="spinner" aria-hidden="true"></div>
 </div>
 
+<canvas id="flyerCanvas" width="1080" height="1920" style="display:none"></canvas>
+
+<a id="descargarFlyer" download="promo.png" style="display:none">Descargar Flyer</a>
+
+
 <footer>
     <!-- COPY -->
     <div class="footer-copy">
@@ -195,6 +208,7 @@
 <script type="module" src="../spin.js"></script>
 <script src="./bookmarklets/bookmarklet.js"></script>
 <script type="module" src="./soloCP.js"></script>
+<script type="module" src="./crearFlyer.js"></script>
 
 </body>
 </html>

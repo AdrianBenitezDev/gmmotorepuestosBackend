@@ -3,6 +3,7 @@ import {arrayImgSeleccionadas} from './obtnerimg.js'
 import {spiner} from '../spin.js'
 import {generarKeywords} from "../busquedaPalabra.js"
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+import { crearFlyer } from './crearFlyer.js';
 
 const auth = getAuth();
 
@@ -143,6 +144,12 @@ const imagenesBase64 = await Promise.all(
   images: imagenesBase64
 };
 
+let crearFlyerCheck=document.getElementById("checkFlyer").checked;
+
+if(crearFlyerCheck){
+    crearFlyer(newProducto);
+}
+
 
   console.log("json listo:", newProducto);
 
@@ -176,7 +183,7 @@ fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/crearProduc
   spiner(false);
   alert("Producto creado Correctmente")
   //recargamos la pagina
-  location.reload();
+  //location.reload();
 
 } catch (e) {
    spiner(false);

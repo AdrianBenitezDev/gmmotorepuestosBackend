@@ -20,9 +20,12 @@
     <!-- ENCABEZADO -->
     <header class="header">
 
-        <img src="logogm.png" class="logo" alt="GM MotoRepuestos">
-        
-        <h1>GM MotoRepuestos</h1>
+        <div id="logoWrapper">
+
+            <img src="logogm.png" class="logo" alt="GM MotoRepuestos">    
+            <h1>GM MotoRepuestos</h1>
+
+        </div>
         <h2>Perfil Administrador</h2>
         <P>Crea, Edita y Elimina Productos </P>
 
@@ -32,14 +35,41 @@
         <div class="card row">
            <div class="rowCard">
 
-                <a class="btn button" href="./cp/cp.html">Crear Producto</a>
-                <a class="btn button" href="./dep/editarProducto.html">Editar o Eliminar</a>
-                <button id="btnStock">Stock y Precios</button>
-                <div class="rowNoti"><button id="btnVentasOnline">Ventas Online</button><span class="edge" id="notiVO"></span></div> 
-                <button id="btnVentasLocal">Ventas en el Local</button>  
+                <button class="btnRed" id="btnCP" >Crear Producto</button>
+                <button class="btnRed" id="btnDEP" href="./dep/editarProducto.html">Editar o Eliminar</button>
+                <button class="btnRed" id="btnStock">Stock y Precios</button>
+                <div class="rowNoti"><button class="btnRed" id="btnVentasOnline">Ventas Online</button><span class="edge" id="notiVO"></span></div> 
+                <button class="btnRed" id="btnVentasLocal">Ventas en el Local</button>  
 
             </div>
         </div>
+
+        
+       <div class="divBusquedaInicio" id="divBusquedaInicio">
+       
+                    <div class="cardBusquedaInicio">
+                    
+            
+                        <h3>Buscar Producto</h3>
+                        <input type="text" placeholder="Ingrese una palabra clave para inciar la busqueda" value="farol" id="inputBusquedaInicio">
+                        <button id="btnBuscarInicio">Buscar</button>
+                        <button id="btnBorrarInicio">Borrar</button>
+                            <h3>CATEGORIAS:</h3>
+                        <select id="categorias">
+                            
+                        </select>
+                            
+                    
+                    </div>
+                
+                        <div class="row">
+                                
+                              
+                        </div>      
+
+       </div>
+
+
     </section>
 
 
@@ -48,6 +78,9 @@
 <!-- -------------------------------------------- -->
 <!------------------- PRODUCTOS -------------------->
 <!-- -------------------------------------------- -->
+
+
+<!-- 
     <section class="productos" >
         
         <div class="gridIndex" id="CategoriaAndProductos">
@@ -56,34 +89,49 @@
 
         <div id="visorProducto"></div>
 
-    </section>
+    </section> -->
+
 
     
 <!-- -------------------------------------------- -->
 <!-- VENTA EN EL LOCAL y STOCK BUSQUEDA ------------>
 <!-- -------------------------------------------- -->
 
-       <div class="divBusquedaInicio" id="divBusquedaInicio">
-        <h3 id="titleStockAndVentaLocal">Venta En El Local</h3>
-        <br>
-        <h3>Buscar producto</h3>
-        <br>
-         <div class="cardBusquedaInicio">
-        <input type="text" placeholder="Ingrese una palabra clave para inciar la busqueda" value="bicicleta" id="inputBusquedaInicio">
-        <button id="btnBuscarInicio">Buscar</button>
-        <button id="btnBorrarInicio">Borrar</button>
+
+       <!--------------------------------------------------->
+       <!--------------- BUSQUEDA INICIO-------------------->
+       <!--------------------------------------------------->
+           <div class="column" id="busquedaProductosInicio"> 
+            <div  class="row navegador" id="navHeader"></div>
+                        <table>
+                            <thead>
+                                    <tr>
+                                        <td>Imagen</td>
+                                        <td>Producto</td>
+                                        <td>Stock</td>
+                                        <td>Precio</td>
+                                        <td>Acciones</td>
+                                    </tr>
+                            </thead>
+                            
+                            <tbody id="busquedaProductosInicioTBody">
+                            </tbody>
+                        </table>
+            <div  class="row navegador" id="navBottom"></div>
         </div>
-        <br>
-        <h3>CATEGORIA</h3>
-          <div class="row">
-      
-          <select id="categorias">
-            
-          </select>
+
+       <!--------------------------------------------------->
+        <!-------------------- CANVAS ----------------------->
+        <!--------------------------------------------------->
+       
+           <canvas id="flyerCanvas" width="1080" height="1920" style="display:none"></canvas>
+        
+        <div class="flyerDiv" id="flyerDiv">
+    
+            <img id="previewFlyer" style="max-width:300px; display:none; border-radius:12px;">
+            <button id="descargarFlyer">Descargar Flyer</button>
+
         </div>
-        <br>
-        <div class="column" id="busquedaProductosInicio"></div>
-       </div>
 <!-- -------------------------------------------- -->
 <!------------------- CONTAINER --------------------->
 <!-- -------------------------------------------- -->
@@ -160,12 +208,16 @@
 <footer class="footer">
     <!-- COPY -->
     <div class="footer-copy">
+        <br>
+        <br>
+        <br>
         © 2025 GM MotoRepuestos — Todos los derechos reservados.
         <a href="https://gmmotorepuestos.com.ar/" >Ir a la Tienda</a>
     </div>
 </footer>
 
 
+<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <script type="module" src="./firebaseConfig.js"></script>
 <script type="module" src="./checkLogin.js"></script>
 <script type="module" src="./auth.js"></script>
@@ -179,6 +231,7 @@
 <script type="module" src="./ventasOnline.js"></script>
 <script type="module" src="busquedaInicio.js"></script>
 <script src="./carrito.js"></script>
+
 
 
 
