@@ -182,10 +182,8 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
   
       <button onclick="navMenos(${numeroNavActual})">&lt</button> Mostrando ${inicioNav} al ${terminarDeIterar} de ${cantidadProductos} Productos Totales <button onclick="navMas(${numeroNavActual})">&gt</button>
 
-  
   `;
 
-  let nav
 
   //realizamos la iteración
   for (let index = inicioNav; index < terminarDeIterar; index++) {
@@ -210,17 +208,21 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
               let name=json.producto.slice(0,20);
 
 //si STOCK esta ACTIVADO
+
+document.getElementById("tdProveedor").style.display="block";
  tr.innerHTML = `
 
 
                 <td> <img style="width:100px; height:100px; overflow:visible;" src="${json.img[0]}"></td>
                 <td> <h3>${name}...</h3></td>
                 <td> <input value=${json.stock} type="number" id="stock_${json.id}"></td>
+                <td> <input value=${json.proveedor} type="number" id="proveedor_${json.id}"> $</td>
                 <td> <input value=${json.precio} type="number" id="precio_${json.id}"> $</td>
                 <td><button  class="btn-stock"
                           data-id="${json.id}"
                           data-stock=${json.stock}
-                          data-precio=${json.precio}>
+                          data-precio=${json.precio}
+                          data-proveedor=${json.proveedor}>
 
                     <svg xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -263,6 +265,8 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
             }else{
 //si stock esta desactivado
 
+document.getElementById("tdProveedor").style.display="none";
+
             tr.innerHTML = `
 
             
@@ -275,6 +279,7 @@ let terminarDeIterar=cantidadProductos<finNav?cantidadProductos:finNav;
 
             <td><h3 style="color:red;">${json.stock}</h3></td>
 
+                       
             <td><h3 style="color:red;">$ ${json.precio}</h3></td>
 
              <td>
@@ -385,9 +390,12 @@ contenedorNav.addEventListener("click", e => {
   //precio
   const precioJson=btn.dataset.precio;
 
+    //proveedor
+  const proveedorJson=btn.dataset.proveedor;
 
 
-  actualizarStock(id, stockJson,precioJson);
+
+  actualizarStock(id, stockJson,precioJson,proveedorJson);
 });
 
 contenedorNav.addEventListener("click",e=>{

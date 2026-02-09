@@ -1,5 +1,5 @@
 import { getAuth } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
-import { actualizarBooleanStock, jsonActual } from "./config.js";
+import { actualizarBooleanStock } from "./config.js";
 import { spiner } from "./spin.js";
 
 const auth = getAuth();
@@ -29,25 +29,27 @@ document.getElementById("btnStock").addEventListener('click',()=>{
 })
 
 
-export async function actualizarStock(idDoc,stockJson,precioJson){
+export async function actualizarStock(idDoc,stockJson,precioJson,proveedorJson){
   //tomamos el valor actul
 
-  jsonActual[idDoc]
   let newStock=document.getElementById("stock_"+idDoc).value;
 
   let newPrecio=document.getElementById("precio_"+idDoc).value;
 
-  console.log(stockJson)
-  
-  console.log(newStock)
+  let newProveedor=document.getElementById("proveedor_"+idDoc).value;
 
-  if(stockJson==newStock && precioJson == newPrecio){
+  // console.log(stockJson)
+  
+  // console.log(newStock)
+
+  if(stockJson==newStock && precioJson == newPrecio && proveedorJson == newProveedor){
     alert("❌ Error: No hay datos nuevos para actualizar!!")
     return
   }
 
   const stock = Number(newStock);
   const precio = Number(newPrecio);
+  const proveedor = Number(newProveedor)
 
   if (Number.isNaN(stock)) {
     return;
@@ -56,11 +58,19 @@ export async function actualizarStock(idDoc,stockJson,precioJson){
     return;
   }
 
+   if (Number.isNaN(proveedor)) {
+    return;
+  }
+
 //realizamos el fetch
   if (!Number.isInteger(stock)) {
   return;
  }
    if (!Number.isInteger(precio)) {
+  return;
+ }
+
+ if (!Number.isInteger(proveedor)) {
   return;
  }
  //realizamos la actualización del stock
@@ -86,6 +96,7 @@ export async function actualizarStock(idDoc,stockJson,precioJson){
 
     let newStockAndPrecio={
       stock: stock,
+      precioProveedor:precioProveedor,
       precio:precio,
       id:idDoc
     }
