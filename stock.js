@@ -96,7 +96,7 @@ export async function actualizarStock(idDoc,stockJson,precioJson,proveedorJson){
 
     let newStockAndPrecio={
       stock: stock,
-      precioProveedor:precioProveedor,
+      proveedor:proveedor,
       precio:precio,
       id:idDoc
     }
