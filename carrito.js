@@ -243,7 +243,7 @@ let datosGuardarLocalStorage={usuario:user,carrito:arrayPedido};
   
   document.getElementById("contadorCarrito").textContent = arrayPedido.length;
   //document.getElementById("panelBlack").style.display="none";
-
+  verPedidos();
 
   
 
