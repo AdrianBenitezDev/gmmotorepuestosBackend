@@ -162,7 +162,7 @@ const imagenesBase64 = await Promise.all(
   images: imagenesBase64
 };
 
-console.log(imagenesBase64)
+
 
 let crearFlyerCheck=document.getElementById("checkFlyer").checked;
 
@@ -172,6 +172,8 @@ if(crearFlyerCheck){
 
 
   console.log("json listo:", newProducto);
+  console.log(objetoImgFromPc)
+  console.log(imagenesBase64)
 
   //---------------------------------------------------
   //---------- revisamos si esta logeado---------------
@@ -207,7 +209,6 @@ fetch("https://crearProducto-xhlrljateq-uc.a.run.app", {
 
 } catch (e) {
    spiner(false);
-  console.log("this error")
   console.error(e);
  
   return;

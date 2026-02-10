@@ -156,34 +156,34 @@ function spinTrue() {
 
 // Agregar listener a las image404
 
-for (let index = 0; index < 5; index++) {
+// for (let index = 0; index < 5; index++) {
  
-  document.getElementById("img404_"+index).addEventListener("click",()=>{
+//   document.getElementById("img404_"+index).addEventListener("click",()=>{
 
-    try {
+//     try {
         
          
-          Array.from(document.getElementsByClassName("imgItem")).forEach(divImg => {
+//           Array.from(document.getElementsByClassName("imgItem")).forEach(divImg => {
 
-            const img=divImg.firstElementChild
-            const last = divImg.lastElementChild; // último hijo que sea un elemento real
+//             const img=divImg.firstElementChild
+//             const last = divImg.lastElementChild; // último hijo que sea un elemento real
 
-            if (last && img.src == arrayImgSeleccionadas[index]) {
-              divImg.removeChild(last);
-            }
-
-
-          });
-
-            arrayImgSeleccionadas.splice(index,1)
+//             if (last && img.src == arrayImgSeleccionadas[index]) {
+//               divImg.removeChild(last);
+//             }
 
 
-          colocarImgVP();
-    } catch (error) {
-      console.error(error)
-    }
+//           });
+
+//             arrayImgSeleccionadas.splice(index,1)
 
 
-  })
+//           colocarImgVP();
+//     } catch (error) {
+//       console.error(error)
+//     }
+
+
+//   })
   
-}
+// }
