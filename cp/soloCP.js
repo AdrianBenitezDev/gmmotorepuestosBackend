@@ -34,9 +34,10 @@ function validarFormulario() {
   const tituloOk = tituloP.value.trim() !== '';
   const descripcionOk = descripcionP.value.trim() !== '';
   const imagenesOk = arrayImgSeleccionadas.length > 0;
+  const proveedor= document.getElementById("inputProveedor").value.trim()!=='';
 
   let btn=document.getElementById("btnCP")
-  if (precioOk && tituloOk && descripcionOk && imagenesOk) {
+  if (precioOk && tituloOk && descripcionOk && imagenesOk && proveedor) {
     btn.className = 'btnCrearProducto';
     btn.disabled = false;
     console.log("✅ btn habilitado");

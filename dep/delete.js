@@ -31,7 +31,7 @@ export async function deleteProducto(deleteId,nombre){
     try{
       const token = await auth.currentUser.getIdToken();
     
-   let resp= await fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/deleteProducto", {
+   let resp= await fetch("https://deleteProducto-xhlrljateq-uc.a.run.app", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

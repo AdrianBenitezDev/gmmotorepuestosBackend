@@ -206,7 +206,7 @@ async function comprarProducto(id,categoria,cantidad){
       metodo_pago: "local", //puede ser online
   }
 
-  let resp =await fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/crearVentaPendiente", {
+  let resp =await fetch("https://crearVentaPendiente-xhlrljateq-uc.a.run.app", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
   body: JSON.stringify(array)

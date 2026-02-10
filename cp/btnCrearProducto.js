@@ -32,9 +32,10 @@ async function crearProducto() {
   let descripcion = document.getElementById("descripcionP").value;
   let stock = document.getElementById("stockP").value;
   let categoria = document.getElementById("categorias");
+  let precio_proveedor = document.getElementById("inputProveedor").value.trim()
 
   // VALIDACIÓN
-  if (titulo == '' || precio == '' || descripcion == '' || categoria.value.toLowerCase() == categoria.options[0].value.toLowerCase()) {
+  if (precio_proveedor =='' || titulo == '' || precio == '' || Number(precio) == 0 || descripcion == '' || categoria.value.toLowerCase() == categoria.options[0].value.toLowerCase()) {
     alert("Debe completar todos los datos");
     return;
     }else if(arrayImgSeleccionadas.length==0){
@@ -136,6 +137,7 @@ const imagenesBase64 = await Promise.all(
   id: nombreDelProducto,
   producto:titulo,
   producto_lower:titulo.toLowerCase(),
+  proveedor:Number(precio_proveedor),
   precio:Number(precio),
   stock:Number(stock),
   descripcion:descripcion,
@@ -170,7 +172,7 @@ if(crearFlyerCheck){
 try{
   const token = await auth.currentUser.getIdToken();
 
-fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/crearProducto", {
+fetch("https://crearProducto-xhlrljateq-uc.a.run.app", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

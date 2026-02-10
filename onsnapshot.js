@@ -165,7 +165,7 @@ spiner(true);
   };
 
   const resp = await fetch(
-    "https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/crearVentaPendiente",
+    "https://crearVentaPendiente-xhlrljateq-uc.a.run.app",
     {
       method: "POST",
       headers: { "Content-Type": "application/json" },

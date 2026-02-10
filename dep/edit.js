@@ -205,7 +205,7 @@ const imagenesBase64Editadas = await Promise.all(
 try{
   const token = await auth.currentUser.getIdToken();
 
-fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/editarProducto", {
+fetch("https://editarProducto-xhlrljateq-uc.a.run.app", {
   method: "POST",
   headers: {
     "Content-Type": "application/json",

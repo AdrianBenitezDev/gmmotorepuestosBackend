@@ -18,7 +18,7 @@ window.logear = async function () {
 
     // 2️⃣ validar admin en backend
     const resp = await fetch(
-      "https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/loginAdmin",
+      "https://loginAdmin-xhlrljateq-uc.a.run.app",
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },

@@ -101,7 +101,7 @@ export async function actualizarStock(idDoc,stockJson,precioJson,proveedorJson){
       id:idDoc
     }
  
- let resp=await fetch("https://us-central1-gmmotorepuestos-ventas.cloudfunctions.net/actualizarProducto", {
+ let resp=await fetch("https://actualizarProducto-xhlrljateq-uc.a.run.app", {
    method: "POST",
    headers: {
      "Content-Type": "application/json",

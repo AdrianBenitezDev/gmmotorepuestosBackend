@@ -4,6 +4,12 @@
 
 ✅ agregar label de "sin stock" a los productos
 
+❌ Descripción de los productos se muestra al hacer click
 
-❌FUNCION terminarVenta en panel carrito revisar, tiene un return que cancela
+❌ Ajustar el Width de Input de Descripción 
+
+❌ FUNCION terminarVenta en panel carrito revisar, tiene un return que cancela
+
+
+-xhlrljateq-uc.a.run.app
 
