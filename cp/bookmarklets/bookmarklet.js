@@ -39,7 +39,7 @@ const codigo = `
       imagenes: unicas
     };
 
-    const TARGET_ORIGIN = "http://127.0.0.1:5501";
+    const TARGET_ORIGIN = "https://admin.gmmotorepuestos.com.ar";
     const TARGET_URL = TARGET_ORIGIN + "/cp/cp.html";
     const WINDOW_NAME = "ML_CP_WEB";
 

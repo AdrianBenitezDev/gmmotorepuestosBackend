@@ -8,6 +8,7 @@ document.getElementById("btnML").addEventListener('click',()=>{
   window.open("https://www.mercadolibre.com.ar/", "ML_PAGE");
 
 })
+
 window.addEventListener("message", (event) => {
 
   // Seguridad básica
