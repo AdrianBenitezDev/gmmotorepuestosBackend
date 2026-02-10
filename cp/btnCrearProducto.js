@@ -162,6 +162,8 @@ const imagenesBase64 = await Promise.all(
   images: imagenesBase64
 };
 
+console.log(imagenesBase64)
+
 let crearFlyerCheck=document.getElementById("checkFlyer").checked;
 
 if(crearFlyerCheck){
