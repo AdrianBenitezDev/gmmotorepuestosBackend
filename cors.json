@@ -1,6 +1,6 @@
 [
   {
-    "origin": ["http://127.0.0.1:5501", "https://gmmotorepuestos.com"],
+    "origin": ["http://127.0.0.1:5501", "https://gmmotorepuestos.com","https://admin.gmmotorepuestos.com"],
     "method": ["GET"],
     "maxAgeSeconds": 3600
   }
