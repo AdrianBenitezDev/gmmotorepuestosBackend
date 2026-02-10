@@ -17,7 +17,7 @@ window.addEventListener("message", (event) => {
   const imagenes = event.data.imagenes;
   if (!Array.isArray(imagenes)) return;
 
-  console.log("📥 Imágenes recibidas:", imagenes);
+//  console.log("📥 Imágenes recibidas:", imagenes);
 
   procesarImagenesDesdeML(imagenes);
 
@@ -74,8 +74,8 @@ export function procesarImagenesDesdeML(imagenes) {
     return alert("No hay imágenes válidas");
   }
 
-  console.log("imagenes filtradas")
-  console.log(filtradas)
+  //console.log("imagenes filtradas")
+  //console.log(filtradas)
   setImgOptenidasML(filtradas)
   try{
   let h3Aviso= document.getElementById("h3AvisoImgDisponibles").textContent;
