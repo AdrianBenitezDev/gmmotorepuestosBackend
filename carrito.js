@@ -241,6 +241,11 @@ let datosGuardarLocalStorage={usuario:user,carrito:arrayPedido};
   localStorage.setItem('datos',JSON.stringify(datosGuardarLocalStorage))
 
   
+  document.getElementById("contadorCarrito").textContent = arrayPedido.length;
+  //document.getElementById("panelBlack").style.display="none";
+
+
+  
 
 
   return
