@@ -46,11 +46,17 @@ async function crearProducto() {
     return;
   }else{
 
-    for (let index = 0; index < 5; index++) {
-      if(arrayImgSeleccionadas.length<index){
-        arrayImgSeleccionadas.push("../Image404.png")
+    //Debug
+    console.log(arrayImgSeleccionadas);
+
+    for (let index = 0; index == 5; index++) {
+      if(arrayImgSeleccionadas[index]==undefined){
+        arrayImgSeleccionadas.push("../Image404.png");
       } 
     }
+   
+    //Debug
+    console.log(arrayImgSeleccionadas);
    
 spiner(true);
   //  alert("Enviando datos…");
