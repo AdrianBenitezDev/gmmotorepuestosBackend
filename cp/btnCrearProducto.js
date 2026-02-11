@@ -46,23 +46,6 @@ async function crearProducto() {
     return;
   }else{
 
-   
-spiner(true);
-  //  alert("Enviando datos…");
-
- 
-// Mover imagen 4 → 0 en arrayImgSeleccionadas
-
-let docImagenes=[];
-for (let index = 0; index < 5; index++) {
-
-  docImagenes.push(document.getElementById("img404_"+index).src)
-  
-}
-
-console.log(docImagenes)
-
-//--------------CREAR UNA VARIABLE PARA EL ID------------------------
 
 //cramos el valor del id
 if(idObtenido==''){
@@ -72,68 +55,40 @@ if(idObtenido==''){
 
 nombreDelProducto="producto_"+idObtenido;
 
-
-let nuevasRutas = [];
-let arrayImg=[];
-
-console.log(docImagenes)
-
-console.log(docImagenes.length)
-// Recorrer imágenes
-docImagenes.forEach((img, index) => {
-
-    // si no existe esa imagen seleccionada → imagen de error
-    if (!arrayImgSeleccionadas[index]) {
-
-        arrayImg.push("404");
-        img.src = "./Image404.png";
-        return;
-
-    }
-
-    const nuevoNombre = `imagen_${index}_${idObtenido}`;
-
-    //url de la imagen (cuando renderizamos la usamos como base y agregamos el index)
-   // let newSrc= `https://raw.githubusercontent.com/AdrianBenitezDev/gmmotorepuestosBackend/main/categorias/${categoria.value}/${nuevoNombre}`;
-
-     arrayImg.push(index);
-    nuevasRutas.push(nuevoNombre);
-
-});
+spiner(true);
+  //  alert("Enviando datos…");
 
 
-// 5) Convertir el DOM virtual ya modificado en string HTML nuevamente
-//const htmlModificado = docVirtual.body.innerHTML;
 
-// 6) Armar tu documento final
+const imagenesBase64 = [];
 
+for (let index = 0; index < 5; index++) {
 
-  // ---------------------------------------------------
-  // 2) CONVERTIR IMÁGENES SELECCIONADAS A BASE64
-  // ---------------------------------------------------
-const imagenesBase64 = await Promise.all(
-  //array con la url de la imagen y en null tiene "404"
-  arrayImgSeleccionadas.map(
-    (url, index) => {
-    
-    if(!objetoImgFromPc[index]?.base64){
-                convertirImagenABase64(url, nuevasRutas[index])
-    }else{
-      objetoImgFromPc[index]
-    }
+  const nombreImagen = `imagen_${index}_${idObtenido}`;
+  const img = document.getElementById(`img404_${index}`);
+  if (!img || !img.src) continue;
 
-    }
-  )
-);
+  const srcImagen = img.src;
 
+  // 👉 imagen ya subida (https)
+  if (srcImagen.startsWith("https")) {
 
-    // -------------------------------------------------
-  // 3) GENERAMOS UN NUMERO RANDOM PARA EL NAME
-  // ---------------------------------------------------
+    const resultado = await convertirImagenABase64(srcImagen, nombreImagen);
+    imagenesBase64.push(resultado);
 
-  // ---------------------------------------------------
-  // 3) ARMAR PAYLOAD PARA APPS SCRIPT
-  // ---------------------------------------------------
+  } 
+  // 👉 imagen cargada desde PC (data:image)
+  else if (srcImagen.startsWith("data:image")) {
+
+    const base64Puro = srcImagen.split(",")[1];
+    imagenesBase64.push({
+      name: nombreImagen,
+      base64: base64Puro
+    });
+
+  }
+}
+
 
 
   const newProducto = {
