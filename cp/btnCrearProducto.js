@@ -46,36 +46,21 @@ async function crearProducto() {
     return;
   }else{
 
-    //Debug
-    console.log(arrayImgSeleccionadas);
-
-    for (let index = 0; index == 5; index++) {
-      if(arrayImgSeleccionadas[index]==undefined){
-        arrayImgSeleccionadas.push("../Image404.png");
-      } 
-    }
-   
-    //Debug
-    console.log(arrayImgSeleccionadas);
    
 spiner(true);
   //  alert("Enviando datos…");
 
-  // ---------------------------------------------------
-  // 1) TOMAR EL HTML REAL DE LA VISTA PREVIA
-  // ---------------------------------------------------
- // 1) TOMAR EL HTML REAL DE LA VISTA PREVIA
-const vistaPhtml = document.getElementById("vistaP").innerHTML;
-
-// 2) Crear DOM virtual
-const parser = new DOMParser();
-const docVirtual = parser.parseFromString(vistaPhtml, "text/html");
-
-// 3) Obtener imágenes
-let docImagenes = Array.from(docVirtual.getElementsByClassName("img404"));
-
+ 
 // Mover imagen 4 → 0 en arrayImgSeleccionadas
-docImagenes.unshift(docImagenes.splice(4, 1)[0]);
+
+let docImagenes=[];
+for (let index = 0; index < 5; index++) {
+
+  docImagenes.push(document.getElementById("img404_"+index).src)
+  
+}
+
+console.log(docImagenes)
 
 //--------------CREAR UNA VARIABLE PARA EL ID------------------------
 
@@ -91,6 +76,9 @@ nombreDelProducto="producto_"+idObtenido;
 let nuevasRutas = [];
 let arrayImg=[];
 
+console.log(docImagenes)
+
+console.log(docImagenes.length)
 // Recorrer imágenes
 docImagenes.forEach((img, index) => {
 
