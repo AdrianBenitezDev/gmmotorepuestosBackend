@@ -61,10 +61,14 @@ spiner(true);
 
 
 const imagenesBase64 = [];
+let soloNombresImgs=[]
 
 for (let index = 0; index < 5; index++) {
 
   const nombreImagen = `imagen_${index}_${idObtenido}`;
+
+  soloNombresImgs.push(nombreImagen);
+
   const img = document.getElementById(`img404_${index}`);
   if (!img || !img.src) continue;
 
@@ -101,7 +105,7 @@ for (let index = 0; index < 5; index++) {
   stock:Number(stock),
   descripcion:descripcion,
   producto_keywords:generarKeywords(titulo),
-  img:nuevasRutas,
+  img:soloNombresImgs,
   images: imagenesBase64
 };
 
